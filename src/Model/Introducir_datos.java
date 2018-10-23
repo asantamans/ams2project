@@ -45,7 +45,7 @@ public class Introducir_datos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Introducir_datos(ConfigurationLoader config) {
+	public Introducir_datos(ConfigurationLoader config,String user) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 438);
 		contentPane = new JPanel();
@@ -75,7 +75,7 @@ public class Introducir_datos extends JFrame {
 		gbc_lblD.gridy = 0;
 		panel.add(lblD, gbc_lblD);
 		
-		JLabel lblUsuariousuario = new JLabel("Usuario:Usuario");
+		JLabel lblUsuariousuario = new JLabel("Usuario:"+user);
 		GridBagConstraints gbc_lblUsuariousuario = new GridBagConstraints();
 		gbc_lblUsuariousuario.insets = new Insets(0, 0, 5, 5);
 		gbc_lblUsuariousuario.gridx = 7;
@@ -293,12 +293,12 @@ public class Introducir_datos extends JFrame {
             			int seguir =JOptionPane.showConfirmDialog(null,"No ha guardado los datos, Esta seguro que desea continuar?","Quiere continuar?",JOptionPane.YES_NO_OPTION);
             			 if(seguir==JOptionPane.YES_OPTION) {
             				 JOptionPane.showMessageDialog(panel,"Se abrira una ventana nueva", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            				 new modelChooserFrame(config,lblUsuariousuario.getText());
+            				 new modelChooserFrame(config,user);
             			 }
             		}
             		else {
             			esconderFrame();
-            			new modelChooserFrame(config,lblUsuariousuario.getText());
+            			new modelChooserFrame(config,user);
             		}
             	
             }

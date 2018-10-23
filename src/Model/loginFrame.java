@@ -88,7 +88,7 @@ public class loginFrame extends JFrame {
 				if(Login.comprovarLogin(textField.getText(),passwordField.getText(),panel,config)) {
 					panel.setVisible(false);
 					esconderLogin();
-					new Introducir_datos(config);
+					new Introducir_datos(config,textField.getText());
 				}
 			}
 		});
