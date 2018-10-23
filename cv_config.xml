@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration>
+	<car_configuration_path>src\configuracion_vehiculo\car_images</car_configuration_path>
+	<car_configuration_file_name>car_config.xml</car_configuration_file_name>
+	<employee_list>
+		<employee_user>user</employee_user>
+		<employee_user>user2</employee_user>
+	</employee_list>
+	<employee_password>
+		<user_password>pass123</user_password>
+		<user_password>pass321</user_password>
+	</employee_password>
+	<employee_version>
+		<version>true</version>
+		<version>false</version>
+	</employee_version>
+	<specifications_file_path>/spec/ejemplo</specifications_file_path>
+</configuration>
