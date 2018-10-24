@@ -11,5 +11,5 @@ public class TestMain {
 		ConfigurationLoader config = ConfigurationLoader.getConfigurador();
 		new loginFrame(config);
 	}
-
 }
+

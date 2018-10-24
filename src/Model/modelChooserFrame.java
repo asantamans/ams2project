@@ -165,7 +165,7 @@ public class modelChooserFrame extends JFrame {
 		car_config.leerXML_Car_Config();
 		ArrayList<Model> modelos = car_config.getModelos();
 		for (int i= 0; i < modelos.size(); ++i) {
-			String rutaImg = "src\\configuracion_vehiculo\\car_images\\"+modelos.get(i).getImatge_nom();
+			String rutaImg = ConfigurationLoader.getConfigurador().getCar_configuration_path()+modelos.get(i).getImatge_nom();
 			ImageIcon imageIcon = new ImageIcon(rutaImg);
 			Image image = imageIcon.getImage().getScaledInstance(100, 90, Image.SCALE_DEFAULT);
 			imageIcon = new ImageIcon(image);

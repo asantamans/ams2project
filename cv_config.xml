@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <configuration>
-	<car_configuration_path>src\configuracion_vehiculo\car_images</car_configuration_path>
+	<car_configuration_path>src\configuracion_vehiculo\car_images\</car_configuration_path>
 	<car_configuration_file_name>car_config.xml</car_configuration_file_name>
 	<employee_list>
 		<employee_user>user</employee_user>
