@@ -12,6 +12,7 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -26,17 +27,15 @@ import javax.swing.border.EmptyBorder;
 import app_config.ConfigurationLoader;
 import configuracion_vehiculo.CarConfiguration;
 import configuracion_vehiculo.Model;
+import Model.PantallaSubmodelos;
 
 public class modelChooserFrame extends JFrame {
-	private  String userName;
+	private int numBtn = 0;
 	private ArrayList<JButton> modelList;
 	private JPanel contentPane;
 	private JTextArea textArea = new JTextArea();
-	private int point = 0;
-	/**
-	 * Launch the application.
-	 */
-	
+	private JLabel foto;
+	private ArrayList<Model> modelos;
 
 	/**
 	 * Create the frame.
@@ -63,11 +62,12 @@ public class modelChooserFrame extends JFrame {
 		gbl_panel.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
-		JLabel lblNewLabel_2 = new JLabel("Usuario:"+user);
+		JLabel lblNewLabel_2 = new JLabel("Usuario: "+user);
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+		gbc_lblNewLabel_2.gridwidth = 2;
 		gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
 		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_2.gridx = 3;
+		gbc_lblNewLabel_2.gridx = 4;
 		gbc_lblNewLabel_2.gridy = 0;
 		panel.add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
@@ -105,7 +105,10 @@ public class modelChooserFrame extends JFrame {
 		
 		scrollPane.setViewportView(panel_1);
 		
-		JLabel foto = new JLabel(new ImageIcon("src\\carPhoto.jpg"));
+		ImageIcon icn = new ImageIcon(config.getCar_configuration_path()+modelos.get(0).getImatge_nom());
+		Image imgen = icn.getImage().getScaledInstance(406, 237, Image.SCALE_DEFAULT);
+		icn = new ImageIcon(imgen);
+		foto = new JLabel(icn);
 		GridBagConstraints gbc_foto = new GridBagConstraints();
 		gbc_foto.gridwidth = 3;
 		gbc_foto.fill = GridBagConstraints.BOTH;
@@ -114,20 +117,16 @@ public class modelChooserFrame extends JFrame {
 		gbc_foto.gridy = 3;
 		panel.add(foto, gbc_foto);
 		
-		
-		
-		
-		
-		textArea.setText("Coche n4\n Modelo 43a\nMotor X\nInformacion extra");
-		textArea.setEditable(false);
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
-		gbc_textArea.gridheight = 2;
-		gbc_textArea.gridwidth = 2;
-		gbc_textArea.insets = new Insets(0, 0, 5, 55);
-		gbc_textArea.fill = GridBagConstraints.BOTH;
-		gbc_textArea.gridx = 4;
+		gbc_textArea.insets = new Insets(0, 0, 5, 5);
+		gbc_textArea.gridx = 3;
 		gbc_textArea.gridy = 4;
-		panel.add(textArea, gbc_textArea);
+		gbc_textArea.gridheight = 2;
+		gbc_textArea.gridwidth = 3;
+		gbc_textArea.fill = GridBagConstraints.BOTH;
+		textArea.setEditable(false);
+		JScrollPane scPane = new JScrollPane(textArea);
+		panel.add(scPane, gbc_textArea);
 		
 		JButton anteriorButton = new JButton("Anterior");
 		GridBagConstraints gbc_anteriorButton = new GridBagConstraints();
@@ -148,7 +147,8 @@ public class modelChooserFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				dispose();
+				new PantallaSubmodelos(modelos.get(numBtn), user);
 				
 			}
 		});
@@ -163,30 +163,45 @@ public class modelChooserFrame extends JFrame {
 		modelList = new ArrayList<JButton>();
 		CarConfiguration car_config = new CarConfiguration();
 		car_config.leerXML_Car_Config();
-		ArrayList<Model> modelos = car_config.getModelos();
+		modelos = car_config.getModelos();
 		for (int i= 0; i < modelos.size(); ++i) {
 			String rutaImg = ConfigurationLoader.getConfigurador().getCar_configuration_path()+modelos.get(i).getImatge_nom();
+			String [] sp = modelos.get(i).getDescripcio().split(";");
+			String descr = "";
+			for (int j = 0; j < sp.length; j++) {
+				if(j == sp.length-1) {
+					descr = descr+""+sp[j];
+				}else {
+					descr = descr+""+sp[j]+"\n";
+				}
+			}
+			String descripcion = descr;
+			//El textArea tendra por defecto la descripción del primer modelo
+			if (i == 0) {
+				textArea.setText(descripcion);
+				textArea.select(0, 0);
+			}
 			ImageIcon imageIcon = new ImageIcon(rutaImg);
 			Image image = imageIcon.getImage().getScaledInstance(100, 90, Image.SCALE_DEFAULT);
 			imageIcon = new ImageIcon(image);
 			JButton a = new JButton(imageIcon);
-			point = i;
-		/*
+			a.setToolTipText(modelos.get(i).getNom());
+			int point = i;
 			a.addActionListener(new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					textArea.setText(modelos.get(point).getDescripcio());
-					
+					numBtn = point;
+					ImageIcon imageIcn = new ImageIcon(rutaImg);
+					Image img = imageIcn.getImage().getScaledInstance(406, 237, Image.SCALE_DEFAULT);
+					imageIcn = new ImageIcon(img);
+					foto.setIcon(imageIcn);
+					textArea.setText(descripcion);
+					textArea.select(0, 0);
 				}
 			});
-			*/
 			
 			modelList.add(a);
 		}
-		
-	
-		
 	}
-
 }

@@ -30,4 +30,25 @@ public class Motor {
 				+ ", preu=" + preu + "]";
 	}
 	
+	//getters
+	public String getId() {
+		return id;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public String getDescripcio() {
+		return descripcio;
+	}
+
+	public String getImatge_nom() {
+		return imatge_nom;
+	}
+
+	public int getPreu() {
+		return preu;
+	}
+	
 }

@@ -4,80 +4,56 @@
 		<model>
 			<id>001</id>
 			<nom>Seat Ibiza</nom>
-			<descripcio>
-				MEJOR COCHE DEL AÑO 2018\n
-				Llevamos celebrándolo desde el primer día.\n
-				33 años después, el Nuevo SEAT Ibiza sigue ganándose el reconocimiento de todos. Gracias por formar parte de nuestra historia. Sin vosotros, un Ibiza no sería lo que es.
-			</descripcio>
+			<descripcio>MEJOR COCHE DEL AÑO 2018;Llevamos celebrándolo desde el primer día.;33 años después, el Nuevo SEAT Ibiza sigue ganándose el reconocimiento;de todos. Gracias por formar parte de nuestra historia. Sin vosotros,;un Ibiza no sería lo que es.</descripcio>
 			<imatge_nom>seatibiza.jpg</imatge_nom>
 			<preu>12540</preu>
 		</model>
 		<model>
 			<id>002</id>
 			<nom>Seat Leon</nom>
-			<descripcio>
-				Ya forma parte del futuro.\n
-				Que todos tus viajes empiecen cuidando el planeta. Gracias a la gama de motores eficientes del SEAT León conducirás produciendo menos emisiones. Elige entre el TDI, TSI y GNC (Coche de Gas Natural Comprimido) y disfruta de la potencia y el alto rendimiento siendo ecológico.
-			</descripcio>
+			<descripcio>Ya forma parte del futuro.;Que todos tus viajes empiecen cuidando el planeta.;Gracias a la gama de motores eficientes del SEAT León conducirás;produciendo menos emisiones. Elige entre el TDI, TSI y GNC (Coche de;Gas Natural Comprimido) y disfruta de la potencia y el alto rendimiento; siendo ecológico.</descripcio>
 			<imatge_nom>seatleon.jpg</imatge_nom>
 			<preu>16430</preu>
 		</model>
 		<model>
 			<id>003</id>
 			<nom>Seat Ateca</nom>
-			<descripcio>
-				Tu propio camino.\n
-				Podrán decir esto o lo otro, pero cuando uno sabe lo que quiere no necesita dar explicaciones a nadie. Llega el Nuevo SEAT Arona: El SUV urbano de SEAT, diseñado para los que tienen mucho que decir y todavía más por hacer. Con un motor de alto rendimiento, ágil y potente, para enfrentarte al mundo, siempre a tu manera.</descripcio>
+			<descripcio>Una mirada llena de confianza;El SEAT Ateca afronta el día a día lleno de confianza gracias al inconfundible;y dinámico estilo que crean las definidas líneas de su diseño exterior.;En su interior, todo ha sido concebido para que la rutina sea una experiencia;fantástica. Y ahora puedes ir un paso por delante con el nuevo SEAT;Ateca FR, que te ofrece rendimiento y un toque deportivo para que tu;día a día supere todas tus expectativas gracias a su tracción 4Drive.</descripcio>
 			<imatge_nom>seatateca.jpg</imatge_nom>
 			<preu>19290</preu>
 		</model>
 		<model>
 			<id>004</id>
 			<nom>Seat Arona</nom>
-			<descripcio>
-				Una mirada llena de confianza\n
-				El SEAT Ateca afronta el día a día lleno de confianza gracias al inconfundible y dinámico estilo que crean las definidas líneas de su diseño exterior. En su interior, todo ha sido concebido para que la rutina sea una experiencia fantástica. Y ahora puedes ir un paso por delante con el nuevo SEAT Ateca FR, que te ofrece rendimiento y un toque deportivo para que tu día a día supere todas tus expectativas gracias a su tracción 4Drive.
-			</descripcio>
+			<descripcio>Tu propio camino.;Podrán decir esto o lo otro, pero cuando uno sabe lo que quiere no;necesita dar explicaciones a nadie. Llega el Nuevo SEAT Arona: El SUV;urbano de SEAT, diseñado para los que tienen mucho que decir y todavía;más por hacer. Con un motor de alto rendimiento, ágil y potente, para;enfrentarte al mundo, siempre a tu manera.</descripcio>
 			<imatge_nom>seatarona.jpg</imatge_nom>
 			<preu>14390</preu>
 		</model>
 		<model>
 			<id>005</id>
 			<nom>Seat Toledo</nom>
-			<descripcio>
-				Tu estilo de vida con carácter\n
-				Para viajar en familia no es necesario renunciar a la diversión y el rendimiento. El SEAT Toledo combina la elegancia de un sedán con la versatilidad de un coche familiar. Es un coche seguro y de calidad destinado a quienes no quieren perderse la oportunidad de disfrutar de una dinámica experiencia de conducción.
-			</descripcio>
+			<descripcio>Tu estilo de vida con carácter;Para viajar en familia no es necesario renunciar a la diversión y el rendimiento.;El SEAT Toledo combina la elegancia de un sedán con la versatilidad de un;coche familiar. Es un coche seguro y de calidad destinado a quienes no;quieren perderse la oportunidad de disfrutar de una dinámica experiencia;de conducción.</descripcio>
 			<imatge_nom>seattoledo.jpg</imatge_nom>
 			<preu>12730</preu>
 		</model>
 		<model>
 			<id>006</id>
 			<nom>Seat Tarraco</nom>
-			<descripcio>
-				Siempre hay excusas, ¿Por qué no ahora?\n
-				Madurar no es conformarse. Es dejar de poner excusas e ir a por lo que quieres. Nuevo SEAT Tarraco: un SUV 4x4 de grandes dimensiones para grandes ambiciones.
-			</descripcio>
+			<descripcio>Siempre hay excusas, ¿Por qué no ahora?;Madurar no es conformarse. Es dejar de poner excusas e ir a por lo que quieres.;Nuevo SEAT Tarraco: un SUV 4x4 de grandes dimensiones para grandes;ambiciones.</descripcio>
 			<imatge_nom>seattarraco.jpg</imatge_nom>
 			<preu>33000</preu>
 		</model>
 		<model>
 			<id>007</id>
 			<nom>Seat Alhambra</nom>
-			<descripcio>
-				Rompiendo moldes\n
-				El monovolumen SEAT Alhambra ha sido diseñado para sobresalir entre los vehículos de su categoría. La capacidad de un coche 7 plazas y la energía familiar que desprende ya a primera vista, no son las únicas bazas que te ofrece un coche familiar tan completo. Un diseño exterior definido y preciso le otorga su carácter y personalidad para superar cualquier obstáculo.
-			</descripcio>
+			<descripcio>Rompiendo moldes;El monovolumen SEAT Alhambra ha sido diseñado para sobresalir entre;los vehículos de su categoría. La capacidad de un coche 7 plazas y la;energía familiar que desprende ya a primera vista, no son las únicas;bazas que te ofrece un coche familiar tan completo. Un diseño exterior;definido y preciso le otorga su carácter y personalidad para superar;cualquier obstáculo.</descripcio>
 			<imatge_nom>seatalhambra.jpg</imatge_nom>
 			<preu>30960</preu>
 		</model>
 		<model>
 			<id>008</id>
 			<nom>Seat Leon X-PERIENCE</nom>
-			<descripcio>
-				Diseñado para lo inexplorado\n
-				El SEAT León X-PERIENCE ha sido diseñado para ofrecerte la máxima versatilidad y un diseño aerodinámico. Tiene un atractivo inconfundible que se adapta a cualquier actividad. Además, te da mucho espacio para que disfrutes de los mejores momentos de la vida, permitiéndote perseguir lo inexplorado sin ninguna limitación.
-			</descripcio>
+			<descripcio>Diseñado para lo inexplorado;El SEAT León X-PERIENCE ha sido diseñado para ofrecerte la máxima;versatilidad y un diseño aerodinámico. Tiene un atractivo inconfundible;que se adapta a cualquier actividad. Además, te da mucho espacio para;que disfrutes de los mejores momentos de la vida, permitiéndote;perseguir lo inexplorado sin ninguna limitación.</descripcio>
 			<imatge_nom>seatleon-x-perience.jpg</imatge_nom>
 			<preu>20670</preu>
 		</model>
@@ -85,17 +61,31 @@
 	<motors>
 		<motor>
 			<id>001</id>
-			<nom>1.0 TSI 85 KW (115 CV) DSG 7 vel Start/Stop</nom>
-			<descripcio>115CV | Gasolina | 7 velocidades</descripcio>
-			<imatge_nom>motorGasolina.jpg</imatge_nom>
-			<preu>1520</preu>
+			<nom>1.6 TDI Start/Stop Reference Plus</nom>
+			<descripcio>80CV | Diésel | 5 vel</descripcio>
+			<imatge_nom>motorDiesel.jpg</imatge_nom>
+			<preu>1540</preu>
 		</motor>
 		<motor>
 			<id>002</id>
-			<nom>1.6 TDI CR 85 KW (115 CV) Start/Stop Ecomotive</nom>
-			<descripcio>115CV | Diésel | 6 velocidades</descripcio>
-			<imatge_nom>motorDiesel.jpg</imatge_nom>
-			<preu>828</preu>
+			<nom>1.0 TSI Start/Stop Style Plus</nom>
+			<descripcio>95CV | Gasolina | 5 vel</descripcio>
+			<imatge_nom>motorGasolina.jpg</imatge_nom>
+			<preu>2100</preu>
+		</motor>
+		<motor>
+			<id>003</id>
+			<nom>1.0 TSI Start/Stop Xcellence Plus</nom>
+			<descripcio>115CV | Gasolina | 6 vel</descripcio>
+			<imatge_nom>motorGasolina.jpg</imatge_nom>
+			<preu>4530</preu>
+		</motor>
+		<motor>
+			<id>004</id>
+			<nom>1.5 EcoTSI Start/Stop FR Plus</nom>
+			<descripcio>150CV | Gasolina | 6 vel</descripcio>
+			<imatge_nom>motorGasolina.jpg</imatge_nom>
+			<preu>10196</preu>
 		</motor>
 	</motors>
 	<accessoris>
