@@ -28,7 +28,8 @@ public class Login {
 				}
 				
 			}
-			//Esto es un login normal ashahshasho
+			
+		
 		}
 		if(!esCorrectoLogin) {
 			JOptionPane.showMessageDialog(panel, "El Usuairo es incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
