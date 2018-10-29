@@ -325,7 +325,7 @@ public class Introducir_datos extends JFrame {
 	                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 	                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 	 
-	        // El email a validar
+	        // El email a validar hola
 	        String email = textField_4.getText();
 	 
 	        Matcher mather = pattern.matcher(email);
