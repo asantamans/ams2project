@@ -8,6 +8,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -271,8 +273,12 @@ public class Introducir_datos extends JFrame {
             	String campos_blanco=comprobarDatos();
             	if(!campos_blanco.equals("El "))
             		JOptionPane.showMessageDialog(panel, campos_blanco+" no puede estar en blanco", "Error", JOptionPane.ERROR_MESSAGE);
-            	else
+            	if(!comprobarEmail()) 
+            		JOptionPane.showMessageDialog(panel, "Email formato incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+            	else {
             		guardado=true;
+            		JOptionPane.showMessageDialog(panel,"Los datos se han guardado correctamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            }
             }
 
         });
@@ -288,8 +294,12 @@ public class Introducir_datos extends JFrame {
             	String campos_blanco=comprobarDatos();
             	if(!campos_blanco.equals("El "))
             	JOptionPane.showMessageDialog(panel, campos_blanco+" no puede estar en blanco", "Error", JOptionPane.ERROR_MESSAGE);
+            	boolean error=true;
+            	if(!comprobarEmail()) {
+            		JOptionPane.showMessageDialog(panel, "Email formato incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+            	}
             	else
-            		if(!guardado) {
+            		if(!guardado && error) {
             			int seguir =JOptionPane.showConfirmDialog(null,"No ha guardado los datos, Esta seguro que desea continuar?","Quiere continuar?",JOptionPane.YES_NO_OPTION);
             			 if(seguir==JOptionPane.YES_OPTION) {
             				 JOptionPane.showMessageDialog(panel,"Se abrira una ventana nueva", "Advertencia", JOptionPane.WARNING_MESSAGE);
@@ -310,6 +320,23 @@ public class Introducir_datos extends JFrame {
 	private void esconderFrame() {
 		setVisible(false);
 	}
+	private boolean comprobarEmail() {
+		 Pattern pattern = Pattern
+	                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+	                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+	 
+	        // El email a validar
+	        String email = textField_4.getText();
+	 
+	        Matcher mather = pattern.matcher(email);
+	 
+	        if (mather.find() == true) {
+	            return true;
+	        } else {
+	            return false;
+	        }
+
+	}
 	private String comprobarDatos() {
 		String campos_blanco="El ";
 		if(textField.getText().equals("")) {
@@ -326,6 +353,9 @@ public class Introducir_datos extends JFrame {
     			campos_blanco=" La direccion ";
     		else
     			campos_blanco=campos_blanco.concat(" direccion ");
+    	}
+    	if(!comprobarEmail()) {
+    		
     	}
     	return campos_blanco;
 	}

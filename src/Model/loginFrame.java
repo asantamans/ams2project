@@ -8,13 +8,18 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
+import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 
 import app_config.ConfigurationLoader;
 
@@ -92,6 +97,35 @@ public class loginFrame extends JFrame {
 				}
 			}
 		});
+		
+		
+		passwordField.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				 if(arg0.getKeyCode()==KeyEvent.VK_ENTER){
+					 if(Login.comprovarLogin(textField.getText(),passwordField.getText(),panel,config)) {
+							panel.setVisible(false);
+							esconderLogin();
+							new Introducir_datos(config,textField.getText());
+						}
+	                }
+			}
+
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+	
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.fill = GridBagConstraints.BOTH;
