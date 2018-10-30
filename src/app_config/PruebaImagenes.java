@@ -9,14 +9,15 @@ import javax.swing.JFrame;
 
 import configuracion_vehiculo.CarConfiguration;
 import configuracion_vehiculo.Model;
+import idao.ICarConfiguration;
 
 public class PruebaImagenes {
 	public static void main(String[] args) {
 		JFrame f = new JFrame("Botones con imagenes");
 		f.setLayout(new FlowLayout());
 		
-		CarConfiguration car_config = new CarConfiguration();
-		car_config.leerXML_Car_Config();
+		ICarConfiguration car_config = new CarConfiguration();
+		car_config.load_Car_Config();
 		ArrayList<Model> modelos = car_config.getModelos();
 		System.out.println("\n\n"+modelos);
 		

@@ -14,22 +14,19 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class CarConfiguration {
+import idao.ICarConfiguration;
+
+public class CarConfiguration implements ICarConfiguration {
 	private ArrayList<Model> modelos;
 	private ArrayList<Motor> motores;
 	private ArrayList<Accesori> accesorios;
-	
-	public static void main(String[] args) {
-		CarConfiguration car_config = new CarConfiguration();
-		car_config.leerXML_Car_Config();
-	}
 	
 	/**
 	 * Lee el archivo XML de configuracion de coches de los diferentes modelos, motores y accesorios
 	 *  y guarda los datos en diferentes ArrayList
 	 *  @author Marc
 	 */
-	public void leerXML_Car_Config() {
+	public void load_Car_Config() {
 		modelos = new ArrayList<Model>();
 		motores = new ArrayList<Motor>();
 		accesorios = new ArrayList<Accesori>();

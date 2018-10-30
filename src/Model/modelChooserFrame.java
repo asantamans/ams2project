@@ -27,6 +27,7 @@ import javax.swing.border.EmptyBorder;
 import app_config.ConfigurationLoader;
 import configuracion_vehiculo.CarConfiguration;
 import configuracion_vehiculo.Model;
+import idao.ICarConfiguration;
 import Model.PantallaSubmodelos;
 
 public class modelChooserFrame extends JFrame {
@@ -154,15 +155,12 @@ public class modelChooserFrame extends JFrame {
 		});
 		
 		setVisible(true);
-		
-		
-		
-		
 	}
 	private void inicializaParametros() {
 		modelList = new ArrayList<JButton>();
-		CarConfiguration car_config = new CarConfiguration();
-		car_config.leerXML_Car_Config();
+		//implementacion de DAO cada vez que se inicia la pantalla carga los datos de los coches
+		ICarConfiguration car_config = new CarConfiguration();
+		car_config.load_Car_Config();
 		modelos = car_config.getModelos();
 		for (int i= 0; i < modelos.size(); ++i) {
 			String rutaImg = ConfigurationLoader.getConfigurador().getCar_configuration_path()+modelos.get(i).getImatge_nom();

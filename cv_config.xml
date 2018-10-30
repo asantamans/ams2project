@@ -14,5 +14,5 @@
 		<version>true</version>
 		<version>false</version>
 	</employee_version>
-	<specifications_file_path>/spec/ejemplo</specifications_file_path>
+	<specifications_file_path>spec\</specifications_file_path>
 </configuration>
