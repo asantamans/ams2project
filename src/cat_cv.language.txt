@@ -1,0 +1,3 @@
+Usuari;COntrasenya;ENTRAR;
+DADES DEL CLIENT;Usuari:;Nom*,Primer Cognom*;Segon Cognom*;Direcció*;Correu electronic*;Génere;Home;Done;Altres;Data de naixement,GUARDAR;SEGUENT
+Usuari: ;SELECCIONA EL MODEL DE COCHE;ENRERE;SEGUENT

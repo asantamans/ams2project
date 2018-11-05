@@ -20,6 +20,11 @@ public class ConfigurationLoader {
 	private static ArrayList <String> employee_password;
 	private static ArrayList <String> employee_version; 
 	private String specifications_file_path;
+	private static String language;
+	private static String language_default;
+	private static String langPostfix;
+	private static String langFilePath;
+	private static String version;
 	private static ConfigurationLoader config;
 	
 	/**
@@ -95,6 +100,17 @@ public class ConfigurationLoader {
 						employee_version.add(version);
 					}
 				}
+			//Cargado de lenguage en configuracion
+				this.language =eElement.getElementsByTagName("language").item(0).getTextContent();
+				this.language_default = eElement.getElementsByTagName("language_default").item(0).getTextContent();
+				this.langPostfix = eElement.getElementsByTagName("postfix_language_file_name").item(0).getTextContent();
+				this.langFilePath = eElement.getElementsByTagName("language_files_path").item(0).getTextContent();
+				if(!comprobarArchivosLenguaje()) {
+					language = langFilePath+language_default+langPostfix;
+							
+				}
+			
+				
 				
 			}
 		} catch (ParserConfigurationException e) {
@@ -130,5 +146,25 @@ public class ConfigurationLoader {
 	
 	public ArrayList<String> getEmployee_version() {
 		return employee_version;
+	}
+	
+	public static String getLanguage() {
+		return language;
+	}
+
+	private boolean comprobarArchivosLenguaje() {
+		File comprovador = new File(langFilePath);
+		String[] languages = language.split(";");
+		String retorno;
+		for (int i = 0; i< languages.length;++i) {
+			retorno = languages[i];
+			comprovador = new File(langFilePath+retorno+langPostfix);
+			if (comprovador.exists()) {
+				language = langFilePath+retorno+langPostfix;
+				return true;
+			}
+		}
+		return false;
+
 	}
 }

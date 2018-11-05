@@ -10,6 +10,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import app_config.ConfigurationLoader;
+import app_config.langLoader;
 import configuracion_vehiculo.CarConfiguration;
 import configuracion_vehiculo.Model;
 import configuracion_vehiculo.Motor;
@@ -37,7 +38,7 @@ public class PantallaSubmodelos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PantallaSubmodelos(Model modelo, String usuario) {
+	public PantallaSubmodelos(Model modelo, String usuario,ArrayList<String> text) {
 		CarConfiguration car_config = new CarConfiguration();
 		car_config.leerXML_Car_Config();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,7 +54,8 @@ public class PantallaSubmodelos extends JFrame {
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
-		JLabel lbTitulo = new JLabel("Selecci\u00F3n de caracter\u00EDsticas del modelo");
+		JLabel lbTitulo = new JLabel(text.get(0));
+		text.remove(0);
 		lbTitulo.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lbTitulo.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_lbTitulo = new GridBagConstraints();
@@ -74,7 +76,8 @@ public class PantallaSubmodelos extends JFrame {
 			submodelos[i] = submdTxt;
 		}
 		
-		JLabel lblUsuario = new JLabel("Usuario: "+usuario);
+		JLabel lblUsuario = new JLabel(text.get(0)+usuario);
+		text.remove(0);
 		GridBagConstraints gbc_lblUsuario = new GridBagConstraints();
 		gbc_lblUsuario.gridwidth = 2;
 		gbc_lblUsuario.insets = new Insets(0, 0, 5, 5);
@@ -99,13 +102,15 @@ public class PantallaSubmodelos extends JFrame {
 		gbc_list.gridy = 1;
 		contentPane.add(list, gbc_list);
 		
-		JButton btnAnterior = new JButton("Anterior");
+		JButton btnAnterior = new JButton(text.get(0));
+		text.remove(0);
 		btnAnterior.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				dispose();
-				new modelChooserFrame(ConfigurationLoader.getConfigurador(), usuario);
+				setVisible(false);
+			ArrayList<String> text = langLoader.getText(ConfigurationLoader.getLanguage(),2);
+				new modelChooserFrame(usuario,text);
 				
 			}
 		});

@@ -1,0 +1,18 @@
+clave:lbl_user_access:login
+clave:lbl_pass_access:Password
+clave:lbl_boton_access:access
+clave:lbl_datos_cliente:customer data
+clave:lbl_datos_usuario:user
+clave:lbl_datos_nombre:Name
+clave:lbl_datos_pri_ape:First Surname
+clave:lbl_datos_seg_ape:second Surname
+clave:lbl_datos_dir:address
+clave:lbl_datos_email:Email
+clave:lbl_datos_genero:Gender
+clave:lbl_datos_fecha:date
+clave:lbl_datos_guardar:submit
+clave:lbl_datos_siguiente:Next
+clave:lbl_selec_model:Select car model
+clave:lbl_selec_des:
+clave:lbl_selec_ant:previous
+clave:lbl_selec_se:Next

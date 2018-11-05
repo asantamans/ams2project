@@ -32,7 +32,7 @@ public class Login {
 		
 		}
 		if(!esCorrectoLogin) {
-			JOptionPane.showMessageDialog(panel, "El Usuairo es incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(panel, "El Usuario es incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}else if(!esCorrectoPassword){
 			JOptionPane.showMessageDialog(panel, "La contraseña es incorrecta", "Error", JOptionPane.ERROR_MESSAGE);

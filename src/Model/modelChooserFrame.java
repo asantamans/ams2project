@@ -25,6 +25,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import app_config.ConfigurationLoader;
+import app_config.langLoader;
 import configuracion_vehiculo.CarConfiguration;
 import configuracion_vehiculo.Model;
 import Model.PantallaSubmodelos;
@@ -36,11 +37,13 @@ public class modelChooserFrame extends JFrame {
 	private JTextArea textArea = new JTextArea();
 	private JLabel foto;
 	private ArrayList<Model> modelos;
+	private static String user;
 
 	/**
 	 * Create the frame.
 	 */
-	public modelChooserFrame(ConfigurationLoader config,String user) {
+	public modelChooserFrame(String user,ArrayList<String> text) {
+		this.user = user;
 		setResizable(false);
 		setMaximumSize(new Dimension(594, 2147483647));
 		setMinimumSize(new Dimension(594, 511));
@@ -105,7 +108,7 @@ public class modelChooserFrame extends JFrame {
 		
 		scrollPane.setViewportView(panel_1);
 		
-		ImageIcon icn = new ImageIcon(config.getCar_configuration_path()+modelos.get(0).getImatge_nom());
+		ImageIcon icn = new ImageIcon(ConfigurationLoader.getConfigurador().getCar_configuration_path()+modelos.get(0).getImatge_nom());
 		Image imgen = icn.getImage().getScaledInstance(406, 237, Image.SCALE_DEFAULT);
 		icn = new ImageIcon(imgen);
 		foto = new JLabel(icn);
@@ -134,6 +137,16 @@ public class modelChooserFrame extends JFrame {
 		gbc_anteriorButton.gridx = 3;
 		gbc_anteriorButton.gridy = 7;
 		panel.add(anteriorButton, gbc_anteriorButton);
+		anteriorButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<String> text = langLoader.getText(ConfigurationLoader.getLanguage(),1);
+				new Introducir_datos(user,text);
+				setVisible(false);
+				
+			}
+		});
 		
 		JButton siguienteButton = new JButton("Siguiente");
 		GridBagConstraints gbc_siguienteButton = new GridBagConstraints();
@@ -148,7 +161,7 @@ public class modelChooserFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new PantallaSubmodelos(modelos.get(numBtn), user);
+				new PantallaSubmodelos(modelos.get(numBtn), user,text);
 				
 			}
 		});

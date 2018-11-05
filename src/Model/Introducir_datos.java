@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -47,7 +48,8 @@ public class Introducir_datos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Introducir_datos(ConfigurationLoader config,String user) {
+	public Introducir_datos(String user,ArrayList<String> text) {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 438);
 		contentPane = new JPanel();
@@ -65,7 +67,8 @@ public class Introducir_datos extends JFrame {
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
-		JLabel lblD = new JLabel("DATOS DEL CLIENTE ");
+		JLabel lblD = new JLabel(text.get(0));
+		text.remove(0);
 		lblD.setHorizontalAlignment(SwingConstants.CENTER);
 		lblD.setFont(new Font("Arial Black", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblD = new GridBagConstraints();
@@ -77,14 +80,16 @@ public class Introducir_datos extends JFrame {
 		gbc_lblD.gridy = 0;
 		panel.add(lblD, gbc_lblD);
 		
-		JLabel lblUsuariousuario = new JLabel("Usuario:"+user);
+		JLabel lblUsuariousuario = new JLabel(text.get(0)+user);
+		text.remove(0);
 		GridBagConstraints gbc_lblUsuariousuario = new GridBagConstraints();
 		gbc_lblUsuariousuario.insets = new Insets(0, 0, 5, 5);
 		gbc_lblUsuariousuario.gridx = 7;
 		gbc_lblUsuariousuario.gridy = 0;
 		panel.add(lblUsuariousuario, gbc_lblUsuariousuario);
 		
-		JLabel lblNombre = new JLabel("Nombre*");
+		JLabel lblNombre = new JLabel(text.get(0));
+		text.remove(0);
 		lblNombre.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblNombre.setVerticalAlignment(SwingConstants.TOP);
 		lblNombre.setHorizontalAlignment(SwingConstants.LEFT);
@@ -105,7 +110,8 @@ public class Introducir_datos extends JFrame {
 		panel.add(textField, gbc_textField);
 		textField.setColumns(10);
 		
-		JLabel lblPrimerApellido = new JLabel("Primer Apellido*");
+		JLabel lblPrimerApellido = new JLabel(text.get(0));
+		text.remove(0);
 		lblPrimerApellido.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblPrimerApellido.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_lblPrimerApellido = new GridBagConstraints();
@@ -125,7 +131,8 @@ public class Introducir_datos extends JFrame {
 		panel.add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
 		
-		JLabel lblSegundoApellido = new JLabel("Segundo Apellido*");
+		JLabel lblSegundoApellido = new JLabel(text.get(0));
+		text.remove(0);
 		lblSegundoApellido.setFont(new Font("Arial", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblSegundoApellido = new GridBagConstraints();
 		gbc_lblSegundoApellido.anchor = GridBagConstraints.WEST;
@@ -144,7 +151,8 @@ public class Introducir_datos extends JFrame {
 		panel.add(textField_2, gbc_textField_2);
 		textField_2.setColumns(10);
 		
-		JLabel lblDireccin = new JLabel("Direcci\u00F3n*");
+		JLabel lblDireccin = new JLabel(text.get(0));
+		text.remove(0);
 		lblDireccin.setFont(new Font("Arial", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblDireccin = new GridBagConstraints();
 		gbc_lblDireccin.anchor = GridBagConstraints.WEST;
@@ -163,7 +171,8 @@ public class Introducir_datos extends JFrame {
 		panel.add(textField_3, gbc_textField_3);
 		textField_3.setColumns(10);
 		
-		JLabel lblCorreoElectronico = new JLabel("Correo electr\u00F3nico*");
+		JLabel lblCorreoElectronico = new JLabel(text.get(0));
+		text.remove(0);
 		lblCorreoElectronico.setFont(new Font("Arial", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblCorreoElectronico = new GridBagConstraints();
 		gbc_lblCorreoElectronico.anchor = GridBagConstraints.WEST;
@@ -182,7 +191,8 @@ public class Introducir_datos extends JFrame {
 		panel.add(textField_4, gbc_textField_4);
 		textField_4.setColumns(10);
 		
-		JLabel lblGnero = new JLabel("G\u00E9nero");
+		JLabel lblGnero = new JLabel(text.get(0));
+		text.remove(0);
 		lblGnero.setFont(new Font("Arial", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblGnero = new GridBagConstraints();
 		gbc_lblGnero.anchor = GridBagConstraints.WEST;
@@ -191,7 +201,8 @@ public class Introducir_datos extends JFrame {
 		gbc_lblGnero.gridy = 6;
 		panel.add(lblGnero, gbc_lblGnero);
 		
-		JRadioButton rdbtnHombre = new JRadioButton("Hombre");
+		JRadioButton rdbtnHombre = new JRadioButton(text.get(0));
+		text.remove(0);
 		rdbtnHombre.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		GridBagConstraints gbc_rdbtnHombre = new GridBagConstraints();
 		gbc_rdbtnHombre.gridwidth = 3;
@@ -200,7 +211,8 @@ public class Introducir_datos extends JFrame {
 		gbc_rdbtnHombre.gridy = 6;
 		panel.add(rdbtnHombre, gbc_rdbtnHombre);
 		
-		JRadioButton rdbtnMujer = new JRadioButton("Mujer");
+		JRadioButton rdbtnMujer = new JRadioButton(text.get(0));
+		text.remove(0);
 		rdbtnMujer.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		GridBagConstraints gbc_rdbtnMujer = new GridBagConstraints();
 		gbc_rdbtnMujer.insets = new Insets(0, 0, 5, 5);
@@ -208,7 +220,8 @@ public class Introducir_datos extends JFrame {
 		gbc_rdbtnMujer.gridy = 6;
 		panel.add(rdbtnMujer, gbc_rdbtnMujer);
 		
-		JRadioButton rdbtnNoDeterminado = new JRadioButton("No Determinado");
+		JRadioButton rdbtnNoDeterminado = new JRadioButton(text.get(0));
+		text.remove(0);
 		rdbtnNoDeterminado.setSelected(true);
 		rdbtnNoDeterminado.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		GridBagConstraints gbc_rdbtnNoDeterminado = new GridBagConstraints();
@@ -222,7 +235,8 @@ public class Introducir_datos extends JFrame {
 		grupo1.add( rdbtnMujer);
 		grupo1.add(rdbtnNoDeterminado);
 		
-		JLabel lblFechaNacimiento = new JLabel("Fecha Nacimiento");
+		JLabel lblFechaNacimiento = new JLabel(text.get(0));
+		text.remove(0);
 		lblFechaNacimiento.setFont(new Font("Arial", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblFechaNacimiento = new GridBagConstraints();
 		gbc_lblFechaNacimiento.anchor = GridBagConstraints.WEST;
@@ -240,7 +254,8 @@ public class Introducir_datos extends JFrame {
 		gbc_dateChooser.gridy = 7;
 		panel.add(dateChooser, gbc_dateChooser);
 		
-		JButton btnGuardar = new JButton("GUARDAR");
+		JButton btnGuardar = new JButton(text.get(0));
+		text.remove(0);
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
 		gbc_btnGuardar.fill = GridBagConstraints.BOTH;
 		gbc_btnGuardar.ipadx = 2;
@@ -250,7 +265,8 @@ public class Introducir_datos extends JFrame {
 		gbc_btnGuardar.gridy = 9;
 		panel.add(btnGuardar, gbc_btnGuardar);
 		
-		JButton btnS = new JButton("SIGUIENTE");
+		JButton btnS = new JButton(text.get(0));
+		text.remove(0);
 		GridBagConstraints gbc_btnS = new GridBagConstraints();
 		gbc_btnS.fill = GridBagConstraints.BOTH;
 		gbc_btnS.ipady = 1;
@@ -303,12 +319,12 @@ public class Introducir_datos extends JFrame {
             			int seguir =JOptionPane.showConfirmDialog(null,"No ha guardado los datos, Esta seguro que desea continuar?","Quiere continuar?",JOptionPane.YES_NO_OPTION);
             			 if(seguir==JOptionPane.YES_OPTION) {
             				 JOptionPane.showMessageDialog(panel,"Se abrira una ventana nueva", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            				 new modelChooserFrame(config,user);
+            				 new modelChooserFrame(user,text);
             			 }
             		}
             		else {
             			esconderFrame();
-            			new modelChooserFrame(config,user);
+            			new modelChooserFrame(user,text);
             		}
             	
             }
