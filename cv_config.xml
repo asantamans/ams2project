@@ -14,10 +14,14 @@
 		<version>true</version>
 		<version>false</version>
 	</employee_version>
+<<<<<<< HEAD
 	<specifications_file_path>src\specifications</specifications_file_path>
 	<language>es;cat;eng</language>
 	<language_default>es</language_default>
 	<postfix_language_file_name>_cv.language.txt</postfix_language_file_name>
 	<version>#.#.#</version>
 	<language_files_path>src\</language_files_path>
+=======
+	<specifications_file_path>spec\</specifications_file_path>
+>>>>>>> branch 'pre' of https://github.com/asantamans/ams2project.git
 </configuration>

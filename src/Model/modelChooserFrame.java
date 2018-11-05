@@ -28,6 +28,7 @@ import app_config.ConfigurationLoader;
 import app_config.langLoader;
 import configuracion_vehiculo.CarConfiguration;
 import configuracion_vehiculo.Model;
+import idao.ICarConfiguration;
 import Model.PantallaSubmodelos;
 
 public class modelChooserFrame extends JFrame {
@@ -65,7 +66,8 @@ public class modelChooserFrame extends JFrame {
 		gbl_panel.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
-		JLabel lblNewLabel_2 = new JLabel("Usuario: "+user);
+		JLabel lblNewLabel_2 = new JLabel(text.get(0)+user);
+		text.remove(0);
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 		gbc_lblNewLabel_2.gridwidth = 2;
 		gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
@@ -74,7 +76,8 @@ public class modelChooserFrame extends JFrame {
 		gbc_lblNewLabel_2.gridy = 0;
 		panel.add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
-		JLabel lblNewLabel_1 = new JLabel("SELECCIONAR EL MODELO DE COCHE");
+		JLabel lblNewLabel_1 = new JLabel(text.get(0));
+		text.remove(0);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
@@ -131,7 +134,8 @@ public class modelChooserFrame extends JFrame {
 		JScrollPane scPane = new JScrollPane(textArea);
 		panel.add(scPane, gbc_textArea);
 		
-		JButton anteriorButton = new JButton("Anterior");
+		JButton anteriorButton = new JButton(text.get(0));
+		text.remove(0);
 		GridBagConstraints gbc_anteriorButton = new GridBagConstraints();
 		gbc_anteriorButton.insets = new Insets(0, 0, 5, 25);
 		gbc_anteriorButton.gridx = 3;
@@ -148,7 +152,8 @@ public class modelChooserFrame extends JFrame {
 			}
 		});
 		
-		JButton siguienteButton = new JButton("Siguiente");
+		JButton siguienteButton = new JButton(text.get(0));
+		text.remove(0);
 		GridBagConstraints gbc_siguienteButton = new GridBagConstraints();
 		gbc_siguienteButton.insets = new Insets(0, 0, 5, 5);
 		gbc_siguienteButton.gridx = 4;
@@ -167,15 +172,12 @@ public class modelChooserFrame extends JFrame {
 		});
 		
 		setVisible(true);
-		
-		
-		
-		
 	}
 	private void inicializaParametros() {
 		modelList = new ArrayList<JButton>();
-		CarConfiguration car_config = new CarConfiguration();
-		car_config.leerXML_Car_Config();
+		//implementacion de DAO cada vez que se inicia la pantalla carga los datos de los coches
+		ICarConfiguration car_config = new CarConfiguration();
+		car_config.load_Car_Config();
 		modelos = car_config.getModelos();
 		for (int i= 0; i < modelos.size(); ++i) {
 			String rutaImg = ConfigurationLoader.getConfigurador().getCar_configuration_path()+modelos.get(i).getImatge_nom();

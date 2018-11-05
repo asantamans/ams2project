@@ -324,7 +324,7 @@ public class Introducir_datos extends JFrame {
             		}
             		else {
             			esconderFrame();
-            			new modelChooserFrame(user,text);
+            				new modelChooserFrame(user, text);
             		}
             	
             }
