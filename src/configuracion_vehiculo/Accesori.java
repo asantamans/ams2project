@@ -35,5 +35,29 @@ public class Accesori {
 		return "Accesori [id=" + id + ", nom=" + nom + ", descripcio=" + descripcio + ", imatge_nom=" + imatge_nom
 				+ ", preu=" + preu + ", models_disponibles=" + models_disponibles + "]";
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public String getDescripcio() {
+		return descripcio;
+	}
+
+	public String getImatge_nom() {
+		return imatge_nom;
+	}
+
+	public int getPreu() {
+		return preu;
+	}
+
+	public ArrayList<String> getModels_disponibles() {
+		return models_disponibles;
+	}
 	
 }
