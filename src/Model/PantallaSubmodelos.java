@@ -135,7 +135,8 @@ public class PantallaSubmodelos extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//Abrir ventana accesorios
 				int precioSm = preciosSubmodelos.get(selectedSubmodel);//le pasamos el precio del submodelo a la siguiente ventana
-				//tambien le pasaremos el modelo para saber los accesorios disponibles
+				String mo=list.getSelectedValue().toString();
+				new Accesorios_coche(modelo,mo,new ArrayList(),usuario,precioSm);
 			}
 		});
 		btnSiguiente.setFont(new Font("Tahoma", Font.PLAIN, 16));

@@ -91,7 +91,7 @@
 	<accessoris>
 		<accessori>
 			<id>001</id>
-			<nom>Red Pack: Cinturones con detalles en rojo y pinzas de freno rojas</nom>
+			<nom>Cinturones con detalles en rojo</nom>
 			<descripcio>Accesorio de diseño</descripcio>
 			<imatge_nom>KJ1-PRQ.jpg</imatge_nom>
 			<preu>360</preu>
@@ -104,7 +104,7 @@
 		</accessori>
 		<accessori>
 			<id>002</id>
-			<nom>Vision Plus Pack: sensores de parking del. y tras. + cámara trasera</nom>
+			<nom>sensores de parking</nom>
 			<descripcio>La vida es demasiado corta para perder el tiempo aparcando. Con control de distancia de aparcamiento y cámara de visión trasera, el Paquete Visión Plus vigila la distancia con los objetos que haya delante o detrás del coche para avisarte si te aproximas demasiado. También podrás ver la parte trasera cuando des marcha atrás en la pantalla del sistema de infoentretenimiento del coche.</descripcio>
 			<imatge_nom>KJ1-PCK.jpg</imatge_nom>
 			<preu>530</preu>
@@ -117,7 +117,7 @@
 		</accessori>
 		<accessori>
 			<id>003</id>
-			<nom>Connectivity box: Cargador inalámbrico + Amplificador señal GSM</nom>
+			<nom>Cargador inalámbrico</nom>
 			<descripcio>Conexión de antena móvil con la antena del vehículo + Cargador Wireless (te permite cargar el móvil sin necesitar ningún cable). (Requiere Sistema de Navegación o Radio Media System Plus).</descripcio>
 			<imatge_nom>KJ1-PB2.jpg</imatge_nom>
 			<preu>200</preu>
@@ -132,7 +132,7 @@
 		</accessori>
 		<accessori>
 			<id>004</id>
-			<nom>Easy Pack: Sistema de apertura y arranque sin llave KESSY + Llave de acceso inteligente + Control de crucero adaptativo</nom>
+			<nom>apertura y arranque sin llave</nom>
 			<descripcio>Accesorio de confort</descripcio>
 			<imatge_nom>KJ1-PQA.jpg</imatge_nom>
 			<preu>450</preu>
@@ -146,7 +146,7 @@
 		</accessori>
 		<accessori>
 			<id>005</id>
-			<nom>Cuadro de mandos Digital Cockpit</nom>
+			<nom>Cuadro de mandos Digital</nom>
 			<descripcio>Accesorio de navegación</descripcio>
 			<imatge_nom>KJ7-PFK.jpg</imatge_nom>
 			<preu>310</preu>
