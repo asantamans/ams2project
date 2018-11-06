@@ -236,11 +236,19 @@ public class Accesorios_coche extends JFrame {
 				x++;
 			}
 			boolean activado = false;
+			String selec=null;
 			for(int i=0;i<modelos.length;i++) {
 				if(modelos[i].equals(modelo)) {
 					activado=true;
 				}
+				if(selec==null) {
+					selec=modelos[i];
+				}else {
+					selec=selec+","+modelos[i];
+				}
 			}
+			System.out.println(selec);
+			ac[a].setToolTipText(selec);
 			ac[a].setEnabled(activado);
 			panel.add(ac[a], ap);
 			
