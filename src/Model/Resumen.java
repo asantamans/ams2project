@@ -13,6 +13,10 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Resumen extends JFrame {
 
@@ -21,7 +25,7 @@ public class Resumen extends JFrame {
 	 * Create the frame.
 	 * @param mod 
 	 */
-	public Resumen(Model m,String mo, ArrayList idioma,String usuario,String precioF, String mod) {
+	public Resumen(Model m,String mo, ArrayList idioma,String usuario,String precioF, String acc) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 300);
 		contentPane = new JPanel();
@@ -65,7 +69,7 @@ public class Resumen extends JFrame {
 		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
 		gbc_lblNewLabel_1.gridx = 3;
 		gbc_lblNewLabel_1.gridy = 3;
-		Accesorios.setText(mod);
+		Accesorios.setText(acc);
 		panel.add(Accesorios, gbc_lblNewLabel_1);
 		
 		JLabel lblPrecioFinal = new JLabel("Precio final");
@@ -81,5 +85,19 @@ public class Resumen extends JFrame {
 		gbc_lblNewLabel_2.gridy = 5;
 		panel.add(precio, gbc_lblNewLabel_2);
 		setVisible(true);
+		
+		File f = new File ("fs_employee.txt");
+		try {
+			FileWriter fr= new FileWriter(f.getAbsoluteFile(), true);
+			BufferedWriter br = new BufferedWriter(fr);
+			System.out.println(mo);
+			br.write("modelo "+mo);
+			br.write("accesorios "+acc);
+			br.write("Precio Final "+precioF);
+			br.close();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 }
