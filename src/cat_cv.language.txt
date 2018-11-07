@@ -1,3 +1,6 @@
-Usuari;COntrasenya;ENTRAR;
-DADES DEL CLIENT;Usuari:;Nom*,Primer Cognom*;Segon Cognom*;Direcció*;Correu electronic*;Génere;Home;Done;Altres;Data de naixement,GUARDAR;SEGUENT
-Usuari: ;SELECCIONA EL MODEL DE COCHE;ENRERE;SEGUENT
+Usuari;COntrasenya;ENTRAR
+DADES DEL CLIENT;Usuari:;Nom*,Primer Cognom*;Segon Cognom*;Direcció*;Correu electronic*;Génere;Home;Done;Altres;Data de naixement,Guardar;Seguent
+Usuari: ;SELECCIONA EL MODEL DE COCHE;Enrere;Seguent
+Selecció de característiques del model,Usuari: ;Anterior
+Compra d'Accesoris;.;Augment de preu;Enrere;Finalitzar
+Model;Accesoris;Preu final

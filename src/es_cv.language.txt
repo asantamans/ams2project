@@ -1,4 +1,6 @@
 Usuario;Contraseña;ENTRAR
-DATOS DEL CLIENTE;Usuario:;Nombre*;Primer Apellido*;Segundo Apellido*;Dirección*;Correo electronico*;Género;Hombre;Mujer;No Determinado;Fecha Nacimiento;GUARDAR;SIGUIENTE
-Usuario: ;SELECCIONAR EL MODELO DE COCHE;ATRAS;SIGUIENTE
-Selección de características del modelo;Usuario: ;Anterior;
+DATOS DEL CLIENTE;Usuario:;Nombre*;Primer Apellido*;Segundo Apellido*;Dirección*;Correo electronico*;Género;Hombre;Mujer;No Determinado;Fecha Nacimiento;Guardar;Siguiente
+Usuario: ;SELECCIONAR EL MODELO DE COCHE;Atras;Siguiente
+Selección de características del modelo;Usuario: ;Anterior
+Compra de Accesorios;.;Augmento de precio;Atras;Finalizar
+Modelo;Accesorios;Precio final

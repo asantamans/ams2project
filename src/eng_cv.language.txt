@@ -1,3 +1,6 @@
 User;Password;ENTER
 CUSTOMER SETTINGS;User:;Name*;Surname*;Lastname*;Address*;Email*;Genre;Man;Women;Other;Birth date;SAVE;NEXT
-User: ;SELECT A CAR MODEL;GO BACK;NEXT
+User: ;SELECT A CAR MODEL;Back;Next
+Choose the model properties;User: ;Back
+Buy the accesories;.;Price increment;Back;Finish
+Model;Accesories;Final price
