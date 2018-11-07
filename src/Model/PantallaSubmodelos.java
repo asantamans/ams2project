@@ -8,6 +8,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import app_config.ConfigurationLoader;
+import app_config.User;
 import app_config.langLoader;
 import configuracion_vehiculo.CarConfiguration;
 import configuracion_vehiculo.Model;
@@ -77,6 +78,9 @@ public class PantallaSubmodelos extends JFrame {
 		}
 		
 		JLabel lblUsuario = new JLabel(text.get(0)+usuario);
+		if(User.getUsuario().getEmployee_version() == true) {
+			lblUsuario.setToolTipText("Tu cliente tendrá un 20% de descuento en su compra");
+		}
 		text.remove(0);
 		GridBagConstraints gbc_lblUsuario = new GridBagConstraints();
 		gbc_lblUsuario.gridwidth = 2;

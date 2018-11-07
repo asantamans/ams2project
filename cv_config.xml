@@ -6,16 +6,19 @@
 		<employee_user>Arnau</employee_user>
 		<employee_user>Carlos</employee_user>
 		<employee_user>Marc</employee_user>
+		<employee_user>user</employee_user>
 	</employee_list>
 	<employee_password>
 		<user_password>arnau123</user_password>
 		<user_password>carlos123</user_password>
 		<user_password>marc123</user_password>
+		<user_password>user</user_password>
 	</employee_password>
 	<employee_version>
-		<version>true</version>
-		<version>true</version>
-		<version>false</version>
+		<emp_version>true</emp_version>
+		<emp_version>true</emp_version>
+		<emp_version>true</emp_version>
+		<emp_version>false</emp_version>
 	</employee_version>
 	<specifications_file_path>src\specifications</specifications_file_path>
 	<language>es;cat;eng</language>

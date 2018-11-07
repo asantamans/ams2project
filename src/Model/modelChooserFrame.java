@@ -25,6 +25,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import app_config.ConfigurationLoader;
+import app_config.User;
 import app_config.langLoader;
 import configuracion_vehiculo.CarConfiguration;
 import configuracion_vehiculo.Model;
@@ -67,6 +68,9 @@ public class modelChooserFrame extends JFrame {
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		JLabel lblNewLabel_2 = new JLabel(text.get(0)+user);
+		if(User.getUsuario().getEmployee_version() == true) {
+			lblNewLabel_2.setToolTipText("Tu cliente tendrá un 20% de descuento en su compra");
+		}
 		text.remove(0);
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 		gbc_lblNewLabel_2.gridwidth = 2;

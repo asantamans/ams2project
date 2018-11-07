@@ -131,7 +131,7 @@ public class Factura {
 				accesoriosNode.appendChild(accesorioNode);
 			}
 			
-			Element precioNode = document.createElement("precio_total");
+			Element precioNode = document.createElement("precio_final");
 			Text precioValue = document.createTextNode(cocheSelec.getPrecioFinal()+"");
 			precioNode.appendChild(precioValue);
 			

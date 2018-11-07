@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 //import com.jgoodies.forms.layout.CellConstraints.Alignment;
 
 import app_config.ConfigurationLoader;
+import app_config.User;
 import app_config.langLoader;
 import configuracion_vehiculo.Accesori;
 import configuracion_vehiculo.CarConfiguration;
@@ -72,6 +73,9 @@ public class Accesorios_coche extends JFrame {
 		panel_1.setLayout(gbl_panel_1);
 
 		JLabel lblCompraAccesoris = new JLabel("Compra de Accesorios");
+		if(User.getUsuario().getEmployee_version() == true) {
+			lblCompraAccesoris.setToolTipText("Tu cliente tendrá un 20% de descuento en su compra");
+		}
 		lblCompraAccesoris.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_lblCompraAccesoris = new GridBagConstraints();
 		gbc_lblCompraAccesoris.insets = new Insets(0, 0, 5, 5);
@@ -170,8 +174,16 @@ public class Accesorios_coche extends JFrame {
 						JOptionPane.YES_NO_OPTION);
 				if (seguir == JOptionPane.YES_OPTION) {
 					pf = preciosm + precioAccs;
-					JOptionPane.showMessageDialog(panel, "El precio final es " + pf, "Advertencia",
-							JOptionPane.WARNING_MESSAGE);
+					if(User.getUsuario().getEmployee_version() == true) {
+						double pfDescuento = pf-((pf/100)*20);
+						JOptionPane.showMessageDialog(panel, "El precio total es " + pf + ", pero como tienes un 20% de descuento, el precio final sera: "+(int)pfDescuento, "Advertencia",
+								JOptionPane.WARNING_MESSAGE);
+						//el precio no tendra decimales
+						pf = (int) pfDescuento;
+					}else {
+						JOptionPane.showMessageDialog(panel, "El precio final es " + pf, "Advertencia",
+								JOptionPane.WARNING_MESSAGE);
+					}
 					dispose();
 					String preciof = Integer.toString(pf);
 					if (selectedAcc.size() == 0) {
@@ -183,6 +195,7 @@ public class Accesorios_coche extends JFrame {
 						SelectedCar sCar = new SelectedCar(m, car_config.getMotores().get(numSM), selectedAcc, pf);
 						SelectedCar.setSelectedCar(sCar);
 					}
+					setVisible(false);
 					new Resumen(m, mo, idioma, usuario, preciof, mod);
 				}
 			}

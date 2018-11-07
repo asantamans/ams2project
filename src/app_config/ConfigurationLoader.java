@@ -85,13 +85,11 @@ public class ConfigurationLoader {
 					}
 				}
 				
-				
 				String spec_fp = eElement.getElementsByTagName("specifications_file_path").item(0).getTextContent();
 				specifications_file_path = spec_fp;
-				//System.out.println(spec_fp);
 				
 				employee_version = new ArrayList<String>();
-				NodeList nl_vrs = doc.getElementsByTagName("version");
+				NodeList nl_vrs = doc.getElementsByTagName("emp_version");
 				for (int i = 0; i < nl_vrs.getLength(); i++) {
 					Node node_vrs = nl_vrs.item(i);
 					if(node_vrs.getNodeType() == Node.ELEMENT_NODE) {
@@ -101,16 +99,14 @@ public class ConfigurationLoader {
 					}
 				}
 			//Cargado de lenguage en configuracion
-				this.language =eElement.getElementsByTagName("language").item(0).getTextContent();
-				this.language_default = eElement.getElementsByTagName("language_default").item(0).getTextContent();
-				this.langPostfix = eElement.getElementsByTagName("postfix_language_file_name").item(0).getTextContent();
-				this.langFilePath = eElement.getElementsByTagName("language_files_path").item(0).getTextContent();
+				ConfigurationLoader.language =eElement.getElementsByTagName("language").item(0).getTextContent();
+				ConfigurationLoader.language_default = eElement.getElementsByTagName("language_default").item(0).getTextContent();
+				ConfigurationLoader.langPostfix = eElement.getElementsByTagName("postfix_language_file_name").item(0).getTextContent();
+				ConfigurationLoader.langFilePath = eElement.getElementsByTagName("language_files_path").item(0).getTextContent();
+				ConfigurationLoader.version = eElement.getElementsByTagName("version").item(0).getTextContent();
 				if(!comprobarArchivosLenguaje()) {
-					language = langFilePath+language_default+langPostfix;
-							
+					language = langFilePath+language_default+langPostfix;		
 				}
-			
-				
 				
 			}
 		} catch (ParserConfigurationException e) {

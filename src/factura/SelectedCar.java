@@ -10,7 +10,7 @@ public class SelectedCar {
 	private Model modeloSeleccionado;
 	private Motor submodeloSeleccionado;
 	private ArrayList<Accesori> accesoriosSeleccionados;
-	private double precioFinal;
+	private int precioFinal;//el precio final no tendra decimales
 	private static SelectedCar selectedCar;
 	/**
 	 * Al crearlo le pasaremos el modelo de coche seleccionado, el submodelo seleccionado, los accesorios que se hayan seleccionado y el coste total del coche
@@ -21,7 +21,7 @@ public class SelectedCar {
 	 * @author Marc
 	 */
 	public SelectedCar(Model modeloSeleccionado, Motor submodeloSeleccionado,
-			ArrayList<Accesori> accesoriosSeleccionados, double precioFinal) {
+			ArrayList<Accesori> accesoriosSeleccionados, int precioFinal) {
 		this.modeloSeleccionado = modeloSeleccionado;
 		this.submodeloSeleccionado = submodeloSeleccionado;
 		this.accesoriosSeleccionados = accesoriosSeleccionados;
