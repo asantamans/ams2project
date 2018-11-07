@@ -42,7 +42,7 @@ public class Accesorios_coche extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Accesorios_coche(Model m, String mo, ArrayList<String> idioma, String usuario, int preciosm, int numSM) {
+	public Accesorios_coche(Model m, String mo, ArrayList<String> text, String usuario, int preciosm, int numSM) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 634, 500);
 		contentPane = new JPanel();
@@ -71,8 +71,9 @@ public class Accesorios_coche extends JFrame {
 				0.0, Double.MIN_VALUE };
 		gbl_panel_1.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel_1.setLayout(gbl_panel_1);
-
-		JLabel lblCompraAccesoris = new JLabel("Compra de Accesorios");
+		
+		JLabel lblCompraAccesoris = new JLabel(text.get(0));
+		text.remove(0);
 		if(User.getUsuario().getEmployee_version() == true) {
 			lblCompraAccesoris.setToolTipText("Tu cliente tendrá un 20% de descuento en su compra");
 		}
@@ -83,7 +84,8 @@ public class Accesorios_coche extends JFrame {
 		gbc_lblCompraAccesoris.gridy = 0;
 		panel_1.add(lblCompraAccesoris, gbc_lblCompraAccesoris);
 
-		JLabel label = new JLabel(".");
+		JLabel label = new JLabel(text.get(0));
+		text.remove(0);
 		label.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_label = new GridBagConstraints();
 		gbc_label.gridwidth = 13;
@@ -104,7 +106,8 @@ public class Accesorios_coche extends JFrame {
 		gbl_panel_2.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel_2.setLayout(gbl_panel_2);
 
-		JLabel lblAugmentoDePrecio = new JLabel("Augmento de precio");
+		JLabel lblAugmentoDePrecio = new JLabel(text.get(0));
+		text.remove(0);
 		lblAugmentoDePrecio.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblAugmentoDePrecio = new GridBagConstraints();
 		gbc_lblAugmentoDePrecio.gridwidth = 2;
@@ -124,7 +127,8 @@ public class Accesorios_coche extends JFrame {
 		panel_2.add(textField, gbc_textField);
 		textField.setColumns(10);
 
-		JButton btnAtras = new JButton("Atras");
+		JButton btnAtras = new JButton(text.get(0));
+		text.remove(0);
 		GridBagConstraints gbc_btnAtras = new GridBagConstraints();
 		gbc_btnAtras.fill = GridBagConstraints.BOTH;
 		gbc_btnAtras.gridwidth = 2;
@@ -145,7 +149,8 @@ public class Accesorios_coche extends JFrame {
 		CarConfiguration car_config = new CarConfiguration();
 		car_config.load_Car_Config();
 
-		JButton btnFinalizar = new JButton("Finalizar");
+		JButton btnFinalizar = new JButton(text.get(0));
+		text.remove(0);
 		GridBagConstraints gbc_btnFinalizar = new GridBagConstraints();
 		gbc_btnFinalizar.fill = GridBagConstraints.BOTH;
 		gbc_btnFinalizar.insets = new Insets(0, 0, 0, 5);
@@ -196,7 +201,7 @@ public class Accesorios_coche extends JFrame {
 						SelectedCar.setSelectedCar(sCar);
 					}
 					setVisible(false);
-					new Resumen(m, mo, idioma, usuario, preciof, mod);
+					new Resumen(m, mo, text, usuario, preciof, mod);
 				}
 			}
 		});

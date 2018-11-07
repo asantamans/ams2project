@@ -33,7 +33,7 @@ public class Resumen extends JFrame {
 	 * Create the frame.
 	 * @param mod 
 	 */
-	public Resumen(Model m,String mo, ArrayList <String> idioma,String usuario,String precioF, String acc) {
+	public Resumen(Model m,String mo, ArrayList <String> text,String usuario,String precioF, String acc) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 300);
 		contentPane = new JPanel();
@@ -51,7 +51,8 @@ public class Resumen extends JFrame {
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
-		JLabel lblModelo = new JLabel("Modelo");
+		JLabel lblModelo = new JLabel(text.get(0));
+		text.remove(0);
 		GridBagConstraints gbc_lblModelo = new GridBagConstraints();
 		gbc_lblModelo.insets = new Insets(0, 0, 5, 5);
 		gbc_lblModelo.gridx = 1;
@@ -65,7 +66,8 @@ public class Resumen extends JFrame {
 		gbc_lblNewLabel.gridy = 1;
 		panel.add(modelo, gbc_lblNewLabel);
 		
-		JLabel lblAccesorios = new JLabel("Accesorios");
+		JLabel lblAccesorios = new JLabel(text.get(0));
+		text.remove(0);
 		GridBagConstraints gbc_lblAccesorios = new GridBagConstraints();
 		gbc_lblAccesorios.insets = new Insets(0, 0, 5, 5);
 		gbc_lblAccesorios.gridx = 1;
@@ -80,7 +82,8 @@ public class Resumen extends JFrame {
 		Accesorios.setText(acc);
 		panel.add(Accesorios, gbc_lblNewLabel_1);
 		
-		JLabel lblPrecioFinal = new JLabel("Precio final");
+		JLabel lblPrecioFinal = new JLabel(text.get(0));
+		text.remove(0);
 		GridBagConstraints gbc_lblPrecioFinal = new GridBagConstraints();
 		gbc_lblPrecioFinal.insets = new Insets(0, 0, 0, 5);
 		gbc_lblPrecioFinal.gridx = 1;
