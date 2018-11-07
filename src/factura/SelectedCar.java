@@ -11,7 +11,7 @@ public class SelectedCar {
 	private Motor submodeloSeleccionado;
 	private ArrayList<Accesori> accesoriosSeleccionados;
 	private double precioFinal;
-	
+	private static SelectedCar selectedCar;
 	/**
 	 * Al crearlo le pasaremos el modelo de coche seleccionado, el submodelo seleccionado, los accesorios que se hayan seleccionado y el coste total del coche
 	 * @param modeloSeleccionado - El modelo que el usuario haya seleccionado
@@ -43,6 +43,14 @@ public class SelectedCar {
 
 	public double getPrecioFinal() {
 		return precioFinal;
+	}
+
+	public static SelectedCar getSelectedCar() {
+		return selectedCar;
+	}
+
+	public static void setSelectedCar(SelectedCar selectedCar) {
+		SelectedCar.selectedCar = selectedCar;
 	}
 	
 }

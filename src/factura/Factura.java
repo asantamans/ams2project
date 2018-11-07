@@ -15,19 +15,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
 
-//import configuracion_vehiculo.CarConfiguration;
-
 public class Factura {
-	/* main para hacer pruebas
-	public static void main(String[] args) {
-		Factura fac = new Factura();
-		CarConfiguration car_config = new CarConfiguration();
-		car_config.load_Car_Config();
-		double precioFinal = car_config.getModelos().get(0).getPreu()+car_config.getMotores().get(0).getPreu();
-		SelectedCar car = new SelectedCar(car_config.getModelos().get(0), car_config.getMotores().get(0), car_config.getAccesorios(), precioFinal);
-		fac.generateXML("Marc", new Cliente("nombre", "primerApellido", "segundoApellido", "direccion", "correoElectronico", "genero", "01-01-1990"), car);
-	}*/
-	
 	/**
 	 * Genera una factura (archivo xml) con los datos mas relevantes
 	 * @param nombreEmpleado - Es el nombre del empleado (usuario) que se loguea en la aplicacion
@@ -37,7 +25,7 @@ public class Factura {
 	 */
 	public void generateXML(String nombreEmpleado, Cliente cliente, SelectedCar cocheSelec) {
 		try {
-			String nombre_xml = "fs_employee";
+			String nombre_archivo = "fs_employee";
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             DOMImplementation implementation = builder.getDOMImplementation();
@@ -160,7 +148,7 @@ public class Factura {
             //Generate XML
             Source source = new DOMSource(document);
             //Indicamos donde lo queremos almacenar
-            Result result = new StreamResult(new java.io.File(nombre_xml+".xml")); //nombre del archivo
+            Result result = new StreamResult(new java.io.File(nombre_archivo+".xml")); //nombre del archivo
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             //las 3 proximas lineas son importantes, sirven para que genere el xml con saltos de linea, si no se mostrara todo en una linea
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");

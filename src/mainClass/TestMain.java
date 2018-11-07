@@ -8,10 +8,9 @@ import app_config.langLoader;
 public class TestMain {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		ConfigurationLoader config = ConfigurationLoader.getConfigurador();
+		ConfigurationLoader.getConfigurador();
 		ArrayList<String> texto = new ArrayList<String>();
-		texto = langLoader.getText(config.getLanguage());
+		texto = langLoader.getText(ConfigurationLoader.getLanguage());
 		new loginFrame(texto);
 	}
 }

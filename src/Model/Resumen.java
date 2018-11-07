@@ -1,22 +1,30 @@
 package Model;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import configuracion_vehiculo.Model;
+import factura.Cliente;
+import factura.Factura;
+import factura.SelectedCar;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.text.SimpleDateFormat;
 
 public class Resumen extends JFrame {
 
@@ -25,7 +33,7 @@ public class Resumen extends JFrame {
 	 * Create the frame.
 	 * @param mod 
 	 */
-	public Resumen(Model m,String mo, ArrayList idioma,String usuario,String precioF, String acc) {
+	public Resumen(Model m,String mo, ArrayList <String> idioma,String usuario,String precioF, String acc) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 300);
 		contentPane = new JPanel();
@@ -87,17 +95,79 @@ public class Resumen extends JFrame {
 		setVisible(true);
 		
 		File f = new File ("fs_employee.txt");
+		//cuando se implemente, se borraran el delete() es temporal
+		if (f.exists()) {
+			f.delete();
+			f = new File("fs_employee.txt");
+		}
 		try {
 			FileWriter fr= new FileWriter(f.getAbsoluteFile(), true);
 			BufferedWriter br = new BufferedWriter(fr);
-			System.out.println(mo);
-			br.write("modelo "+mo);
-			br.write("accesorios "+acc);
-			br.write("Precio Final "+precioF);
+			br.write("Modelo: "+mo+System.getProperty("line.separator"));
+			if (acc == null) {
+				br.write("Accesorios: sin accesorios"+System.getProperty("line.separator"));
+			}else {
+				br.write("Accesorios: "+acc+System.getProperty("line.separator"));
+			}
+			br.write("Precio Final: "+precioF);
 			br.close();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		//generamos la factura en formato XML
+		Factura factura = new Factura();
+		factura.generateXML(usuario, Cliente.getCliente(), SelectedCar.getSelectedCar());
+		
+		//cuando el usuario cierre la aplicacion, se cambiaran los nombre de los ficheros fs_employee.txt y fs_employee.xml
+		this.addWindowListener(new WindowListener() {
+			@Override
+			public void windowClosing(WindowEvent e) {			
+				SimpleDateFormat sdf_day = new SimpleDateFormat("dd-MM-yyyy");
+				String date = sdf_day.format(new Date());
+				SimpleDateFormat sdf = new SimpleDateFormat("HH;mm");
+				String hour = sdf.format(new Date());
+				
+				if (new File("fs_employee_"+date+"_i_"+hour+".txt").exists()) {
+					File deleteFile = new File("fs_employee_"+date+"_i_"+hour+".txt");
+					deleteFile.delete();
+				}
+				
+				if (new File("fs_employee_"+date+"_i_"+hour+".xml").exists()) {
+					File deleteFile = new File("fs_employee_"+date+"_i_"+hour+".xml");
+					deleteFile.delete();
+				}
+				
+				File fTxt = new File("fs_employee.txt");
+				File fXml = new File("fs_employee.xml");
+				Path source = fTxt.toPath();
+				Path sourceXML = fXml.toPath();
+				try {
+				     Files.move(source, source.resolveSibling("fs_employee_"+date+"_i_"+hour+".txt"));
+				     Files.move(sourceXML, sourceXML.resolveSibling("fs_employee_"+date+"_i_"+hour+".xml"));
+				} catch (IOException ex) {
+				     ex.printStackTrace();
+				}
+				System.exit(0);
+			}
+			
+			//como WindowListener es una interfaz nos obliga a implementar estos metodos, pero no los utilizaremos
+			@Override
+			public void windowOpened(WindowEvent e) {}
+			
+			@Override
+			public void windowIconified(WindowEvent e) {}
+			
+			@Override
+			public void windowDeiconified(WindowEvent e) {}
+			
+			@Override
+			public void windowDeactivated(WindowEvent e) {}
+			
+			@Override
+			public void windowClosed(WindowEvent e) {}
+			
+			@Override
+			public void windowActivated(WindowEvent e) {}
+		});
 	}
 }

@@ -1,7 +1,5 @@
 package Model;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
@@ -39,11 +37,8 @@ public class PantallaSubmodelos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-
-
 	public PantallaSubmodelos(Model modelo, String usuario,ArrayList<String> text) {
-		//implementacion de DAO cada vez que se inicia la pantalla carga los datos de los coches
-	
+		//implementacion de DAO cada vez que se inicia la pantalla, carga los datos de los coches
 		ICarConfiguration car_config = new CarConfiguration();
 		car_config.load_Car_Config();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,7 +68,7 @@ public class PantallaSubmodelos extends JFrame {
 		JList list;
 		ArrayList<Motor> motores = car_config.getMotores();
 		String [] submodelos = new String [motores.size()];
-		//añado submodelos al JList
+		//añado submodelos a un array de Strings
 		for (int i = 0; i < submodelos.length; i++) {
 			int precio = modelo.getPreu()+motores.get(i).getPreu();
 			preciosSubmodelos.add(precio);
@@ -89,7 +84,9 @@ public class PantallaSubmodelos extends JFrame {
 		gbc_lblUsuario.gridx = 6;
 		gbc_lblUsuario.gridy = 0;
 		contentPane.add(lblUsuario, gbc_lblUsuario);
+		//añado el array al JList
 		list = new JList(submodelos);
+		list.setSelectedIndex(0);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		list.addListSelectionListener(new ListSelectionListener() {
@@ -133,10 +130,11 @@ public class PantallaSubmodelos extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
 				//Abrir ventana accesorios
-				int precioSm = preciosSubmodelos.get(selectedSubmodel);//le pasamos el precio del submodelo a la siguiente ventana
-				String mo=list.getSelectedValue().toString();
-				new Accesorios_coche(modelo,mo,new ArrayList(),usuario,precioSm);
+				int precioSm = preciosSubmodelos.get(selectedSubmodel);//le pasamos el precio del submodelo seleccionado a la siguiente ventana
+				String nombre_submod = list.getSelectedValue().toString();
+				new Accesorios_coche(modelo, nombre_submod,text,usuario,precioSm, selectedSubmodel);
 			}
 		});
 		btnSiguiente.setFont(new Font("Tahoma", Font.PLAIN, 16));

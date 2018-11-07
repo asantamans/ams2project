@@ -8,6 +8,8 @@ public class Cliente {
 	private String correoElectronico;
 	private String genero;
 	private String fechaNacimiento;
+	private static Cliente cliente;
+	
 	public Cliente(String nombre, String primerApellido, String segundoApellido, String direccion,
 			String correoElectronico, String genero, String fechaNacimiento) {
 		this.nombre = nombre;
@@ -38,5 +40,19 @@ public class Cliente {
 	}
 	public String getFechaNacimiento() {
 		return fechaNacimiento;
+	}
+	public static Cliente getCliente() {
+		return cliente;
+	}
+	public static void setCliente(Cliente cliente) {
+		Cliente.cliente = cliente;
+	}
+	
+	//to String para ver el objeto, borrar al finalizar
+	@Override
+	public String toString() {
+		return "Cliente [nombre=" + nombre + ", primerApellido=" + primerApellido + ", segundoApellido="
+				+ segundoApellido + ", direccion=" + direccion + ", correoElectronico=" + correoElectronico
+				+ ", genero=" + genero + ", fechaNacimiento=" + fechaNacimiento + "]";
 	}
 }

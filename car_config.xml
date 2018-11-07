@@ -104,7 +104,7 @@
 		</accessori>
 		<accessori>
 			<id>002</id>
-			<nom>sensores de parking</nom>
+			<nom>Sensores de parking</nom>
 			<descripcio>La vida es demasiado corta para perder el tiempo aparcando. Con control de distancia de aparcamiento y cámara de visión trasera, el Paquete Visión Plus vigila la distancia con los objetos que haya delante o detrás del coche para avisarte si te aproximas demasiado. También podrás ver la parte trasera cuando des marcha atrás en la pantalla del sistema de infoentretenimiento del coche.</descripcio>
 			<imatge_nom>KJ1-PCK.jpg</imatge_nom>
 			<preu>530</preu>
@@ -132,7 +132,7 @@
 		</accessori>
 		<accessori>
 			<id>004</id>
-			<nom>apertura y arranque sin llave</nom>
+			<nom>Apertura y arranque sin llave</nom>
 			<descripcio>Accesorio de confort</descripcio>
 			<imatge_nom>KJ1-PQA.jpg</imatge_nom>
 			<preu>450</preu>
