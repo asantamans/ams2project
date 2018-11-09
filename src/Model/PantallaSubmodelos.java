@@ -84,9 +84,6 @@ public class PantallaSubmodelos extends JFrame {
 		}
 		
 		JLabel lblUsuario = new JLabel(text.get(0)+usuario);
-		if(User.getUsuario().getEmployee_version() == true) {
-			lblUsuario.setToolTipText("Tu cliente tendrá un 20% de descuento en su compra");
-		}
 		text.remove(0);
 		GridBagConstraints gbc_lblUsuario = new GridBagConstraints();
 		gbc_lblUsuario.gridwidth = 2;

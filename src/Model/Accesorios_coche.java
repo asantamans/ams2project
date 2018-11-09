@@ -84,9 +84,6 @@ public class Accesorios_coche extends JFrame {
 		
 		JLabel lblCompraAccesoris = new JLabel(text.get(0));
 		text.remove(0);
-		if(User.getUsuario().getEmployee_version() == true) {
-			lblCompraAccesoris.setToolTipText("Tu cliente tendrá un 20% de descuento en su compra");
-		}
 		lblCompraAccesoris.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_lblCompraAccesoris = new GridBagConstraints();
 		gbc_lblCompraAccesoris.insets = new Insets(0, 0, 5, 5);
@@ -189,9 +186,10 @@ public class Accesorios_coche extends JFrame {
 						JOptionPane.YES_NO_OPTION);
 				if (seguir == JOptionPane.YES_OPTION) {
 					pf = preciosm + precioAccs;
-					if(User.getUsuario().getEmployee_version() == true) {
-						double pfDescuento = pf-((pf/100)*20);
-						JOptionPane.showMessageDialog(panel, "El precio total es " + pf + ", pero como tienes un 20% de descuento, el precio final sera: "+(int)pfDescuento, "Advertencia",
+					if(ConfigurationLoader.getConfigurador().getDescompte() > 0) {
+						int discount = ConfigurationLoader.getConfigurador().getDescompte();
+						double pfDescuento = pf-((pf/100)*discount);
+						JOptionPane.showMessageDialog(panel, "El precio total es " + pf + ", pero como tienes un "+discount+"% de descuento, el precio final sera: "+(int)pfDescuento, "Advertencia",
 								JOptionPane.WARNING_MESSAGE);
 						//el precio no tendra decimales
 						pf = (int) pfDescuento;

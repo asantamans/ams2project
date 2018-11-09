@@ -3,10 +3,14 @@ package Model;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import app_config.ConfigurationLoader;
+import app_config.langLoader;
+import configuracion_vehiculo.CarConfiguration;
 import configuracion_vehiculo.Model;
 import factura.Cliente;
 import factura.Factura;
@@ -16,6 +20,8 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedWriter;
@@ -29,6 +35,16 @@ import java.text.SimpleDateFormat;
 public class Resumen extends JFrame {
 
 	private JPanel contentPane;
+	
+	public static void main(String[] args) {
+		ConfigurationLoader.getConfigurador();
+		CarConfiguration car_conf = new CarConfiguration();
+		car_conf.load_Car_Config();
+		String nombre = car_conf.getModelos().get(0).getNom()+" "+car_conf.getMotores().get(0).getNom()+" "+car_conf.getMotores().get(0).getDescripcio();
+		ArrayList<String> text = langLoader.getText(ConfigurationLoader.getLanguage(),5);
+		new Resumen(car_conf.getModelos().get(0),  nombre, text, "Marc", car_conf.getModelos().get(0).getPreu()+300+"", "Rueda de repuesto, Alarma");
+	}
+	
 	/**
 	 * Create the frame.
 	 * @param mod 
@@ -48,9 +64,9 @@ public class Resumen extends JFrame {
 		contentPane.add(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{30, 0, 30, 31, 0};
-		gbl_panel.rowHeights = new int[]{30, 0, 31, 0, 30, 0, 0};
+		gbl_panel.rowHeights = new int[]{30, 0, 31, 0, 30, 0, 0, 0};
 		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE, 4.9E-324};
 		panel.setLayout(gbl_panel);
 		
 		JLabel lblModelo = new JLabel(text.get(0));
@@ -87,17 +103,34 @@ public class Resumen extends JFrame {
 		JLabel lblPrecioFinal = new JLabel(text.get(0));
 		text.remove(0);
 		GridBagConstraints gbc_lblPrecioFinal = new GridBagConstraints();
-		gbc_lblPrecioFinal.insets = new Insets(0, 0, 0, 5);
+		gbc_lblPrecioFinal.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPrecioFinal.gridx = 1;
 		gbc_lblPrecioFinal.gridy = 5;
 		panel.add(lblPrecioFinal, gbc_lblPrecioFinal);
 		
 		JLabel precio = new JLabel(precioF);
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 0);
 		gbc_lblNewLabel_2.gridx = 3;
 		gbc_lblNewLabel_2.gridy = 5;
 		panel.add(precio, gbc_lblNewLabel_2);
 		setVisible(true);
+		
+		JButton btnNewPres = new JButton("Nuevo presupuesto");
+		btnNewPres.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false);
+				ArrayList<String> text = langLoader.getText(ConfigurationLoader.getLanguage(),1);
+				new Introducir_datos(usuario, text);
+			}
+		});
+		GridBagConstraints gbc_btnNewPres = new GridBagConstraints();
+		gbc_btnNewPres.insets = new Insets(0, 0, 5, 0);
+		gbc_btnNewPres.gridwidth = 2;
+		gbc_btnNewPres.gridx = 2;
+		gbc_btnNewPres.gridy = 6;
+		panel.add(btnNewPres, gbc_btnNewPres);
 		
 		File f = new File ("fs_employee.txt");
 		try {

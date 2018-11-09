@@ -88,10 +88,6 @@ public class Introducir_datos extends JFrame {
 		panel.add(lblD, gbc_lblD);
 
 		JLabel lblUsuariousuario = new JLabel(text.get(0) + user);
-		//comprueba si el empleado puede dar descuento a su cliente
-		if(User.getUsuario().getEmployee_version() == true) {
-			lblUsuariousuario.setToolTipText("Tu cliente tendrá un 20% de descuento en su compra");
-		}
 		text.remove(0);
 		GridBagConstraints gbc_lblUsuariousuario = new GridBagConstraints();
 		gbc_lblUsuariousuario.insets = new Insets(0, 0, 5, 5);
