@@ -26,7 +26,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
@@ -43,6 +51,8 @@ public class Accesorios_coche extends JFrame {
 	 * Create the frame.
 	 */
 	public Accesorios_coche(Model m, String mo, ArrayList<String> text, String usuario, int preciosm, int numSM) {
+		setIconImage(Login.icono());
+		setTitle(loginFrame.titulo);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 634, 500);
 		contentPane = new JPanel();
@@ -201,6 +211,19 @@ public class Accesorios_coche extends JFrame {
 						SelectedCar.setSelectedCar(sCar);
 					}
 					setVisible(false);
+					File f = new File ("fs_employee.txt");
+					try {
+						FileWriter fr= new FileWriter(f.getAbsoluteFile(), true);
+						BufferedWriter br = new BufferedWriter(fr);
+						if (mod == null) {
+							br.write("Accesorios: sin accesorios"+System.getProperty("line.separator"));
+						}else {
+							br.write("Accesorios: "+mod+System.getProperty("line.separator"));
+						}
+						br.close();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 					new Resumen(m, mo, text, usuario, preciof, mod);
 				}
 			}

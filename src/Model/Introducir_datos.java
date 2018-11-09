@@ -3,6 +3,7 @@ package Model;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.HeadlessException;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,6 +31,10 @@ import factura.Cliente;
 
 public class Introducir_datos extends JFrame {
 
+	public Introducir_datos() throws HeadlessException {
+		super();
+	}
+
 	/**
 	 * 
 	 */
@@ -49,8 +54,9 @@ public class Introducir_datos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Introducir_datos(String user, ArrayList<String> text) {
-
+	public  Introducir_datos(String user, ArrayList<String> text) {
+		setIconImage(Login.icono());
+		setTitle(loginFrame.titulo);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 438);
 		contentPane = new JPanel();
@@ -335,6 +341,7 @@ public class Introducir_datos extends JFrame {
 								JOptionPane.WARNING_MESSAGE);
 						Cliente sinDatos = new Cliente("no name", "no primerApellido", "no segundoApellido", "no direccion", "no correoElectronico", "no genero", "no fechaNacimiento");
 						new modelChooserFrame(user, text);
+						setVisible(false);
 						Cliente.setCliente(sinDatos);
 					}
 				} else {

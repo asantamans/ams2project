@@ -34,6 +34,8 @@ public class Resumen extends JFrame {
 	 * @param mod 
 	 */
 	public Resumen(Model m,String mo, ArrayList <String> text,String usuario,String precioF, String acc) {
+		setIconImage(Login.icono());
+		setTitle(loginFrame.titulo);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 300);
 		contentPane = new JPanel();
@@ -98,20 +100,9 @@ public class Resumen extends JFrame {
 		setVisible(true);
 		
 		File f = new File ("fs_employee.txt");
-		//cuando se implemente, se borraran el delete() es temporal
-		if (f.exists()) {
-			f.delete();
-			f = new File("fs_employee.txt");
-		}
 		try {
 			FileWriter fr= new FileWriter(f.getAbsoluteFile(), true);
 			BufferedWriter br = new BufferedWriter(fr);
-			br.write("Modelo: "+mo+System.getProperty("line.separator"));
-			if (acc == null) {
-				br.write("Accesorios: sin accesorios"+System.getProperty("line.separator"));
-			}else {
-				br.write("Accesorios: "+acc+System.getProperty("line.separator"));
-			}
 			br.write("Precio Final: "+precioF);
 			br.close();
 		} catch (IOException e1) {
@@ -149,6 +140,16 @@ public class Resumen extends JFrame {
 				     Files.move(sourceXML, sourceXML.resolveSibling("fs_employee_"+date+"_i_"+hour+".xml"));
 				} catch (IOException ex) {
 				     ex.printStackTrace();
+				}
+				File f = new File ("fs_employee.txt");
+				try {
+					if(f.exists()) {
+						f.delete();
+					}
+					f.createNewFile();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 				System.exit(0);
 			}

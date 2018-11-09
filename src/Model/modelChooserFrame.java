@@ -9,10 +9,16 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -45,6 +51,9 @@ public class modelChooserFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public modelChooserFrame(String user,ArrayList<String> text) {
+		setTitle("");
+		setIconImage(Login.icono());
+		setTitle(loginFrame.titulo);
 		this.user = user;
 		setResizable(false);
 		setMaximumSize(new Dimension(594, 2147483647));
@@ -150,7 +159,8 @@ public class modelChooserFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ArrayList<String> text = langLoader.getText(ConfigurationLoader.getLanguage(),1);
-				new Introducir_datos(user,text);
+				Introducir_datos da= new Introducir_datos(user,text);
+				da.setVisible(true);
 				setVisible(false);
 				
 			}
@@ -169,6 +179,18 @@ public class modelChooserFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				File f = new File ("fs_employee.txt");
+				if(f.exists()) {
+					f.delete();
+				}
+				try {
+					FileWriter fr= new FileWriter(f.getAbsoluteFile(), true);
+					BufferedWriter br = new BufferedWriter(fr);
+					br.write("Modelo: "+modelos.get(numBtn).getNom()+System.getProperty("line.separator"));
+					br.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				dispose();
 				new PantallaSubmodelos(modelos.get(numBtn), user,text);
 				

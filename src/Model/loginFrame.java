@@ -27,6 +27,7 @@ import app_config.ConfigurationLoader;
 public class loginFrame extends JFrame {
 	private JTextField textField;
 	private JPasswordField passwordField;
+	public static String titulo ="Car_Configurator";
 
 	/**
 	 * Launch the application.
@@ -37,6 +38,8 @@ public class loginFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public loginFrame(ArrayList<String> text) {
+		setIconImage(Login.icono());
+		setTitle(titulo);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout(0, 0));

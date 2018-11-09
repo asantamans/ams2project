@@ -26,6 +26,10 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.JButton;
 
@@ -39,6 +43,8 @@ public class PantallaSubmodelos extends JFrame {
 	 * Create the frame.
 	 */
 	public PantallaSubmodelos(Model modelo, String usuario,ArrayList<String> text) {
+		setIconImage(Login.icono());
+		setTitle(loginFrame.titulo);
 		//implementacion de DAO cada vez que se inicia la pantalla, carga los datos de los coches
 		ICarConfiguration car_config = new CarConfiguration();
 		car_config.load_Car_Config();
@@ -134,10 +140,20 @@ public class PantallaSubmodelos extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String nombre_submod = list.getSelectedValue().toString();
+				File f = new File ("fs_employee.txt");
+				try {
+					FileWriter fr= new FileWriter(f.getAbsoluteFile(), true);
+					BufferedWriter br = new BufferedWriter(fr);
+					br.write("SubModelo: "+nombre_submod+System.getProperty("line.separator"));
+					br.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				setVisible(false);
 				//Abrir ventana accesorios
 				int precioSm = preciosSubmodelos.get(selectedSubmodel);//le pasamos el precio del submodelo seleccionado a la siguiente ventana
-				String nombre_submod = list.getSelectedValue().toString();
+				
 				new Accesorios_coche(modelo, nombre_submod,text,usuario,precioSm, selectedSubmodel);
 			}
 		});

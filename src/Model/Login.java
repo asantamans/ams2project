@@ -1,7 +1,9 @@
 package Model;
 
+import java.awt.Image;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -11,6 +13,7 @@ import app_config.User;
 public class Login {
 
 	public static boolean comprovarLogin(String user,String pass,JPanel panel,ConfigurationLoader config) {
+		
 		//login.getText();
 		//String tField = user,pField=pass;
 		boolean esCorrectoLogin=false;
@@ -54,4 +57,10 @@ public class Login {
 			return true;
 		}
 	}
+	public static Image  icono() {
+		ImageIcon icon = new ImageIcon("src/icono.png");
+		Image imagen = icon.getImage();
+		return imagen;
+	}
+
 }
