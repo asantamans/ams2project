@@ -1,6 +1,64 @@
-Usuario;Contraseña;ENTRAR
-DATOS DEL CLIENTE;Usuario:;Nombre*;Primer Apellido*;Segundo Apellido*;Dirección*;Correo electronico*;Género;Hombre;Mujer;No Determinado;Fecha Nacimiento;Guardar;Siguiente
-Usuario: ;SELECCIONAR EL MODELO DE COCHE;Atras;Siguiente
-Selección de características del modelo;Usuario: ;Anterior
-Compra de Accesorios;.;Augmento de precio;Atras;Finalizar
-Modelo;Accesorios;Precio final
+lblNewLabel==Usuario
+lblPassword==Contraseña
+btnNewButton==ENTRAR
+loginErrorOp1==El Usuario es incorrecto
+loginErrorOp2==La contraseña es incorrecta
+loginErrorOp3==El Usuario y la contraseña son incorrectos
+lblD==DATOS DEL CLIENTE
+lblUsuariousuario==Usuario: 
+lblNombre==Nombre*
+lblPrimerApellido==Primer Apellido*
+lblSegundoApellido==Segundo Apellido*
+lblDireccin==Dirección*
+lblCorreoElectronico==Correo electronico*
+lblGnero==Género
+rdbtnHombre==Hombre
+rdbtnMujer==Mujer
+rdbtnNoDeterminado==No Determinado
+lblFechaNacimiento==Fecha Nacimiento
+btnGuardar==Guardar
+btnS==Siguiente
+btnGuardarListenerOp1== no puede estar en blanco
+btnGuardarListenerOp2==Email formato incorrecto
+btnGuardarListenerOp3==Los datos se han guardado correctamente
+btnSListenerOp1== no puede estar en blanco
+btnSListenerOp2==Email formato incorrecto
+btnSListenerOp3==No ha guardado los datos, Esta seguro que desea continuar?
+btnSListenerOp4==Se abrira una ventana nueva
+lblNewLabel_2==Usuario
+lblNewLabel_1==SELECCIONAR EL MODELO DE COCHE
+anteriorButton==Atras
+siguienteButton==Finalizar
+lbTitulo==Selección de características del modelo
+lblUsuario==Usuario: 
+btnAnterior==Anterior
+btnSiguiente==Siguiente
+mensajesDescuento==Tu cliente tendrá un 20% de descuento en su compra
+lblCompraAccesoris==Compra de Accesorios
+label==.
+lblAugmentoDePrecio==Augmento de precio
+btnAtras==Atras
+btnFinalizar==Finalizar
+btnFinalizarListenerOp1Text1==Son correctos los accesorios?
+btnFinalizarListenerOp1Text2==Quiere continuar?
+btnFinalizarListenerOp2Text1==El precio total es 
+btnFinalizarListenerOp2Text2==, pero como tienes un 20% de descuento, el precio final sera    
+btnFinalizarListenerOp3Text1==El precio final es 
+selec==Accesorio disponible en:
+lblModelo==Modelo
+lblAccesorios==Accesorios
+lblPrecioFinal==Precio final
+OptionPaneError==Error
+OptionPaneAlert==Advertencia
+OptionPaneInformation==Informacion
+OptionPaneExtra1==Quiere continuar?
+comprobarDatosOp0==El 
+comprobarDatosOp1== Nombre 
+comprobarDatosOp2== Primer apellido 
+comprobarDatosOp3== Segundo apellido 
+comprobarDatosOp4== La direccion 
+comprobarDatosOp5== Direccion 
+FacturaWriterOp1==Modelo: 
+FacturaWriterOp2==Accesorios: sin accesorios
+FacturaWriterOp3==Accesorios: 
+FacturaWriterOp4==Precio Final: 
