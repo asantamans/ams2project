@@ -50,7 +50,7 @@ public class modelChooserFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public modelChooserFrame(String user,ArrayList<String> text) {
+	public modelChooserFrame(String user) {
 		setTitle("");
 		setIconImage(Login.icono());
 		setTitle(loginFrame.titulo);
@@ -76,8 +76,7 @@ public class modelChooserFrame extends JFrame {
 		gbl_panel.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
-		JLabel lblNewLabel_2 = new JLabel(text.get(0)+user);
-		text.remove(0);
+		JLabel lblNewLabel_2 = new JLabel(langLoader.getText("lblNewLabel_2")+user);
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 		gbc_lblNewLabel_2.gridwidth = 2;
 		gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
@@ -86,8 +85,8 @@ public class modelChooserFrame extends JFrame {
 		gbc_lblNewLabel_2.gridy = 0;
 		panel.add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
-		JLabel lblNewLabel_1 = new JLabel(text.get(0));
-		text.remove(0);
+		JLabel lblNewLabel_1 = new JLabel(langLoader.getText("lblNewLabel_1"));
+		
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
@@ -144,8 +143,8 @@ public class modelChooserFrame extends JFrame {
 		JScrollPane scPane = new JScrollPane(textArea);
 		panel.add(scPane, gbc_textArea);
 		
-		JButton anteriorButton = new JButton(text.get(0));
-		text.remove(0);
+		JButton anteriorButton = new JButton(langLoader.getText("anteriorButton"));
+		
 		GridBagConstraints gbc_anteriorButton = new GridBagConstraints();
 		gbc_anteriorButton.insets = new Insets(0, 0, 5, 25);
 		gbc_anteriorButton.gridx = 3;
@@ -155,16 +154,15 @@ public class modelChooserFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ArrayList<String> text = langLoader.getText(ConfigurationLoader.getLanguage(),1);
-				Introducir_datos da= new Introducir_datos(user,text);
+				Introducir_datos da= new Introducir_datos(user);
 				da.setVisible(true);
 				setVisible(false);
 				
 			}
 		});
 		
-		JButton siguienteButton = new JButton(text.get(0));
-		text.remove(0);
+		JButton siguienteButton = new JButton(langLoader.getText("siguienteButton"));
+	
 		GridBagConstraints gbc_siguienteButton = new GridBagConstraints();
 		gbc_siguienteButton.insets = new Insets(0, 0, 5, 5);
 		gbc_siguienteButton.gridx = 4;
@@ -189,7 +187,7 @@ public class modelChooserFrame extends JFrame {
 					e1.printStackTrace();
 				}
 				dispose();
-				new PantallaSubmodelos(modelos.get(numBtn), user,text);
+				new PantallaSubmodelos(modelos.get(numBtn), user);
 				
 			}
 		});

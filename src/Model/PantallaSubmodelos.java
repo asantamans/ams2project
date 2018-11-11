@@ -42,7 +42,7 @@ public class PantallaSubmodelos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PantallaSubmodelos(Model modelo, String usuario,ArrayList<String> text) {
+	public PantallaSubmodelos(Model modelo, String usuari) {
 		setIconImage(Login.icono());
 		setTitle(loginFrame.titulo);
 		//implementacion de DAO cada vez que se inicia la pantalla, carga los datos de los coches
@@ -61,8 +61,7 @@ public class PantallaSubmodelos extends JFrame {
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
-		JLabel lbTitulo = new JLabel(text.get(0));
-		text.remove(0);
+		JLabel lbTitulo = new JLabel(langLoader.getText("lbTitulo"));
 		lbTitulo.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lbTitulo.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_lbTitulo = new GridBagConstraints();
@@ -83,8 +82,7 @@ public class PantallaSubmodelos extends JFrame {
 			submodelos[i] = submdTxt;
 		}
 		
-		JLabel lblUsuario = new JLabel(text.get(0)+usuario);
-		text.remove(0);
+		JLabel lblUsuario = new JLabel(langLoader.getText("lblUsuario")+usuari);
 		GridBagConstraints gbc_lblUsuario = new GridBagConstraints();
 		gbc_lblUsuario.gridwidth = 2;
 		gbc_lblUsuario.insets = new Insets(0, 0, 5, 5);
@@ -111,15 +109,14 @@ public class PantallaSubmodelos extends JFrame {
 		gbc_list.gridy = 1;
 		contentPane.add(list, gbc_list);
 		
-		JButton btnAnterior = new JButton(text.get(0));
-		text.remove(0);
+		JButton btnAnterior = new JButton(langLoader.getText("btnAnterior"));
 		btnAnterior.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
-			ArrayList<String> text = langLoader.getText(ConfigurationLoader.getLanguage(),2);
-				new modelChooserFrame(usuario,text);
+		
+				new modelChooserFrame(usuari);
 				
 			}
 		});
@@ -132,7 +129,7 @@ public class PantallaSubmodelos extends JFrame {
 		gbc_btnAnterior.gridy = 2;
 		contentPane.add(btnAnterior, gbc_btnAnterior);
 		
-		JButton btnSiguiente = new JButton("Siguiente");
+		JButton btnSiguiente = new JButton(langLoader.getText("btnSiguiente"));
 		btnSiguiente.addActionListener(new ActionListener() {
 			
 			@Override
@@ -151,7 +148,7 @@ public class PantallaSubmodelos extends JFrame {
 				//Abrir ventana accesorios
 				int precioSm = preciosSubmodelos.get(selectedSubmodel);//le pasamos el precio del submodelo seleccionado a la siguiente ventana
 				
-				new Accesorios_coche(modelo, nombre_submod,text,usuario,precioSm, selectedSubmodel);
+				new Accesorios_coche(modelo, nombre_submod,usuari,precioSm, selectedSubmodel);
 			}
 		});
 		btnSiguiente.setFont(new Font("Tahoma", Font.PLAIN, 16));

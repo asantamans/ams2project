@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import app_config.ConfigurationLoader;
 import app_config.User;
+import app_config.langLoader;
 
 public class Login {
 
@@ -32,13 +33,13 @@ public class Login {
 		
 		}
 		if(!esCorrectoLogin) {
-			JOptionPane.showMessageDialog(panel, "El Usuario es incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(panel, langLoader.getText("loginErrorOp1"), langLoader.getText("OptionPaneError"), JOptionPane.ERROR_MESSAGE);
 			return false;
 		}else if(!esCorrectoPassword){
-			JOptionPane.showMessageDialog(panel, "La contraseña es incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(panel, langLoader.getText("loginErrorOp2"), langLoader.getText("OptionPaneError"), JOptionPane.ERROR_MESSAGE);
 			return false;
 		}else if(!esCorrectoLogin && !esCorrectoPassword) {
-			JOptionPane.showMessageDialog(panel, "El Usuario y la contraseña son incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(panel, langLoader.getText("loginErrorOp3"),langLoader.getText("OptionPaneError"), JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		else {

@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
 import app_config.ConfigurationLoader;
+import app_config.langLoader;
 
 public class loginFrame extends JFrame {
 	private JTextField textField;
@@ -37,7 +38,7 @@ public class loginFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public loginFrame(ArrayList<String> text) {
+	public loginFrame() {
 		setIconImage(Login.icono());
 		setTitle(titulo);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,8 +54,7 @@ public class loginFrame extends JFrame {
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
-		JLabel lblNewLabel = new JLabel(text.get(0));
-		text.remove(0);
+		JLabel lblNewLabel = new JLabel(langLoader.getText("lblNewLabel"));
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
@@ -74,8 +74,7 @@ public class loginFrame extends JFrame {
 		panel.add(textField, gbc_textField);
 		textField.setColumns(10);
 		
-		JLabel lblPassword = new JLabel(text.get(0));
-		text.remove(0);
+		JLabel lblPassword = new JLabel(langLoader.getText("lblPassword"));
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
 		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
@@ -93,14 +92,14 @@ public class loginFrame extends JFrame {
 		gbc_passwordField.gridy = 4;
 		panel.add(passwordField, gbc_passwordField);
 		
-		JButton btnNewButton = new JButton(text.get(0));
-		text.remove(0);
+		JButton btnNewButton = new JButton(langLoader.getText("btnNewButton"));
+
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(Login.comprovarLogin(textField.getText(),passwordField.getText(),panel,ConfigurationLoader.getConfigurador())) {
 					panel.setVisible(false);
 					esconderLogin();
-					new Introducir_datos(textField.getText(),text);
+					new Introducir_datos(textField.getText());
 				}
 			}
 		});
@@ -114,7 +113,7 @@ public class loginFrame extends JFrame {
 					 if(Login.comprovarLogin(textField.getText(),passwordField.getText(),panel,ConfigurationLoader.getConfigurador())) {
 							panel.setVisible(false);
 							esconderLogin();
-							new Introducir_datos(textField.getText(),text);
+							new Introducir_datos(textField.getText());
 						}
 	                }
 			}
