@@ -1,6 +1,7 @@
 package Model;
 
 import java.awt.Image;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -44,6 +45,18 @@ public class Login {
 		}
 		else {
 			return true;
+		}
+	}
+	public static void datosguardados() {
+		File f = new File ("fs_employee.txt");
+		if(f.exists()) {
+			int op=JOptionPane.showConfirmDialog(null,
+					"Hay datos guardados,desea cargarlos?", "Datos guardados",JOptionPane.YES_NO_OPTION);
+			if(op==JOptionPane.YES_OPTION) {
+				System.out.println("Cargar ventana pertienente");
+			}else {
+				f.delete();
+			}
 		}
 	}
 	public static Image  icono() {

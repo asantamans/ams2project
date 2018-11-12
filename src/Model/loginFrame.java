@@ -98,6 +98,7 @@ public class loginFrame extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				if(Login.comprovarLogin(textField.getText(),passwordField.getText(),panel,ConfigurationLoader.getConfigurador())) {
 					panel.setVisible(false);
+					Login.datosguardados();
 					esconderLogin();
 					new Introducir_datos(textField.getText());
 				}
@@ -111,7 +112,8 @@ public class loginFrame extends JFrame {
 			public void keyPressed(KeyEvent arg0) {
 				 if(arg0.getKeyCode()==KeyEvent.VK_ENTER){
 					 if(Login.comprovarLogin(textField.getText(),passwordField.getText(),panel,ConfigurationLoader.getConfigurador())) {
-							panel.setVisible(false);
+						 Login.datosguardados();	
+						 panel.setVisible(false);
 							esconderLogin();
 							new Introducir_datos(textField.getText());
 						}

@@ -115,8 +115,8 @@ public class PantallaSubmodelos extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
-		
-				new modelChooserFrame(usuari);
+				boolean a=true;
+				new modelChooserFrame(usuari,a);
 				
 			}
 		});

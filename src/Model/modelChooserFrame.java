@@ -12,8 +12,11 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,19 +49,24 @@ public class modelChooserFrame extends JFrame {
 	private JLabel foto;
 	private ArrayList<Model> modelos;
 	private static String user;
-
+	private ImageIcon icn;
+	private Image imgen;
+	private int pos=0;
 	/**
 	 * Create the frame.
 	 */
-	public modelChooserFrame(String user) {
-		setTitle("");
+	public modelChooserFrame(String user,boolean atras) {
 		setIconImage(Login.icono());
 		setTitle(loginFrame.titulo);
 		this.user = user;
 		setResizable(false);
 		setMaximumSize(new Dimension(594, 2147483647));
 		setMinimumSize(new Dimension(594, 511));
-		inicializaParametros();
+		/*if(atras) {
+			atras();
+		}else {*/
+			inicializaParametros(pos);
+		//}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 645, 590);
 		contentPane = new JPanel();
@@ -120,8 +128,8 @@ public class modelChooserFrame extends JFrame {
 		
 		scrollPane.setViewportView(panel_1);
 		
-		ImageIcon icn = new ImageIcon(ConfigurationLoader.getConfigurador().getCar_configuration_path()+modelos.get(0).getImatge_nom());
-		Image imgen = icn.getImage().getScaledInstance(406, 237, Image.SCALE_DEFAULT);
+		icn = new ImageIcon(ConfigurationLoader.getConfigurador().getCar_configuration_path()+modelos.get(0).getImatge_nom());
+		imgen = icn.getImage().getScaledInstance(406, 237, Image.SCALE_DEFAULT);
 		icn = new ImageIcon(imgen);
 		foto = new JLabel(icn);
 		GridBagConstraints gbc_foto = new GridBagConstraints();
@@ -150,18 +158,21 @@ public class modelChooserFrame extends JFrame {
 		gbc_anteriorButton.gridx = 3;
 		gbc_anteriorButton.gridy = 7;
 		panel.add(anteriorButton, gbc_anteriorButton);
+		
+		
 		anteriorButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Introducir_datos da= new Introducir_datos(user);
-				da.setVisible(true);
+				
+				
+				new Introducir_datos(user).setVisible(true);
 				setVisible(false);
 				
 			}
 		});
 		
-		JButton siguienteButton = new JButton(langLoader.getText("siguienteButton"));
+		JButton siguienteButton = new JButton(langLoader.getText("btnSiguiente"));
 	
 		GridBagConstraints gbc_siguienteButton = new GridBagConstraints();
 		gbc_siguienteButton.insets = new Insets(0, 0, 5, 5);
@@ -175,14 +186,28 @@ public class modelChooserFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				File f = new File ("fs_employee.txt");
-				if(f.exists()) {
-					f.delete();
-				}
-				try {
-					FileWriter fr= new FileWriter(f.getAbsoluteFile(), true);
-					BufferedWriter br = new BufferedWriter(fr);
-					br.write("Modelo: "+modelos.get(numBtn).getNom()+System.getProperty("line.separator"));
-					br.close();
+					try {
+						FileReader fr = new FileReader(f.getAbsoluteFile());
+						BufferedReader br = new BufferedReader(fr);
+						String linea;
+						String datos[]=new String[7];
+						int con=0;
+						while((linea=br.readLine())!=null){
+							if(con<=6) {
+								String [] temp=linea.split(": ");
+								datos[con]=temp[1];
+							}
+							con++;
+						}
+						File f2 = new File("fichero2.txt");
+						f.renameTo(f2);
+						fr.close();
+						br.close();
+					if(f.exists()) {
+						f.delete();
+					}
+				
+					escribir(datos);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
@@ -194,7 +219,69 @@ public class modelChooserFrame extends JFrame {
 		
 		setVisible(true);
 	}
-	private void inicializaParametros() {
+	private void escribir(String [] datos) {
+		File ff = new File ("fs_employee.txt");
+		if(ff.exists()) {
+			ff.delete();
+		}
+		FileWriter fw;
+		try {
+			fw = new FileWriter(ff.getAbsoluteFile(), true);
+			fw.write("Nombre: "+datos[0]+System.getProperty("line.separator"));
+			fw.write("PrimerApellido: "+datos[1]+System.getProperty("line.separator"));
+			fw.write("segundoApellido: "+datos[2]+System.getProperty("line.separator"));
+			fw.write("Direccion: "+datos[3]+System.getProperty("line.separator"));
+			fw.write("Email: "+datos[4]+System.getProperty("line.separator"));
+			fw.write("Genero: "+datos[5]+System.getProperty("line.separator"));
+			fw.write("Fecha nacimiento: "+datos[6]+System.getProperty("line.separator"));
+			fw.write("Modelo: "+modelos.get(numBtn).getNom()+System.getProperty("line.separator"));
+			fw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	private void atras() {
+		/*ICarConfiguration car_config = new CarConfiguration();
+		car_config.load_Car_Config();
+		modelos = car_config.getModelos();
+		File f = new File ("fs_employee.txt");
+		if(f.exists()) {
+			FileReader fr;
+			try {
+				fr = new FileReader(f.getAbsoluteFile());
+				BufferedReader br = new BufferedReader(fr);
+				String linea;
+				String modelo = null;
+				int con=0;
+				while((linea=br.readLine())!=null){
+					if(con==7) {
+						String [] temp=linea.split(": ");
+						modelo=temp[1];
+					}
+					con++;
+				}
+					int pos=0;
+					for(int i=0;i<modelos.size();i++) {
+						if(modelos.get(i).getNom().equalsIgnoreCase(modelo)) {
+							pos=i;
+						}
+					}
+					this.pos=pos;
+					System.out.println(this.pos);
+					inicializaParametros(this.pos);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}*/
+	}
+	private void inicializaParametros(int pos) {
 		modelList = new ArrayList<JButton>();
 		//implementacion de DAO cada vez que se inicia la pantalla carga los datos de los coches
 		ICarConfiguration car_config = new CarConfiguration();
@@ -213,7 +300,7 @@ public class modelChooserFrame extends JFrame {
 			}
 			String descripcion = descr;
 			//El textArea tendra por defecto la descripción del primer modelo
-			if (i == 0) {
+			if (i == pos) {
 				textArea.setText(descripcion);
 				textArea.select(0, 0);
 			}

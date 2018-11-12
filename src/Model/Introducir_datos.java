@@ -7,6 +7,15 @@ import java.awt.HeadlessException;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,6 +55,10 @@ public class Introducir_datos extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+	private JRadioButton rdbtnHombre;
+	private JRadioButton rdbtnMujer;
+	private JRadioButton rdbtnNoDeterminado;
+	private JDateChooser dateChooser;
 	private boolean guardado = false;
 
 	/**
@@ -201,7 +214,7 @@ public class Introducir_datos extends JFrame {
 		gbc_lblGnero.gridy = 6;
 		panel.add(lblGnero, gbc_lblGnero);
 
-		JRadioButton rdbtnHombre = new JRadioButton(langLoader.getText("rdbtnHombre"));
+		rdbtnHombre = new JRadioButton(langLoader.getText("rdbtnHombre"));
 		rdbtnHombre.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		GridBagConstraints gbc_rdbtnHombre = new GridBagConstraints();
 		gbc_rdbtnHombre.gridwidth = 3;
@@ -210,7 +223,7 @@ public class Introducir_datos extends JFrame {
 		gbc_rdbtnHombre.gridy = 6;
 		panel.add(rdbtnHombre, gbc_rdbtnHombre);
 
-		JRadioButton rdbtnMujer = new JRadioButton(langLoader.getText("rdbtnMujer"));
+		rdbtnMujer = new JRadioButton(langLoader.getText("rdbtnMujer"));
 		rdbtnMujer.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		GridBagConstraints gbc_rdbtnMujer = new GridBagConstraints();
 		gbc_rdbtnMujer.insets = new Insets(0, 0, 5, 5);
@@ -218,7 +231,7 @@ public class Introducir_datos extends JFrame {
 		gbc_rdbtnMujer.gridy = 6;
 		panel.add(rdbtnMujer, gbc_rdbtnMujer);
 
-		JRadioButton rdbtnNoDeterminado = new JRadioButton(langLoader.getText("rdbtnNoDeterminado"));
+		rdbtnNoDeterminado = new JRadioButton(langLoader.getText("rdbtnNoDeterminado"));
 		rdbtnNoDeterminado.setSelected(true);
 		rdbtnNoDeterminado.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		GridBagConstraints gbc_rdbtnNoDeterminado = new GridBagConstraints();
@@ -241,7 +254,7 @@ public class Introducir_datos extends JFrame {
 		gbc_lblFechaNacimiento.gridy = 7;
 		panel.add(lblFechaNacimiento, gbc_lblFechaNacimiento);
 
-		JDateChooser dateChooser = new JDateChooser();
+		dateChooser = new JDateChooser();
 		GridBagConstraints gbc_dateChooser = new GridBagConstraints();
 		gbc_dateChooser.insets = new Insets(0, 0, 5, 5);
 		gbc_dateChooser.fill = GridBagConstraints.HORIZONTAL;
@@ -270,6 +283,8 @@ public class Introducir_datos extends JFrame {
 		gbc_btnS.gridx = 6;
 		gbc_btnS.gridy = 9;
 		panel.add(btnS, gbc_btnS);
+		
+		atras();
 
 		/**
 		 * 
@@ -292,6 +307,7 @@ public class Introducir_datos extends JFrame {
 					guardado = true;
 					JOptionPane.showMessageDialog(panel, langLoader.getText("btnGuardarListenerOp3"), langLoader.getText("OptionPaneInformation"),
 							JOptionPane.INFORMATION_MESSAGE);
+					escribirFichero();
 				}
 			}
 
@@ -323,7 +339,8 @@ public class Introducir_datos extends JFrame {
 						JOptionPane.showMessageDialog(panel, langLoader.getText("btnSListenerOp4"), langLoader.getText("OptionPaneAlert"),
 								JOptionPane.WARNING_MESSAGE);
 						Cliente sinDatos = new Cliente("no name", "no primerApellido", "no segundoApellido", "no direccion", "no correoElectronico", "no genero", "no fechaNacimiento");
-						new modelChooserFrame(user);
+						boolean a=false;
+						new modelChooserFrame(user,a);
 						Cliente.setCliente(sinDatos);
 					}
 				} else {
@@ -357,13 +374,59 @@ public class Introducir_datos extends JFrame {
 						Cliente.setCliente(datos_cliente);
 					}
 					esconderFrame();
-					new modelChooserFrame(user);
+					boolean a=false;
+					new modelChooserFrame(user,a);
 				}
 
 			}
 
 		});
 		setVisible(true);
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {		
+				if(!guardado) {
+					int op=JOptionPane.showConfirmDialog(null,
+							"Quieres salir sin guardar los datos?", "Quiere cerrar?",
+							JOptionPane.YES_NO_OPTION);
+					if(op == JOptionPane.NO_OPTION) {
+						int op1=JOptionPane.showConfirmDialog(null,
+								"Quiere guardar?", "Quiere cerrar?",
+								JOptionPane.YES_NO_OPTION);
+					if(op1==JOptionPane.YES_OPTION) {
+						escribirFichero();
+						JOptionPane.showMessageDialog(panel, langLoader.getText("btnGuardarListenerOp3"), langLoader.getText("OptionPaneInformation"),
+								JOptionPane.INFORMATION_MESSAGE);
+						int op3=JOptionPane.showConfirmDialog(null,
+								"Esta seguro que quiere cerrar la ventana?", "Quiere cerrar?",
+								JOptionPane.YES_NO_OPTION);
+						if(op3 == JOptionPane.NO_OPTION) {
+							setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+						}else {
+							dispose();
+						}
+						
+					}else if(op1==JOptionPane.NO_OPTION) {
+						dispose();
+					}
+						setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+					}else {
+						dispose();
+					}
+				}else {
+					int op=JOptionPane.showConfirmDialog(null,
+							"Esta seguro que quiere cerrar la ventana?", "Quiere cerrar?",
+							JOptionPane.YES_NO_OPTION);
+					if(op == JOptionPane.NO_OPTION) {
+						setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+					}else {
+						dispose();
+					}
+				}
+			
+			}
+
+			});
 
 	}
 
@@ -387,6 +450,33 @@ public class Introducir_datos extends JFrame {
 		}
 
 	}
+	private void escribirFichero() {
+		File f = new File ("fs_employee.txt");
+		if(f.exists()) {
+			f.delete();
+		}
+		try {
+			FileWriter fr= new FileWriter(f.getAbsoluteFile(), true);
+			BufferedWriter br = new BufferedWriter(fr);
+			br.write("Nombre: "+textField.getText()+System.getProperty("line.separator"));
+			br.write("PrimerApellido: "+textField_1.getText()+System.getProperty("line.separator"));
+			br.write("segundoApellido: "+textField_2.getText()+System.getProperty("line.separator"));
+			br.write("Direccion: "+textField_3.getText()+System.getProperty("line.separator"));
+			br.write("Email: "+textField_4.getText()+System.getProperty("line.separator"));
+			if(rdbtnHombre.isSelected()) {
+				br.write("Genero: "+rdbtnHombre.getText()+System.getProperty("line.separator"));
+			}else if(rdbtnMujer.isSelected()) {
+				br.write("Genero: "+rdbtnMujer.getText()+System.getProperty("line.separator"));
+			}else {
+				br.write("Genero: "+rdbtnNoDeterminado.getText()+System.getProperty("line.separator"));
+			}
+			
+			br.write("Fecha nacimiento: "+dateChooser.getDate()+System.getProperty("line.separator"));
+			br.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
 
 	private String comprobarDatos() {
 		String campos_blanco = "El ";
@@ -409,5 +499,47 @@ public class Introducir_datos extends JFrame {
 
 		}
 		return campos_blanco;
+	}
+	private void atras() {
+		File f = new File ("fs_employee.txt");
+		if(f.exists()) {
+			FileReader fr;
+			try {
+				fr = new FileReader(f.getAbsoluteFile());
+				BufferedReader br = new BufferedReader(fr);
+				String linea;
+				String datos[]=new String[7];
+				int con=0;
+				while((linea=br.readLine())!=null){
+					if(con<=6) {
+						String [] temp=linea.split(": ");
+						datos[con]=temp[1];
+					}
+					con++;
+				}
+				textField.setText(datos[0]);
+				textField_1.setText(datos[1]);
+				textField_2.setText(datos[2]);
+				textField_3.setText(datos[3]);
+				textField_4.setText(datos[4]);
+				if(datos[5].equalsIgnoreCase("hombre")) {
+					rdbtnHombre.setSelected(true);
+				}else if(datos[5].equalsIgnoreCase("mujer")) {
+					rdbtnMujer.setSelected(true);
+				}else {
+					rdbtnNoDeterminado.setSelected(true);
+				}
+				//Date d=new Date(datos[6]);
+			//	dateChooser.setDate(d);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+	
 	}
 }
