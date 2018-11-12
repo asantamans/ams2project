@@ -1,6 +1,65 @@
-User;Password;ENTER
-CUSTOMER SETTINGS;User:;Name*;Surname*;Lastname*;Address*;Email*;Genre;Man;Women;Other;Birth date;SAVE;NEXT
-User: ;SELECT A CAR MODEL;Back;Next
-Choose the model properties;User: ;Back
-Buy the accesories;.;Price increment;Back;Finish
-Model;Accesories;Final price
+lblNewLabel==Username
+lblPassword==Password
+btnNewButton==ENTER
+loginErrorOp1==The username is incorrect
+loginErrorOp2==The password is incorrect
+loginErrorOp3==The username and password are incorrect
+lblD==CLIENT DATA
+lblUsuariousuario==User: 
+lblNombre==Name*
+lblPrimerApellido==First Surname*
+lblSegundoApellido==Second Surname*
+lblDireccin==Address*
+lblCorreoElectronico==Email*
+lblGnero==Gender
+rdbtnHombre==Male
+rdbtnMujer==Female
+rdbtnNoDeterminado==Undeterminated
+lblFechaNacimiento==Birth Date
+btnGuardar==Save
+btnS==Continue
+btnGuardarListenerOp1== can't be empty
+btnGuardarListenerOp2==Email incorrect format
+btnGuardarListenerOp3==The data has been saved correctly
+btnSListenerOp1== can't be empty
+btnSListenerOp2==Email incorrect format
+btnSListenerOp3==Data has not been saved, Would you like to continue?
+btnSListenerOp4==A new frame will be displayed
+lblNewLabel_2==User: 
+lblNewLabel_1==CHOOSE A CAR MODEL
+anteriorButton==Back
+siguienteButton==End
+lbTitulo==Choose the model characteristics
+lblUsuario==User: 
+btnAnterior==Back
+btnSiguiente==next
+mensajesDescuento==Your customer will have a 20% discount on their purchase
+lblCompraAccesoris==Purchase Accesories
+label==.
+lblAugmentoDePrecio==Price increase
+btnAtras==Back
+btnFinalizar==End
+btnFinalizarListenerOp1Text1==Are the accesories correct?
+btnFinalizarListenerOp1Text2==Would you like to continue?
+btnFinalizarListenerOp2Text1==The total amount is 
+btnFinalizarListenerOp2Text2==, but due that you have a  
+btnFinalizarListenerOp2Text3==% discount, the final price will be: 
+btnFinalizarListenerOp3Text1==The final price is 
+selec==Accesoria available in:
+lblModelo==Model
+lblAccesorios==Accesories
+lblPrecioFinal==Final price
+OptionPaneError==Error
+OptionPaneAlert==Advertise
+OptionPaneInformation==Information
+OptionPaneExtra1==Would you like to continue?
+comprobarDatosOp0==The 
+comprobarDatosOp1== Name 
+comprobarDatosOp2== First surname 
+comprobarDatosOp3== Second surname 
+comprobarDatosOp4== The address 
+comprobarDatosOp5== Address 
+FacturaWriterOp1==Model: 
+FacturaWriterOp2==Accesories: without accesories
+FacturaWriterOp3==Accesories: 
+FacturaWriterOp4==Final price: 
