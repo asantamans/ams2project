@@ -74,11 +74,12 @@ public class PantallaSubmodelos extends JFrame {
 		JList list;
 		ArrayList<Motor> motores = car_config.getMotores();
 		String [] submodelos = new String [motores.size()];
-		//añado submodelos a un array de Strings
+		//aï¿½ado submodelos a un array de Strings
 		for (int i = 0; i < submodelos.length; i++) {
 			int precio = modelo.getPreu()+motores.get(i).getPreu();
 			preciosSubmodelos.add(precio);
-			String submdTxt = modelo.getNom()+" "+motores.get(i).getNom()+" | "+motores.get(i).getDescripcio()+" | "+precio+"€";
+			String euro = "\u20ac";//Simbolo del euro
+			String submdTxt = modelo.getNom()+" "+motores.get(i).getNom()+" | "+motores.get(i).getDescripcio()+" | "+precio+euro;
 			submodelos[i] = submdTxt;
 		}
 		
@@ -89,7 +90,7 @@ public class PantallaSubmodelos extends JFrame {
 		gbc_lblUsuario.gridx = 6;
 		gbc_lblUsuario.gridy = 0;
 		contentPane.add(lblUsuario, gbc_lblUsuario);
-		//añado el array al JList
+		//aï¿½ado el array al JList
 		list = new JList(submodelos);
 		list.setSelectedIndex(0);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
