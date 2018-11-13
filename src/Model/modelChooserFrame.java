@@ -62,11 +62,7 @@ public class modelChooserFrame extends JFrame {
 		setResizable(false);
 		setMaximumSize(new Dimension(594, 2147483647));
 		setMinimumSize(new Dimension(594, 511));
-		/*if(atras) {
-			atras();
-		}else {*/
-			inicializaParametros(pos);
-		//}
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 645, 590);
 		contentPane = new JPanel();
@@ -115,7 +111,15 @@ public class modelChooserFrame extends JFrame {
 		gbc_scrollPane.gridx = 1;
 		gbc_scrollPane.gridy = 3;
 		panel.add(scrollPane, gbc_scrollPane);
-		
+		if(atras) {
+			atras();
+		}else {
+			inicializaParametros(pos);
+			icn = new ImageIcon(ConfigurationLoader.getConfigurador().getCar_configuration_path()+modelos.get(pos).getImatge_nom());
+			imgen = icn.getImage().getScaledInstance(406, 237, Image.SCALE_DEFAULT);
+			icn = new ImageIcon(imgen);
+			foto = new JLabel(icn);
+		}
 		JPanel panel_1 = new JPanel();
 		panel_1.setMinimumSize(new Dimension(113, 10));
 		panel_1.setMaximumSize(new Dimension(113, 32767));
@@ -128,10 +132,6 @@ public class modelChooserFrame extends JFrame {
 		
 		scrollPane.setViewportView(panel_1);
 		
-		icn = new ImageIcon(ConfigurationLoader.getConfigurador().getCar_configuration_path()+modelos.get(0).getImatge_nom());
-		imgen = icn.getImage().getScaledInstance(406, 237, Image.SCALE_DEFAULT);
-		icn = new ImageIcon(imgen);
-		foto = new JLabel(icn);
 		GridBagConstraints gbc_foto = new GridBagConstraints();
 		gbc_foto.gridwidth = 3;
 		gbc_foto.fill = GridBagConstraints.BOTH;
@@ -164,8 +164,6 @@ public class modelChooserFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
 				new Introducir_datos(user).setVisible(true);
 				setVisible(false);
 				
@@ -199,8 +197,6 @@ public class modelChooserFrame extends JFrame {
 							}
 							con++;
 						}
-						File f2 = new File("fichero2.txt");
-						f.renameTo(f2);
 						fr.close();
 						br.close();
 					if(f.exists()) {
@@ -212,7 +208,7 @@ public class modelChooserFrame extends JFrame {
 					e1.printStackTrace();
 				}
 				dispose();
-				new PantallaSubmodelos(modelos.get(numBtn), user);
+				new PantallaSubmodelos(modelos.get(numBtn), user,false);
 				
 			}
 		});
@@ -243,7 +239,7 @@ public class modelChooserFrame extends JFrame {
 		
 	}
 	private void atras() {
-		/*ICarConfiguration car_config = new CarConfiguration();
+		ICarConfiguration car_config = new CarConfiguration();
 		car_config.load_Car_Config();
 		modelos = car_config.getModelos();
 		File f = new File ("fs_employee.txt");
@@ -269,8 +265,14 @@ public class modelChooserFrame extends JFrame {
 						}
 					}
 					this.pos=pos;
-					System.out.println(this.pos);
+					numBtn=pos;
+					icn = new ImageIcon(ConfigurationLoader.getConfigurador().getCar_configuration_path()+modelos.get(pos).getImatge_nom());
+					imgen = icn.getImage().getScaledInstance(406, 237, Image.SCALE_DEFAULT);
+					icn = new ImageIcon(imgen);
+					foto = new JLabel(icn);
 					inicializaParametros(this.pos);
+					fr.close();
+					br.close();
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -279,7 +281,7 @@ public class modelChooserFrame extends JFrame {
 				e.printStackTrace();
 			}
 			
-		}*/
+		}
 	}
 	private void inicializaParametros(int pos) {
 		modelList = new ArrayList<JButton>();

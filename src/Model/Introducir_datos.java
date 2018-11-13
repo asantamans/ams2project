@@ -470,8 +470,15 @@ public class Introducir_datos extends JFrame {
 			}else {
 				br.write("Genero: "+rdbtnNoDeterminado.getText()+System.getProperty("line.separator"));
 			}
-			
-			br.write("Fecha nacimiento: "+dateChooser.getDate()+System.getProperty("line.separator"));
+			if(dateChooser.getDate()==null) {
+				SimpleDateFormat sdf_day = new SimpleDateFormat("dd-MMM-yyyy");
+				String date = sdf_day.format(new Date());
+				br.write("Fecha nacimiento: "+date+System.getProperty("line.separator"));
+			}else {
+			SimpleDateFormat sdf_day = new SimpleDateFormat("dd-MMM-yyyy");
+			String date = sdf_day.format(dateChooser.getDate());
+			br.write("Fecha nacimiento: "+date+System.getProperty("line.separator"));
+			}
 			br.close();
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -529,8 +536,10 @@ public class Introducir_datos extends JFrame {
 				}else {
 					rdbtnNoDeterminado.setSelected(true);
 				}
-				//Date d=new Date(datos[6]);
-			//	dateChooser.setDate(d);
+				Date date = new Date(datos[6]);
+				dateChooser.setDate(date);
+				fr.close();
+				br.close();
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

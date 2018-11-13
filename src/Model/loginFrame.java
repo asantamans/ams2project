@@ -11,12 +11,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -24,9 +29,13 @@ import javax.swing.KeyStroke;
 
 import app_config.ConfigurationLoader;
 import app_config.langLoader;
+import configuracion_vehiculo.CarConfiguration;
+import configuracion_vehiculo.Model;
+import configuracion_vehiculo.Motor;
+import idao.ICarConfiguration;
 
 public class loginFrame extends JFrame {
-	private JTextField textField;
+	private static JTextField textField;
 	private JPasswordField passwordField;
 	public static String titulo ="Car_Configurator";
 
@@ -97,10 +106,9 @@ public class loginFrame extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(Login.comprovarLogin(textField.getText(),passwordField.getText(),panel,ConfigurationLoader.getConfigurador())) {
+					datosguardados();
 					panel.setVisible(false);
-					Login.datosguardados();
 					esconderLogin();
-					new Introducir_datos(textField.getText());
 				}
 			}
 		});
@@ -112,10 +120,9 @@ public class loginFrame extends JFrame {
 			public void keyPressed(KeyEvent arg0) {
 				 if(arg0.getKeyCode()==KeyEvent.VK_ENTER){
 					 if(Login.comprovarLogin(textField.getText(),passwordField.getText(),panel,ConfigurationLoader.getConfigurador())) {
-						 Login.datosguardados();	
+						 datosguardados();	
 						 panel.setVisible(false);
-							esconderLogin();
-							new Introducir_datos(textField.getText());
+						 esconderLogin();
 						}
 	                }
 			}
@@ -147,5 +154,55 @@ public class loginFrame extends JFrame {
 	public void esconderLogin() {
 		setVisible(false);
 	}
-
+	public static void datosguardados() {
+		File f = new File ("fs_employee.txt");
+		if(f.exists()) {
+			int op=JOptionPane.showConfirmDialog(null,
+					"Hay datos guardados,desea cargarlos?", "Datos guardados",JOptionPane.YES_NO_OPTION);
+			if(op==JOptionPane.YES_OPTION) {
+				try {
+					FileReader fr = new FileReader(f.getAbsoluteFile());
+					BufferedReader br = new BufferedReader(fr);
+					String linea;
+					String modelo=null;
+					int con=0;
+					while((linea=br.readLine())!=null){
+						con++;
+						if(con==8) {
+							modelo=linea;
+						}
+					}
+					if(con==7) {
+						new Introducir_datos(textField.getText());
+					}else if(con==8) {
+						new modelChooserFrame(textField.getText(),true);
+					}else if(con==9) {
+						ArrayList<Model> modelos;
+						ICarConfiguration car_config = new CarConfiguration();
+						car_config.load_Car_Config();
+						modelos = car_config.getModelos();
+						String []mod=modelo.split(": ");
+						int pos=0;
+						for(int a=0;a<modelos.size();a++) {
+							if(modelos.get(a).getNom().equals(mod[1])) {
+								pos=a;
+							}
+						}
+						new PantallaSubmodelos(modelos.get(pos),textField.getText(),true);
+					}else if(con==10) {
+						System.out.println("Abrir ventana accesorios");
+					}
+					fr.close();
+					br.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			}else {
+				f.delete();
+				new Introducir_datos(textField.getText());
+			}
+		}else {
+			new Introducir_datos(textField.getText());
+		}
+	}
 }

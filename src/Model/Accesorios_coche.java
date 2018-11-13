@@ -145,7 +145,7 @@ public class Accesorios_coche extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
 				
-				new PantallaSubmodelos(m, usuario);
+				new PantallaSubmodelos(m, usuario,true);
 			}
 		});
 		
