@@ -1,14 +1,12 @@
 package Model;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.BufferedReader;
@@ -17,7 +15,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,24 +22,17 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.KeyStroke;
 
 import app_config.ConfigurationLoader;
 import app_config.langLoader;
 import configuracion_vehiculo.CarConfiguration;
 import configuracion_vehiculo.Model;
-import configuracion_vehiculo.Motor;
 import idao.ICarConfiguration;
 
 public class loginFrame extends JFrame {
 	private static JTextField textField;
 	private JPasswordField passwordField;
 	public static String titulo ="Car_Configurator";
-
-	/**
-	 * Launch the application.
-	 */
-
 
 	/**
 	 * Create the frame.
@@ -157,8 +147,12 @@ public class loginFrame extends JFrame {
 	public static void datosguardados() {
 		File f = new File ("fs_employee.txt");
 		if(f.exists()) {
-			int op=JOptionPane.showConfirmDialog(null,
-					"Hay datos guardados,desea cargarlos?", "Datos guardados",JOptionPane.YES_NO_OPTION);
+			//Cambiar texto botones JOptionPane
+			Object[] options = {langLoader.getText("OptionPaneYesButton"), "No"};
+			int op=JOptionPane.showOptionDialog(null, 
+					langLoader.getText("OptionPaneSavedData"), langLoader.getText("OptionPaneInformation"),
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+					
 			if(op==JOptionPane.YES_OPTION) {
 				try {
 					FileReader fr = new FileReader(f.getAbsoluteFile());
@@ -189,14 +183,12 @@ public class loginFrame extends JFrame {
 							}
 						}
 						new PantallaSubmodelos(modelos.get(pos),textField.getText(),true);
-					}else if(con==10) {
-						System.out.println("Abrir ventana accesorios");
 					}
 					fr.close();
 					br.close();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 			}else {
 				f.delete();
 				new Introducir_datos(textField.getText());

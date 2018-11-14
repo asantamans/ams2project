@@ -34,7 +34,6 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import app_config.ConfigurationLoader;
-import app_config.User;
 import app_config.langLoader;
 import configuracion_vehiculo.CarConfiguration;
 import configuracion_vehiculo.Model;

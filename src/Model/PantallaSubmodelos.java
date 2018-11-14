@@ -7,8 +7,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import app_config.ConfigurationLoader;
-import app_config.User;
 import app_config.langLoader;
 import configuracion_vehiculo.CarConfiguration;
 import configuracion_vehiculo.Model;
@@ -27,7 +25,6 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -164,8 +161,6 @@ public class PantallaSubmodelos extends JFrame {
 						}
 						con++;
 					}
-					File f2 = new File("fichero2.txt");
-					f.renameTo(f2);
 					fr.close();
 					br.close();
 				if(f.exists()) {
@@ -177,10 +172,10 @@ public class PantallaSubmodelos extends JFrame {
 					e1.printStackTrace();
 				}
 				setVisible(false);
-				// Abrir ventana accesorios
-				int precioSm = preciosSubmodelos.get(selectedSubmodel);// le pasamos el precio del submodelo
-																		// seleccionado a la siguiente ventana
-
+				
+				//Le pasamos el precio del submodelo seleccionado a la siguiente ventana
+				int precioSm = preciosSubmodelos.get(selectedSubmodel);
+				
 				new Accesorios_coche(modelo, nombre_submod, usuari, precioSm, selectedSubmodel);
 			}
 		});
@@ -242,12 +237,15 @@ public class PantallaSubmodelos extends JFrame {
 				}
 				br.close();
 				fr.close();
+				
+				String euro = "\u20ac";//Simbolo del euro
+				
 				int pos = 0;
 				String mot;
 				for (int i = 0; i < motores.size(); i++) {
 					precio = modelo.getPreu() + motores.get(i).getPreu();
 					mot=modelo.getNom()+" " + motores.get(i).getNom() + " | " + motores.get(i).getDescripcio()
-							+ " | " + precio + "€";
+							+ " | " + precio + euro;
 					if (mot.equalsIgnoreCase(modelos)) {
 						pos = i;
 					}

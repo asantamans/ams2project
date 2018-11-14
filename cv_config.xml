@@ -14,7 +14,7 @@
 		<user_password>marc123</user_password>
 		<user_password>user</user_password>
 	</employee_password>
-	<descompte>-15</descompte>
+	<descompte>15</descompte>
 	<specifications_file_path>src/specifications</specifications_file_path>
 	<language>es;cat;eng</language>
 	<language_default>es</language_default>

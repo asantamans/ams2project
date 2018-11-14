@@ -32,7 +32,7 @@ siguienteButton==End
 lbTitulo==Choose the model characteristics
 lblUsuario==User: 
 btnAnterior==Back
-btnSiguiente==next
+btnSiguiente==Next
 mensajesDescuento==Your customer will have a 20% discount on their purchase
 lblCompraAccesoris==Purchase Accesories
 label==.
@@ -42,10 +42,10 @@ btnFinalizar==End
 btnFinalizarListenerOp1Text1==Are the accesories correct?
 btnFinalizarListenerOp1Text2==Would you like to continue?
 btnFinalizarListenerOp2Text1==The total amount is 
-btnFinalizarListenerOp2Text2==, but due that you have a  
+btnFinalizarListenerOp2Text2==, but due that you have a 
 btnFinalizarListenerOp2Text3==% discount, the final price will be: 
 btnFinalizarListenerOp3Text1==The final price is 
-selec==Accesoria available in:
+selec==Accessory available in:
 lblModelo==Model
 lblAccesorios==Accesories
 lblPrecioFinal==Final price
@@ -63,3 +63,13 @@ FacturaWriterOp1==Model:
 FacturaWriterOp2==Accesories: without accesories
 FacturaWriterOp3==Accesories: 
 FacturaWriterOp4==Final price: 
+OptionPaneSavedData==There's saved data, do you want to load it?
+OptionPaneClosing==Would you like to close?
+OptionPaneClosingConfirmation==Are you sure you want to close this window?
+OptionPaneSaving==Would you like to save?
+OptionPaneNotSaving==Would you like to leave without saving the data?
+OptionPaneYesButton==Yes
+btnNewPres==New budget
+OptionPaneArtic==The
+OptionPaneArticFem==The
+OptionPaneOkOption==Ok

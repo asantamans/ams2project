@@ -4,15 +4,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-//import com.jgoodies.forms.layout.CellConstraints.Alignment;
-
 import app_config.ConfigurationLoader;
-import app_config.User;
 import app_config.langLoader;
 import configuracion_vehiculo.Accesori;
 import configuracion_vehiculo.CarConfiguration;
 import configuracion_vehiculo.Model;
-import factura.Cliente;
 import factura.SelectedCar;
 
 import java.awt.GridBagLayout;
@@ -30,11 +26,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
@@ -46,7 +38,7 @@ public class Accesorios_coche extends JFrame {
 	private JTextField textField;
 	private JCheckBox[] ac;
 	private ArrayList<Accesori> accesorios;
-
+	
 	/**
 	 * Create the frame.
 	 */
@@ -162,35 +154,43 @@ public class Accesorios_coche extends JFrame {
 		btnFinalizar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String mod = null;
+				String mod = "";
 				ArrayList<Accesori> selectedAcc = new ArrayList<Accesori>();
 				for (int i = 0; i < ac.length; i++) {
 					if (ac[i].isSelected()) {				
 						String nombre_accesorio = accesorios.get(i).getNom();
 						selectedAcc.add(accesorios.get(i));
-						if (mod == null) {
-							mod = nombre_accesorio;
-						} else {
-							mod = mod + "," + (nombre_accesorio);
-						}						
+						if (i == ac.length-1) {
+							mod = mod + nombre_accesorio;
+						}else {
+							mod = mod + nombre_accesorio + System.lineSeparator();
+						}
 					}
 				}
+
 				int precioAccs = Integer.parseInt(textField.getText());
 				int pf = 0;
-				int seguir = JOptionPane.showConfirmDialog(null, langLoader.getText("btnFinalizarListenerOp1Text1"), langLoader.getText("btnFinalizarListenerOp1Text2"),
-						JOptionPane.YES_NO_OPTION);
+				
+				//Cambiar texto botones JOptionPane
+				Object[] options = {langLoader.getText("OptionPaneYesButton"), "No"};
+				
+				int seguir = JOptionPane.showOptionDialog(null, langLoader.getText("btnFinalizarListenerOp1Text1"), langLoader.getText("btnFinalizarListenerOp1Text2"),
+						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 				if (seguir == JOptionPane.YES_OPTION) {
+					//Servira para cambiar el texto del boton aceptar de los JOptionPane
+					Object[] ok_option = {langLoader.getText("OptionPaneOkOption")};
+					
 					pf = preciosm + precioAccs;
 					if(ConfigurationLoader.getConfigurador().getDescompte() > 0) {
 						int discount = ConfigurationLoader.getConfigurador().getDescompte();
 						double pfDescuento = pf-((pf/100)*discount);
-						JOptionPane.showMessageDialog(panel, langLoader.getText("btnFinalizarListenerOp2Text1")+ pf + langLoader.getText("btnFinalizarListenerOp2Text2")+discount+langLoader.getText("btnFinalizarListenerOp2Text3")+(int)pfDescuento,langLoader.getText("OptionPaneAlert"),
-								JOptionPane.WARNING_MESSAGE);
+						JOptionPane.showOptionDialog(panel, langLoader.getText("btnFinalizarListenerOp2Text1")+ pf + langLoader.getText("btnFinalizarListenerOp2Text2")+discount+langLoader.getText("btnFinalizarListenerOp2Text3")+(int)pfDescuento,langLoader.getText("OptionPaneAlert"),
+								JOptionPane.WARNING_MESSAGE, JOptionPane.WARNING_MESSAGE, null, ok_option, ok_option[0]);
 						//el precio no tendra decimales
 						pf = (int) pfDescuento;
 					}else {
-						JOptionPane.showMessageDialog(panel, langLoader.getText("btnFinalizarListenerOp3Text1") + pf, langLoader.getText("OptionPaneAlert"),
-								JOptionPane.WARNING_MESSAGE);
+						JOptionPane.showOptionDialog(panel, langLoader.getText("btnFinalizarListenerOp3Text1") + pf, langLoader.getText("OptionPaneAlert"),
+								JOptionPane.WARNING_MESSAGE, JOptionPane.WARNING_MESSAGE, null, ok_option, ok_option[0]);
 					}
 					dispose();
 					String preciof = Integer.toString(pf);
@@ -208,7 +208,7 @@ public class Accesorios_coche extends JFrame {
 					try {
 						FileWriter fr= new FileWriter(f.getAbsoluteFile(), true);
 						BufferedWriter br = new BufferedWriter(fr);
-						if (mod == null) {
+						if (mod == "") {
 							br.write("Accesorios: sin accesorios"+System.getProperty("line.separator"));
 						}else {
 							br.write("Accesorios: "+mod+System.getProperty("line.separator"));
@@ -255,7 +255,7 @@ public class Accesorios_coche extends JFrame {
 					selec = selec + ", " + "<b>" + acc_mod_disponible.get(i) + "</b>";
 				}
 			}
-			selec = "<html>" + "Accesorio disponible en:" + "<p>" + selec + "</p>" + "</html>";
+			selec = "<html>" + langLoader.getText("selec") + "<p>" + selec + "</p>" + "</html>";
 			ac[a].setToolTipText(selec);
 			ac[a].setEnabled(activado);
 			int point = a;

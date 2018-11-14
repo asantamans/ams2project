@@ -17,7 +17,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,7 +34,6 @@ import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JDateChooser;
 
-import app_config.User;
 import app_config.langLoader;
 import factura.Cliente;
 
@@ -45,9 +43,6 @@ public class Introducir_datos extends JFrame {
 		super();
 	}
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
@@ -60,10 +55,6 @@ public class Introducir_datos extends JFrame {
 	private JRadioButton rdbtnNoDeterminado;
 	private JDateChooser dateChooser;
 	private boolean guardado = false;
-
-	/**
-	 * Launch the application.
-	 */
 
 	/**
 	 * Create the frame.
@@ -296,17 +287,21 @@ public class Introducir_datos extends JFrame {
 		btnGuardar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//Servira para cambiar el texto del boton aceptar de los JOptionPane
+				Object[] ok_option = {langLoader.getText("OptionPaneOkOption")};
+				
 				String campos_blanco = comprobarDatos();
-				if (!campos_blanco.equals("El "))
-					JOptionPane.showMessageDialog(panel, campos_blanco +langLoader.getText("btnGuardarListenerOp1"), langLoader.getText("OptionPaneError"),
-							JOptionPane.ERROR_MESSAGE);
-				if (!comprobarEmail())
-					JOptionPane.showMessageDialog(panel, langLoader.getText("btnGuardarListenerOp2"), langLoader.getText("OptionPaneError"),
-							JOptionPane.ERROR_MESSAGE);
-				else {
+				if (!campos_blanco.equals(langLoader.getText("OptionPaneArtic")) || !comprobarEmail()) {
+					if (!campos_blanco.equals(langLoader.getText("OptionPaneArtic")))
+						JOptionPane.showOptionDialog(panel, campos_blanco +langLoader.getText("btnGuardarListenerOp1"), langLoader.getText("OptionPaneError"),
+								JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, ok_option, ok_option[0]);
+					if (!comprobarEmail())
+						JOptionPane.showOptionDialog(panel, langLoader.getText("btnGuardarListenerOp2"), langLoader.getText("OptionPaneError"),
+								JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, ok_option, ok_option[0]);
+				}else {
 					guardado = true;
-					JOptionPane.showMessageDialog(panel, langLoader.getText("btnGuardarListenerOp3"), langLoader.getText("OptionPaneInformation"),
-							JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showOptionDialog(panel, langLoader.getText("btnGuardarListenerOp3"), langLoader.getText("OptionPaneInformation"),
+							JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, ok_option, ok_option[0]);
 					escribirFichero();
 				}
 			}
@@ -323,21 +318,30 @@ public class Introducir_datos extends JFrame {
 		btnS.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//Servira para cambiar el texto del boton aceptar de los JOptionPane
+				Object[] ok_option = {langLoader.getText("OptionPaneOkOption")};
+				
 				String campos_blanco = comprobarDatos();
-				if (!campos_blanco.equals("El "))
-					JOptionPane.showMessageDialog(panel, campos_blanco + langLoader.getText("btnSListenerOp1"), langLoader.getText("OptionPaneError"),
-							JOptionPane.ERROR_MESSAGE);
-				boolean error = true;
-				if (!comprobarEmail()) {
-					JOptionPane.showMessageDialog(panel,langLoader.getText("btnSListenerOp2"), langLoader.getText("OptionPaneError"),
-							JOptionPane.ERROR_MESSAGE);
-				} else if (!guardado && error) {
-					int seguir = JOptionPane.showConfirmDialog(null,
+				boolean error = false;
+				if (!campos_blanco.equals(langLoader.getText("OptionPaneArtic")) || !comprobarEmail()) {
+					error = true;
+					if (!campos_blanco.equals(langLoader.getText("OptionPaneArtic")))
+						JOptionPane.showOptionDialog(panel, campos_blanco + langLoader.getText("btnSListenerOp1"), langLoader.getText("OptionPaneError"),
+								JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, ok_option, ok_option[0]);
+						
+					if (!comprobarEmail()) {
+						JOptionPane.showOptionDialog(panel,langLoader.getText("btnSListenerOp2"), langLoader.getText("OptionPaneError"),
+								JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, ok_option, ok_option[0]);
+					}
+				} else if (!guardado && !error) {
+					//Cambiar texto botones JOptionPane
+					Object[] options = {langLoader.getText("OptionPaneYesButton"), "No"};
+					int seguir = JOptionPane.showOptionDialog(null,
 							langLoader.getText("btnSListenerOp3"), langLoader.getText("OptionPaneExtra1"),
-							JOptionPane.YES_NO_OPTION);
-					if (seguir == JOptionPane.YES_OPTION) {
-						JOptionPane.showMessageDialog(panel, langLoader.getText("btnSListenerOp4"), langLoader.getText("OptionPaneAlert"),
-								JOptionPane.WARNING_MESSAGE);
+							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+					if (seguir == JOptionPane.YES_OPTION) {				
+						JOptionPane.showOptionDialog(panel, langLoader.getText("btnSListenerOp4"), langLoader.getText("OptionPaneAlert"),
+								JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, ok_option, ok_option[0]);
 						Cliente sinDatos = new Cliente("no name", "no primerApellido", "no segundoApellido", "no direccion", "no correoElectronico", "no genero", "no fechaNacimiento");
 						boolean a=false;
 						new modelChooserFrame(user,a);
@@ -384,22 +388,26 @@ public class Introducir_datos extends JFrame {
 		setVisible(true);
 		this.addWindowListener(new WindowAdapter() {
 			@Override
-			public void windowClosing(WindowEvent e) {		
+			public void windowClosing(WindowEvent e) {
+				//Cambiar texto botones JOptionPane
+				Object[] options = {langLoader.getText("OptionPaneYesButton"), "No"};
 				if(!guardado) {
-					int op=JOptionPane.showConfirmDialog(null,
-							"Quieres salir sin guardar los datos?", "Quiere cerrar?",
-							JOptionPane.YES_NO_OPTION);
+					int op=JOptionPane.showOptionDialog(null,
+							langLoader.getText("OptionPaneNotSaving"), langLoader.getText("OptionPaneClosing"),
+							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 					if(op == JOptionPane.NO_OPTION) {
-						int op1=JOptionPane.showConfirmDialog(null,
-								"Quiere guardar?", "Quiere cerrar?",
-								JOptionPane.YES_NO_OPTION);
+						int op1=JOptionPane.showOptionDialog(null,
+								langLoader.getText("OptionPaneSaving"), langLoader.getText("OptionPaneClosing"),
+								JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 					if(op1==JOptionPane.YES_OPTION) {
 						escribirFichero();
-						JOptionPane.showMessageDialog(panel, langLoader.getText("btnGuardarListenerOp3"), langLoader.getText("OptionPaneInformation"),
-								JOptionPane.INFORMATION_MESSAGE);
-						int op3=JOptionPane.showConfirmDialog(null,
-								"Esta seguro que quiere cerrar la ventana?", "Quiere cerrar?",
-								JOptionPane.YES_NO_OPTION);
+						//Servira para cambiar el texto del boton aceptar de los JOptionPane
+						Object[] ok_option = {langLoader.getText("OptionPaneOkOption")};
+						JOptionPane.showOptionDialog(panel, langLoader.getText("btnGuardarListenerOp3"), langLoader.getText("OptionPaneInformation"),
+								JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, ok_option, ok_option[0]);
+						int op3=JOptionPane.showOptionDialog(null,
+								langLoader.getText("OptionPaneClosingConfirmation"), langLoader.getText("OptionPaneClosing"),
+								JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 						if(op3 == JOptionPane.NO_OPTION) {
 							setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 						}else {
@@ -414,9 +422,9 @@ public class Introducir_datos extends JFrame {
 						dispose();
 					}
 				}else {
-					int op=JOptionPane.showConfirmDialog(null,
-							"Esta seguro que quiere cerrar la ventana?", "Quiere cerrar?",
-							JOptionPane.YES_NO_OPTION);
+					int op=JOptionPane.showOptionDialog(null,
+							langLoader.getText("OptionPaneClosingConfirmation"), langLoader.getText("OptionPaneClosing"),
+							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 					if(op == JOptionPane.NO_OPTION) {
 						setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 					}else {
@@ -486,22 +494,44 @@ public class Introducir_datos extends JFrame {
 	}
 
 	private String comprobarDatos() {
-		String campos_blanco = "El ";
+		String campos_blanco = langLoader.getText("OptionPaneArtic")+";";
 		if (textField.getText().equals("")) {
-			campos_blanco = campos_blanco.concat(" nombre ");
+			campos_blanco = campos_blanco.concat(langLoader.getText("lblNombre").substring(0, langLoader.getText("lblNombre").length()-1)+";");
 		}
 		if (textField_1.getText().equals("")) {
-			campos_blanco = campos_blanco.concat(" Primer apellido ");
+			campos_blanco = campos_blanco.concat(langLoader.getText("lblPrimerApellido").substring(0, langLoader.getText("lblPrimerApellido").length()-1)+";");
 		}
 		if (textField_2.getText().equals("")) {
-			campos_blanco = campos_blanco.concat(" Segundo apellido ");
+			campos_blanco = campos_blanco.concat(langLoader.getText("lblSegundoApellido").substring(0, langLoader.getText("lblSegundoApellido").length()-1)+";");
 		}
 		if (textField_3.getText().equals("")) {
-			if (campos_blanco.equals("El "))
-				campos_blanco = " La direccion ";
+			if (campos_blanco.equals(langLoader.getText("OptionPaneArtic")))
+				campos_blanco = langLoader.getText("OptionPaneArticFem")+";"+langLoader.getText("lblDireccin").substring(0, langLoader.getText("lblDireccin").length()-1);
 			else
-				campos_blanco = campos_blanco.concat(" direccion ");
+				campos_blanco = campos_blanco.concat(langLoader.getText("lblDireccin").substring(0, langLoader.getText("lblDireccin").length()-1)+";");
 		}
+		if (textField_4.getText().equals("")) {
+			campos_blanco = campos_blanco.concat(langLoader.getText("lblCorreoElectronico").substring(0, langLoader.getText("lblCorreoElectronico").length()-1)+";");
+		}
+
+		int st = 0;
+		String gd = "";
+		for (int i = 0; i < campos_blanco.length(); i++) {
+			if (campos_blanco.charAt(i) == ';') {
+				if(i == campos_blanco.lastIndexOf(";")) {
+					gd = gd+"";
+				} 
+				else if (st == 0){
+					gd = gd+" ";
+				} else {
+					gd = gd+", ";
+				}
+				st++;
+			}else {
+				gd = gd+campos_blanco.charAt(i)+"";
+			}
+		}
+		campos_blanco = gd;
 		if (!comprobarEmail()) {
 
 		}

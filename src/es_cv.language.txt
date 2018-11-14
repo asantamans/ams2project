@@ -63,3 +63,13 @@ FacturaWriterOp1==Modelo:
 FacturaWriterOp2==Accesorios: sin accesorios
 FacturaWriterOp3==Accesorios: 
 FacturaWriterOp4==Precio Final: 
+OptionPaneSavedData==Hay datos guardados,desea cargarlos?
+OptionPaneClosing==Quiere cerrar?
+OptionPaneClosingConfirmation==Está seguro que quiere cerrar esta ventana?
+OptionPaneSaving==Quiere guardar?
+OptionPaneNotSaving==Quieres salir sin guardar los datos?
+OptionPaneYesButton==Sí
+btnNewPres==Nuevo presupuesto
+OptionPaneArtic==El
+OptionPaneArticFem==La
+OptionPaneOkOption==Aceptar
