@@ -344,6 +344,7 @@ public class Introducir_datos extends JFrame {
 								JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, ok_option, ok_option[0]);
 						Cliente sinDatos = new Cliente("no name", "no primerApellido", "no segundoApellido", "no direccion", "no correoElectronico", "no genero", "no fechaNacimiento");
 						boolean a=false;
+						esconderFrame();
 						new modelChooserFrame(user,a);
 						Cliente.setCliente(sinDatos);
 					}
@@ -458,6 +459,7 @@ public class Introducir_datos extends JFrame {
 		}
 
 	}
+	
 	private void escribirFichero() {
 		File f = new File ("fs_employee.txt");
 		if(f.exists()) {

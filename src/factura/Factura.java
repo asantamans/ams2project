@@ -24,6 +24,10 @@ public class Factura {
 	 * @author Marc
 	 */
 	public void generateXML(String nombreEmpleado, Cliente cliente, SelectedCar cocheSelec) {
+		//por si fuera nulo en algun punto
+		if (cliente == null) {
+			cliente = new Cliente("no name", "no primerApellido", "no segundoApellido", "no direccion", "no correoElectronico", "no genero", "no fechaNacimiento");
+		}
 		try {
 			String nombre_archivo = "fs_employee";
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

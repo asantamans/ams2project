@@ -19,8 +19,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -183,6 +185,8 @@ public class modelChooserFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				File f = new File ("fs_employee.txt");
+				if(!f.exists()) {
+					escribirFicheroNoGuardado();
 					try {
 						FileReader fr = new FileReader(f.getAbsoluteFile());
 						BufferedReader br = new BufferedReader(fr);
@@ -198,22 +202,73 @@ public class modelChooserFrame extends JFrame {
 						}
 						fr.close();
 						br.close();
-					if(f.exists()) {
-						f.delete();
+						if(f.exists()) {
+							f.delete();
+						}
+					
+						escribir(datos);
+					} catch (IOException e1) {
+						e1.printStackTrace();
 					}
-				
-					escribir(datos);
-				} catch (IOException e1) {
-					e1.printStackTrace();
+					dispose();
+					new PantallaSubmodelos(modelos.get(numBtn), user,false);
+				}else {
+					try {
+						FileReader fr = new FileReader(f.getAbsoluteFile());
+						BufferedReader br = new BufferedReader(fr);
+						String linea;
+						String datos[]=new String[7];
+						int con=0;
+						while((linea=br.readLine())!=null){
+							if(con<=6) {
+								String [] temp=linea.split(": ");
+								datos[con]=temp[1];
+							}
+							con++;
+						}
+						fr.close();
+						br.close();
+						if(f.exists()) {
+							f.delete();
+						}
+					
+						escribir(datos);
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+					dispose();
+					new PantallaSubmodelos(modelos.get(numBtn), user,false);
 				}
-				dispose();
-				new PantallaSubmodelos(modelos.get(numBtn), user,false);
-				
 			}
 		});
 		
 		setVisible(true);
 	}
+	
+	/**
+	 * Sirve para escribir en el fichero que el usuario no ha escrito datos para que no de errores en el siguiente frame
+	 */
+	private void escribirFicheroNoGuardado() {
+		File f = new File ("fs_employee.txt");
+		if(f.exists()) {
+			f.delete();
+		}
+		try {
+			FileWriter fr= new FileWriter(f.getAbsoluteFile(), true);
+			BufferedWriter br = new BufferedWriter(fr);
+			br.write("Nombre:  "+System.getProperty("line.separator"));
+			br.write("PrimerApellido:  "+System.getProperty("line.separator"));
+			br.write("segundoApellido:  "+System.getProperty("line.separator"));
+			br.write("Direccion:  "+System.getProperty("line.separator"));
+			br.write("Email:  "+System.getProperty("line.separator"));
+			br.write("Genero:  "+System.getProperty("line.separator"));
+			br.write("Fecha nacimiento:  "+System.getProperty("line.separator"));
+			br.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
 	private void escribir(String [] datos) {
 		File ff = new File ("fs_employee.txt");
 		if(ff.exists()) {

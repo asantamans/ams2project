@@ -27,6 +27,7 @@ import app_config.ConfigurationLoader;
 import app_config.langLoader;
 import configuracion_vehiculo.CarConfiguration;
 import configuracion_vehiculo.Model;
+import factura.Cliente;
 import idao.ICarConfiguration;
 
 public class loginFrame extends JFrame {
@@ -160,7 +161,12 @@ public class loginFrame extends JFrame {
 					String linea;
 					String modelo=null;
 					int con=0;
+					ArrayList <String> line = new ArrayList<>();
 					while((linea=br.readLine())!=null){
+						if (con <= 8) {
+							String [] sp = linea.split(": ");
+							line.add(sp[1]);
+						}
 						con++;
 						if(con==8) {
 							modelo=linea;
@@ -169,6 +175,7 @@ public class loginFrame extends JFrame {
 					if(con==7) {
 						new Introducir_datos(textField.getText());
 					}else if(con==8) {
+						Cliente.setCliente(new Cliente(line.get(0), line.get(1), line.get(2), line.get(3), line.get(4), line.get(5), line.get(6)));
 						new modelChooserFrame(textField.getText(),true);
 					}else if(con==9) {
 						ArrayList<Model> modelos;
@@ -182,6 +189,7 @@ public class loginFrame extends JFrame {
 								pos=a;
 							}
 						}
+						Cliente.setCliente(new Cliente(line.get(0), line.get(1), line.get(2), line.get(3), line.get(4), line.get(5), line.get(6)));
 						new PantallaSubmodelos(modelos.get(pos),textField.getText(),true);
 					}
 					fr.close();
