@@ -4,15 +4,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-//import com.jgoodies.forms.layout.CellConstraints.Alignment;
-
 import app_config.ConfigurationLoader;
-import app_config.User;
 import app_config.langLoader;
 import configuracion_vehiculo.Accesori;
 import configuracion_vehiculo.CarConfiguration;
 import configuracion_vehiculo.Model;
-import factura.Cliente;
 import factura.SelectedCar;
 
 import java.awt.GridBagLayout;
@@ -26,6 +22,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JCheckBox;
@@ -38,11 +38,13 @@ public class Accesorios_coche extends JFrame {
 	private JTextField textField;
 	private JCheckBox[] ac;
 	private ArrayList<Accesori> accesorios;
-
+	
 	/**
 	 * Create the frame.
 	 */
-	public Accesorios_coche(Model m, String mo, ArrayList<String> text, String usuario, int preciosm, int numSM) {
+	public Accesorios_coche(Model m, String mo, String usuario, int preciosm, int numSM) {
+		setIconImage(Login.icono());
+		setTitle(loginFrame.titulo);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 634, 500);
 		contentPane = new JPanel();
@@ -72,11 +74,7 @@ public class Accesorios_coche extends JFrame {
 		gbl_panel_1.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel_1.setLayout(gbl_panel_1);
 		
-		JLabel lblCompraAccesoris = new JLabel(text.get(0));
-		text.remove(0);
-		if(User.getUsuario().getEmployee_version() == true) {
-			lblCompraAccesoris.setToolTipText("Tu cliente tendrá un 20% de descuento en su compra");
-		}
+		JLabel lblCompraAccesoris = new JLabel(langLoader.getText("lblCompraAccesoris"));
 		lblCompraAccesoris.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_lblCompraAccesoris = new GridBagConstraints();
 		gbc_lblCompraAccesoris.insets = new Insets(0, 0, 5, 5);
@@ -84,8 +82,7 @@ public class Accesorios_coche extends JFrame {
 		gbc_lblCompraAccesoris.gridy = 0;
 		panel_1.add(lblCompraAccesoris, gbc_lblCompraAccesoris);
 
-		JLabel label = new JLabel(text.get(0));
-		text.remove(0);
+		JLabel label = new JLabel(langLoader.getText("label"));
 		label.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_label = new GridBagConstraints();
 		gbc_label.gridwidth = 13;
@@ -106,8 +103,7 @@ public class Accesorios_coche extends JFrame {
 		gbl_panel_2.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel_2.setLayout(gbl_panel_2);
 
-		JLabel lblAugmentoDePrecio = new JLabel(text.get(0));
-		text.remove(0);
+		JLabel lblAugmentoDePrecio = new JLabel(langLoader.getText("lblAugmentoDePrecio"));
 		lblAugmentoDePrecio.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblAugmentoDePrecio = new GridBagConstraints();
 		gbc_lblAugmentoDePrecio.gridwidth = 2;
@@ -127,8 +123,7 @@ public class Accesorios_coche extends JFrame {
 		panel_2.add(textField, gbc_textField);
 		textField.setColumns(10);
 
-		JButton btnAtras = new JButton(text.get(0));
-		text.remove(0);
+		JButton btnAtras = new JButton(langLoader.getText("btnAtras"));
 		GridBagConstraints gbc_btnAtras = new GridBagConstraints();
 		gbc_btnAtras.fill = GridBagConstraints.BOTH;
 		gbc_btnAtras.gridwidth = 2;
@@ -141,16 +136,15 @@ public class Accesorios_coche extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
-				ArrayList<String> text = langLoader.getText(ConfigurationLoader.getLanguage(),3);
-				new PantallaSubmodelos(m, usuario, text);
+				
+				new PantallaSubmodelos(m, usuario,true);
 			}
 		});
 		
 		CarConfiguration car_config = new CarConfiguration();
 		car_config.load_Car_Config();
 
-		JButton btnFinalizar = new JButton(text.get(0));
-		text.remove(0);
+		JButton btnFinalizar = new JButton(langLoader.getText("btnFinalizar"));
 		GridBagConstraints gbc_btnFinalizar = new GridBagConstraints();
 		gbc_btnFinalizar.fill = GridBagConstraints.BOTH;
 		gbc_btnFinalizar.insets = new Insets(0, 0, 0, 5);
@@ -160,34 +154,43 @@ public class Accesorios_coche extends JFrame {
 		btnFinalizar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String mod = null;
+				String mod = "";
 				ArrayList<Accesori> selectedAcc = new ArrayList<Accesori>();
 				for (int i = 0; i < ac.length; i++) {
 					if (ac[i].isSelected()) {				
 						String nombre_accesorio = accesorios.get(i).getNom();
 						selectedAcc.add(accesorios.get(i));
-						if (mod == null) {
-							mod = nombre_accesorio;
-						} else {
-							mod = mod + "," + (nombre_accesorio);
-						}						
+						if (i == ac.length-1) {
+							mod = mod + nombre_accesorio;
+						}else {
+							mod = mod + nombre_accesorio + System.lineSeparator();
+						}
 					}
 				}
+
 				int precioAccs = Integer.parseInt(textField.getText());
 				int pf = 0;
-				int seguir = JOptionPane.showConfirmDialog(null, "Son correctos los accesorios?", "Quiere continuar?",
-						JOptionPane.YES_NO_OPTION);
+				
+				//Cambiar texto botones JOptionPane
+				Object[] options = {langLoader.getText("OptionPaneYesButton"), "No"};
+				
+				int seguir = JOptionPane.showOptionDialog(null, langLoader.getText("btnFinalizarListenerOp1Text1"), langLoader.getText("btnFinalizarListenerOp1Text2"),
+						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 				if (seguir == JOptionPane.YES_OPTION) {
+					//Servira para cambiar el texto del boton aceptar de los JOptionPane
+					Object[] ok_option = {langLoader.getText("OptionPaneOkOption")};
+					
 					pf = preciosm + precioAccs;
-					if(User.getUsuario().getEmployee_version() == true) {
-						double pfDescuento = pf-((pf/100)*20);
-						JOptionPane.showMessageDialog(panel, "El precio total es " + pf + ", pero como tienes un 20% de descuento, el precio final sera: "+(int)pfDescuento, "Advertencia",
-								JOptionPane.WARNING_MESSAGE);
+					if(ConfigurationLoader.getConfigurador().getDescompte() > 0) {
+						int discount = ConfigurationLoader.getConfigurador().getDescompte();
+						double pfDescuento = pf-((pf/100)*discount);
+						JOptionPane.showOptionDialog(panel, langLoader.getText("btnFinalizarListenerOp2Text1")+ pf + langLoader.getText("btnFinalizarListenerOp2Text2")+discount+langLoader.getText("btnFinalizarListenerOp2Text3")+(int)pfDescuento,langLoader.getText("OptionPaneAlert"),
+								JOptionPane.WARNING_MESSAGE, JOptionPane.WARNING_MESSAGE, null, ok_option, ok_option[0]);
 						//el precio no tendra decimales
 						pf = (int) pfDescuento;
 					}else {
-						JOptionPane.showMessageDialog(panel, "El precio final es " + pf, "Advertencia",
-								JOptionPane.WARNING_MESSAGE);
+						JOptionPane.showOptionDialog(panel, langLoader.getText("btnFinalizarListenerOp3Text1") + pf, langLoader.getText("OptionPaneAlert"),
+								JOptionPane.WARNING_MESSAGE, JOptionPane.WARNING_MESSAGE, null, ok_option, ok_option[0]);
 					}
 					dispose();
 					String preciof = Integer.toString(pf);
@@ -201,7 +204,20 @@ public class Accesorios_coche extends JFrame {
 						SelectedCar.setSelectedCar(sCar);
 					}
 					setVisible(false);
-					new Resumen(m, mo, text, usuario, preciof, mod);
+					File f = new File ("fs_employee.txt");
+					try {
+						FileWriter fr= new FileWriter(f.getAbsoluteFile(), true);
+						BufferedWriter br = new BufferedWriter(fr);
+						if (mod == "") {
+							br.write("Accesorios: sin accesorios"+System.getProperty("line.separator"));
+						}else {
+							br.write("Accesorios: "+mod+System.getProperty("line.separator"));
+						}
+						br.close();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+					new Resumen(m, mo, usuario, preciof, mod);
 				}
 			}
 		});
@@ -239,7 +255,7 @@ public class Accesorios_coche extends JFrame {
 					selec = selec + ", " + "<b>" + acc_mod_disponible.get(i) + "</b>";
 				}
 			}
-			selec = "<html>" + "Accesorio disponible en:" + "<p>" + selec + "</p>" + "</html>";
+			selec = "<html>" + langLoader.getText("selec") + "<p>" + selec + "</p>" + "</html>";
 			ac[a].setToolTipText(selec);
 			ac[a].setEnabled(activado);
 			int point = a;

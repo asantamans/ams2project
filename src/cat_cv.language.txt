@@ -1,6 +1,75 @@
-Usuari;COntrasenya;ENTRAR
-DADES DEL CLIENT;Usuari:;Nom*,Primer Cognom*;Segon Cognom*;Direcció*;Correu electronic*;Génere;Home;Done;Altres;Data de naixement,Guardar;Seguent
-Usuari: ;SELECCIONA EL MODEL DE COCHE;Enrere;Seguent
-Selecció de característiques del model,Usuari: ;Anterior
-Compra d'Accesoris;.;Augment de preu;Enrere;Finalitzar
-Model;Accesoris;Preu final
+lblNewLabel==Usuari
+lblPassword==Contrasenya
+btnNewButton==ENTRAR
+loginErrorOp1==L'Usuari es incorrecte
+loginErrorOp2==La contrasenya es incorrecte
+loginErrorOp3==El usuari i la contrasenya son incorrectes
+lblD==DADES DEL CLIENT
+lblUsuariousuario==Usuari: 
+lblNombre==Nom*
+lblPrimerApellido==Primer Cognom*
+lblSegundoApellido==Segon Cognom*
+lblDireccin==Direcció*
+lblCorreoElectronico==Correu electronic*
+lblGnero==Genere
+rdbtnHombre==Home
+rdbtnMujer==Dona
+rdbtnNoDeterminado==No Determinat
+lblFechaNacimiento==Data de Naixement
+btnGuardar==Guardar
+btnS==Seguent
+btnGuardarListenerOp1== no pot estar en blanc
+btnGuardarListenerOp2==Email format incorrecte
+btnGuardarListenerOp3==Les dades s'han guardad correctament
+btnSListenerOp1== no pot estar en blanc
+btnSListenerOp2==Email format incorrecte
+btnSListenerOp3==No ha guardat les dades, Esta segur que desitja continuar?
+btnSListenerOp4==S'obrira una finestra nova
+lblNewLabel_2==Usuari: 
+lblNewLabel_1==SELECCIONAR EL MODEL DE COTXE
+anteriorButton==Enrere
+siguienteButton==Finalizar
+lbTitulo==Selecciona les caracteristiques del model
+lblUsuario==Usuari: 
+btnAnterior==Enrere
+btnSiguiente==Seguent
+mensajesDescuento==El teu client tindra un 20% de descompte en la compra
+lblCompraAccesoris==Compra d'Accesoris
+label==.
+lblAugmentoDePrecio==Augment de preu
+btnAtras==Enrere
+btnFinalizar==Finalitzar
+btnFinalizarListenerOp1Text1==Son correctes els accesoris?
+btnFinalizarListenerOp1Text2==Desitja continuar?
+btnFinalizarListenerOp2Text1==El preu total es 
+btnFinalizarListenerOp2Text2==, pero com disposes d'un 
+btnFinalizarListenerOp2Text3==% de descompte, el preu final sera: 
+btnFinalizarListenerOp3Text1==El preu final es 
+selec==Accesori disponible en:
+lblModelo==Model
+lblAccesorios==Accesoris
+lblPrecioFinal==Preu final
+OptionPaneError==Error
+OptionPaneAlert==Advertencia
+OptionPaneInformation==Informacio
+OptionPaneExtra1==Desitja continuar?
+comprobarDatosOp0==El 
+comprobarDatosOp1== Nomb 
+comprobarDatosOp2== Primer cognom 
+comprobarDatosOp3== Segundo cognom 
+comprobarDatosOp4== La direccio 
+comprobarDatosOp5== Direccio 
+FacturaWriterOp1==Model: 
+FacturaWriterOp2==Accesoris: sense accesoris
+FacturaWriterOp3==Accesoris: 
+FacturaWriterOp4==Preu Final: 
+OptionPaneSavedData==Hi ha dades guardades, desitja carregar-les?
+OptionPaneClosing==Desitja tancar?
+OptionPaneClosingConfirmation==Està segur que vol tancar aquesta finestra?
+OptionPaneSaving==Desitja guardar?
+OptionPaneNotSaving==Desitja sortir sense guardar les dades?
+OptionPaneYesButton==Si
+btnNewPres==Nou pressupost
+OptionPaneArtic==El
+OptionPaneArticFem==La
+OptionPaneOkOption==Acceptar

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <configuration>
-	<car_configuration_path>src\configuracion_vehiculo\car_images\</car_configuration_path>
+	<car_configuration_path>src/configuracion_vehiculo/car_images/</car_configuration_path>
 	<car_configuration_file_name>car_config.xml</car_configuration_file_name>
 	<employee_list>
 		<employee_user>Arnau</employee_user>
@@ -14,17 +14,11 @@
 		<user_password>marc123</user_password>
 		<user_password>user</user_password>
 	</employee_password>
-	<employee_version>
-		<emp_version>true</emp_version>
-		<emp_version>true</emp_version>
-		<emp_version>true</emp_version>
-		<emp_version>false</emp_version>
-	</employee_version>
-	<specifications_file_path>src\specifications</specifications_file_path>
+	<descompte>15</descompte>
+	<specifications_file_path>src/specifications</specifications_file_path>
 	<language>es;cat;eng</language>
 	<language_default>es</language_default>
 	<postfix_language_file_name>_cv.language.txt</postfix_language_file_name>
 	<version>#.#.#</version>
-	<language_files_path>src\</language_files_path>
-	<specifications_file_path>spec\</specifications_file_path>
+	<language_files_path>src/</language_files_path>
 </configuration>

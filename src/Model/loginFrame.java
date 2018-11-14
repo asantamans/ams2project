@@ -1,42 +1,46 @@
 package Model;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.KeyStroke;
 
 import app_config.ConfigurationLoader;
+import app_config.langLoader;
+import configuracion_vehiculo.CarConfiguration;
+import configuracion_vehiculo.Model;
+import factura.Cliente;
+import idao.ICarConfiguration;
 
 public class loginFrame extends JFrame {
-	private JTextField textField;
+	private static JTextField textField;
 	private JPasswordField passwordField;
-
-	/**
-	 * Launch the application.
-	 */
-
+	public static String titulo ="Car_Configurator";
 
 	/**
 	 * Create the frame.
 	 */
-	public loginFrame(ArrayList<String> text) {
+	public loginFrame() {
+		setIconImage(Login.icono());
+		setTitle(titulo);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout(0, 0));
@@ -50,8 +54,7 @@ public class loginFrame extends JFrame {
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
-		JLabel lblNewLabel = new JLabel(text.get(0));
-		text.remove(0);
+		JLabel lblNewLabel = new JLabel(langLoader.getText("lblNewLabel"));
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
@@ -71,8 +74,7 @@ public class loginFrame extends JFrame {
 		panel.add(textField, gbc_textField);
 		textField.setColumns(10);
 		
-		JLabel lblPassword = new JLabel(text.get(0));
-		text.remove(0);
+		JLabel lblPassword = new JLabel(langLoader.getText("lblPassword"));
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
 		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
@@ -90,14 +92,14 @@ public class loginFrame extends JFrame {
 		gbc_passwordField.gridy = 4;
 		panel.add(passwordField, gbc_passwordField);
 		
-		JButton btnNewButton = new JButton(text.get(0));
-		text.remove(0);
+		JButton btnNewButton = new JButton(langLoader.getText("btnNewButton"));
+
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(Login.comprovarLogin(textField.getText(),passwordField.getText(),panel,ConfigurationLoader.getConfigurador())) {
+					datosguardados();
 					panel.setVisible(false);
 					esconderLogin();
-					new Introducir_datos(textField.getText(),text);
 				}
 			}
 		});
@@ -109,9 +111,9 @@ public class loginFrame extends JFrame {
 			public void keyPressed(KeyEvent arg0) {
 				 if(arg0.getKeyCode()==KeyEvent.VK_ENTER){
 					 if(Login.comprovarLogin(textField.getText(),passwordField.getText(),panel,ConfigurationLoader.getConfigurador())) {
-							panel.setVisible(false);
-							esconderLogin();
-							new Introducir_datos(textField.getText(),text);
+						 datosguardados();	
+						 panel.setVisible(false);
+						 esconderLogin();
 						}
 	                }
 			}
@@ -143,5 +145,64 @@ public class loginFrame extends JFrame {
 	public void esconderLogin() {
 		setVisible(false);
 	}
-
+	public static void datosguardados() {
+		File f = new File ("fs_employee.txt");
+		if(f.exists()) {
+			//Cambiar texto botones JOptionPane
+			Object[] options = {langLoader.getText("OptionPaneYesButton"), "No"};
+			int op=JOptionPane.showOptionDialog(null, 
+					langLoader.getText("OptionPaneSavedData"), langLoader.getText("OptionPaneInformation"),
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+					
+			if(op==JOptionPane.YES_OPTION) {
+				try {
+					FileReader fr = new FileReader(f.getAbsoluteFile());
+					BufferedReader br = new BufferedReader(fr);
+					String linea;
+					String modelo=null;
+					int con=0;
+					ArrayList <String> line = new ArrayList<>();
+					while((linea=br.readLine())!=null){
+						if (con <= 8) {
+							String [] sp = linea.split(": ");
+							line.add(sp[1]);
+						}
+						con++;
+						if(con==8) {
+							modelo=linea;
+						}
+					}
+					if(con==7) {
+						new Introducir_datos(textField.getText());
+					}else if(con==8) {
+						Cliente.setCliente(new Cliente(line.get(0), line.get(1), line.get(2), line.get(3), line.get(4), line.get(5), line.get(6)));
+						new modelChooserFrame(textField.getText(),true);
+					}else if(con==9) {
+						ArrayList<Model> modelos;
+						ICarConfiguration car_config = new CarConfiguration();
+						car_config.load_Car_Config();
+						modelos = car_config.getModelos();
+						String []mod=modelo.split(": ");
+						int pos=0;
+						for(int a=0;a<modelos.size();a++) {
+							if(modelos.get(a).getNom().equals(mod[1])) {
+								pos=a;
+							}
+						}
+						Cliente.setCliente(new Cliente(line.get(0), line.get(1), line.get(2), line.get(3), line.get(4), line.get(5), line.get(6)));
+						new PantallaSubmodelos(modelos.get(pos),textField.getText(),true);
+					}
+					fr.close();
+					br.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}else {
+				f.delete();
+				new Introducir_datos(textField.getText());
+			}
+		}else {
+			new Introducir_datos(textField.getText());
+		}
+	}
 }

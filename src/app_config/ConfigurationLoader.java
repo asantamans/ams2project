@@ -18,7 +18,7 @@ public class ConfigurationLoader {
 	private String car_configuration_file_name;
 	private static ArrayList <String> employee_list;
 	private static ArrayList <String> employee_password;
-	private static ArrayList <String> employee_version; 
+	private static int descompte;
 	private String specifications_file_path;
 	private static String language;
 	private static String language_default;
@@ -84,21 +84,23 @@ public class ConfigurationLoader {
 						employee_password.add(pass);
 					}
 				}
-				
-				String spec_fp = eElement.getElementsByTagName("specifications_file_path").item(0).getTextContent();
-				specifications_file_path = spec_fp;
-				
-				employee_version = new ArrayList<String>();
-				NodeList nl_vrs = doc.getElementsByTagName("emp_version");
-				for (int i = 0; i < nl_vrs.getLength(); i++) {
-					Node node_vrs = nl_vrs.item(i);
-					if(node_vrs.getNodeType() == Node.ELEMENT_NODE) {
-						Element element_vrs = (Element) node_vrs;
-						String version = element_vrs.getTextContent();
-						employee_version.add(version);
+						
+				String descompte = eElement.getElementsByTagName("descompte").item(0).getTextContent();
+				try {
+					int parsed = Integer.parseInt(descompte);
+					if (parsed > 0 && parsed < 22) {
+						ConfigurationLoader.descompte = parsed;
+					}else {
+						ConfigurationLoader.descompte = 0;
 					}
+				} catch (Exception exc) {
+					ConfigurationLoader.descompte = 0;
 				}
-			//Cargado de lenguage en configuracion
+
+				String spec_fp = eElement.getElementsByTagName("specifications_file_path").item(0).getTextContent();
+				specifications_file_path = spec_fp;				
+				
+				//Cargado de lenguage en configuracion
 				ConfigurationLoader.language =eElement.getElementsByTagName("language").item(0).getTextContent();
 				ConfigurationLoader.language_default = eElement.getElementsByTagName("language_default").item(0).getTextContent();
 				ConfigurationLoader.langPostfix = eElement.getElementsByTagName("postfix_language_file_name").item(0).getTextContent();
@@ -140,8 +142,8 @@ public class ConfigurationLoader {
 		return employee_password;
 	}
 	
-	public ArrayList<String> getEmployee_version() {
-		return employee_version;
+	public int getDescompte() {
+		return descompte;
 	}
 	
 	public static String getLanguage() {
