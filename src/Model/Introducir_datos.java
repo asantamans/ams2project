@@ -26,7 +26,6 @@ import javax.swing.border.EmptyBorder;
 import com.toedter.calendar.JDateChooser;
 
 import app_config.User;
-import app_config.langLoader;
 import factura.Cliente;
 
 public class Introducir_datos extends JFrame {
@@ -50,7 +49,7 @@ public class Introducir_datos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Introducir_datos(String user) {
+	public Introducir_datos(String user, ArrayList<String> text) {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 438);
@@ -69,8 +68,8 @@ public class Introducir_datos extends JFrame {
 		gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
 
-		JLabel lblD = new JLabel(langLoader.getText("lblD"));
-		
+		JLabel lblD = new JLabel(text.get(0));
+		text.remove(0);
 		lblD.setHorizontalAlignment(SwingConstants.CENTER);
 		lblD.setFont(new Font("Arial Black", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblD = new GridBagConstraints();
@@ -82,20 +81,20 @@ public class Introducir_datos extends JFrame {
 		gbc_lblD.gridy = 0;
 		panel.add(lblD, gbc_lblD);
 
-		JLabel lblUsuariousuario = new JLabel(langLoader.getText("lblUsuariousuario") + user);
+		JLabel lblUsuariousuario = new JLabel(text.get(0) + user);
 		//comprueba si el empleado puede dar descuento a su cliente
 		if(User.getUsuario().getEmployee_version() == true) {
 			lblUsuariousuario.setToolTipText("Tu cliente tendrá un 20% de descuento en su compra");
 		}
-		
+		text.remove(0);
 		GridBagConstraints gbc_lblUsuariousuario = new GridBagConstraints();
 		gbc_lblUsuariousuario.insets = new Insets(0, 0, 5, 5);
 		gbc_lblUsuariousuario.gridx = 7;
 		gbc_lblUsuariousuario.gridy = 0;
 		panel.add(lblUsuariousuario, gbc_lblUsuariousuario);
 
-		JLabel lblNombre = new JLabel(langLoader.getText("lblNombre"));
-		
+		JLabel lblNombre = new JLabel(text.get(0));
+		text.remove(0);
 		lblNombre.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblNombre.setVerticalAlignment(SwingConstants.TOP);
 		lblNombre.setHorizontalAlignment(SwingConstants.LEFT);
@@ -116,8 +115,8 @@ public class Introducir_datos extends JFrame {
 		panel.add(textField, gbc_textField);
 		textField.setColumns(10);
 
-		JLabel lblPrimerApellido = new JLabel(langLoader.getText("lblPrimerApellido"));
-		
+		JLabel lblPrimerApellido = new JLabel(text.get(0));
+		text.remove(0);
 		lblPrimerApellido.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblPrimerApellido.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_lblPrimerApellido = new GridBagConstraints();
@@ -137,8 +136,8 @@ public class Introducir_datos extends JFrame {
 		panel.add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
 
-		JLabel lblSegundoApellido = new JLabel(langLoader.getText("lblSegundoApellido"));
-		
+		JLabel lblSegundoApellido = new JLabel(text.get(0));
+		text.remove(0);
 		lblSegundoApellido.setFont(new Font("Arial", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblSegundoApellido = new GridBagConstraints();
 		gbc_lblSegundoApellido.anchor = GridBagConstraints.WEST;
@@ -157,8 +156,8 @@ public class Introducir_datos extends JFrame {
 		panel.add(textField_2, gbc_textField_2);
 		textField_2.setColumns(10);
 
-		JLabel lblDireccin = new JLabel(langLoader.getText("lblDireccin"));
-		
+		JLabel lblDireccin = new JLabel(text.get(0));
+		text.remove(0);
 		lblDireccin.setFont(new Font("Arial", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblDireccin = new GridBagConstraints();
 		gbc_lblDireccin.anchor = GridBagConstraints.WEST;
@@ -177,8 +176,8 @@ public class Introducir_datos extends JFrame {
 		panel.add(textField_3, gbc_textField_3);
 		textField_3.setColumns(10);
 
-		JLabel lblCorreoElectronico = new JLabel(langLoader.getText("lblCorreoElectronico"));
-		
+		JLabel lblCorreoElectronico = new JLabel(text.get(0));
+		text.remove(0);
 		lblCorreoElectronico.setFont(new Font("Arial", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblCorreoElectronico = new GridBagConstraints();
 		gbc_lblCorreoElectronico.anchor = GridBagConstraints.WEST;
@@ -197,8 +196,8 @@ public class Introducir_datos extends JFrame {
 		panel.add(textField_4, gbc_textField_4);
 		textField_4.setColumns(10);
 
-		JLabel lblGnero = new JLabel(langLoader.getText("lblGnero"));
-		
+		JLabel lblGnero = new JLabel(text.get(0));
+		text.remove(0);
 		lblGnero.setFont(new Font("Arial", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblGnero = new GridBagConstraints();
 		gbc_lblGnero.anchor = GridBagConstraints.WEST;
@@ -207,8 +206,8 @@ public class Introducir_datos extends JFrame {
 		gbc_lblGnero.gridy = 6;
 		panel.add(lblGnero, gbc_lblGnero);
 
-		JRadioButton rdbtnHombre = new JRadioButton(langLoader.getText("rdbtnHombre"));
-		
+		JRadioButton rdbtnHombre = new JRadioButton(text.get(0));
+		text.remove(0);
 		rdbtnHombre.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		GridBagConstraints gbc_rdbtnHombre = new GridBagConstraints();
 		gbc_rdbtnHombre.gridwidth = 3;
@@ -217,8 +216,8 @@ public class Introducir_datos extends JFrame {
 		gbc_rdbtnHombre.gridy = 6;
 		panel.add(rdbtnHombre, gbc_rdbtnHombre);
 
-		JRadioButton rdbtnMujer = new JRadioButton(langLoader.getText("rdbtnMujer"));
-		
+		JRadioButton rdbtnMujer = new JRadioButton(text.get(0));
+		text.remove(0);
 		rdbtnMujer.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		GridBagConstraints gbc_rdbtnMujer = new GridBagConstraints();
 		gbc_rdbtnMujer.insets = new Insets(0, 0, 5, 5);
@@ -226,8 +225,8 @@ public class Introducir_datos extends JFrame {
 		gbc_rdbtnMujer.gridy = 6;
 		panel.add(rdbtnMujer, gbc_rdbtnMujer);
 
-		JRadioButton rdbtnNoDeterminado = new JRadioButton(langLoader.getText("rdbtnNoDeterminado"));
-		
+		JRadioButton rdbtnNoDeterminado = new JRadioButton(text.get(0));
+		text.remove(0);
 		rdbtnNoDeterminado.setSelected(true);
 		rdbtnNoDeterminado.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		GridBagConstraints gbc_rdbtnNoDeterminado = new GridBagConstraints();
@@ -241,8 +240,8 @@ public class Introducir_datos extends JFrame {
 		grupo1.add(rdbtnMujer);
 		grupo1.add(rdbtnNoDeterminado);
 
-		JLabel lblFechaNacimiento = new JLabel(langLoader.getText("lblFechaNacimiento"));
-		
+		JLabel lblFechaNacimiento = new JLabel(text.get(0));
+		text.remove(0);
 		lblFechaNacimiento.setFont(new Font("Arial", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblFechaNacimiento = new GridBagConstraints();
 		gbc_lblFechaNacimiento.anchor = GridBagConstraints.WEST;
@@ -260,8 +259,8 @@ public class Introducir_datos extends JFrame {
 		gbc_dateChooser.gridy = 7;
 		panel.add(dateChooser, gbc_dateChooser);
 
-		JButton btnGuardar = new JButton(langLoader.getText("btnGuardar"));
-		
+		JButton btnGuardar = new JButton(text.get(0));
+		text.remove(0);
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
 		gbc_btnGuardar.fill = GridBagConstraints.BOTH;
 		gbc_btnGuardar.ipadx = 2;
@@ -271,8 +270,8 @@ public class Introducir_datos extends JFrame {
 		gbc_btnGuardar.gridy = 9;
 		panel.add(btnGuardar, gbc_btnGuardar);
 
-		JButton btnS = new JButton(langLoader.getText("btnS"));
-		
+		JButton btnS = new JButton(text.get(0));
+		text.remove(0);
 		GridBagConstraints gbc_btnS = new GridBagConstraints();
 		gbc_btnS.fill = GridBagConstraints.BOTH;
 		gbc_btnS.ipady = 1;
@@ -295,14 +294,14 @@ public class Introducir_datos extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String campos_blanco = comprobarDatos();
 				if (!campos_blanco.equals("El "))
-					JOptionPane.showMessageDialog(panel, campos_blanco +langLoader.getText("btnGuardarListenerOp1"), langLoader.getText("OptionPaneError"),
+					JOptionPane.showMessageDialog(panel, campos_blanco + " no puede estar en blanco", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				if (!comprobarEmail())
-					JOptionPane.showMessageDialog(panel, langLoader.getText("btnGuardarListenerOp2"), langLoader.getText("OptionPaneError"),
+					JOptionPane.showMessageDialog(panel, "Email formato incorrecto", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				else {
 					guardado = true;
-					JOptionPane.showMessageDialog(panel, langLoader.getText("btnGuardarListenerOp3"), langLoader.getText("OptionPaneInformation"),
+					JOptionPane.showMessageDialog(panel, "Los datos se han guardado correctamente", "Informacion",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
@@ -321,21 +320,21 @@ public class Introducir_datos extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String campos_blanco = comprobarDatos();
 				if (!campos_blanco.equals("El "))
-					JOptionPane.showMessageDialog(panel, campos_blanco + langLoader.getText("btnSListenerOp1"), langLoader.getText("OptionPaneError"),
+					JOptionPane.showMessageDialog(panel, campos_blanco + " no puede estar en blanco", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				boolean error = true;
 				if (!comprobarEmail()) {
-					JOptionPane.showMessageDialog(panel,langLoader.getText("btnSListenerOp2"), langLoader.getText("OptionPaneError"),
+					JOptionPane.showMessageDialog(panel, "Email formato incorrecto", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				} else if (!guardado && error) {
 					int seguir = JOptionPane.showConfirmDialog(null,
-							langLoader.getText("btnSListenerOp3"), langLoader.getText("OptionPaneExtra1"),
+							"No ha guardado los datos, Esta seguro que desea continuar?", "Quiere continuar?",
 							JOptionPane.YES_NO_OPTION);
 					if (seguir == JOptionPane.YES_OPTION) {
-						JOptionPane.showMessageDialog(panel, langLoader.getText("btnSListenerOp4"), langLoader.getText("OptionPaneAlert"),
+						JOptionPane.showMessageDialog(panel, "Se abrira una ventana nueva", "Advertencia",
 								JOptionPane.WARNING_MESSAGE);
 						Cliente sinDatos = new Cliente("no name", "no primerApellido", "no segundoApellido", "no direccion", "no correoElectronico", "no genero", "no fechaNacimiento");
-						new modelChooserFrame(user);
+						new modelChooserFrame(user, text);
 						Cliente.setCliente(sinDatos);
 					}
 				} else {
@@ -369,7 +368,7 @@ public class Introducir_datos extends JFrame {
 						Cliente.setCliente(datos_cliente);
 					}
 					esconderFrame();
-					new modelChooserFrame(user);
+					new modelChooserFrame(user, text);
 				}
 
 			}
@@ -401,21 +400,21 @@ public class Introducir_datos extends JFrame {
 	}
 
 	private String comprobarDatos() {
-		String campos_blanco =langLoader.getText("comprobarDatosOp0");
+		String campos_blanco = "El ";
 		if (textField.getText().equals("")) {
-			campos_blanco = campos_blanco.concat(langLoader.getText("comprobarDatosOp1"));
+			campos_blanco = campos_blanco.concat(" nombre ");
 		}
 		if (textField_1.getText().equals("")) {
-			campos_blanco = campos_blanco.concat(langLoader.getText("comprobarDatosOp2"));
+			campos_blanco = campos_blanco.concat(" Primer apellido ");
 		}
 		if (textField_2.getText().equals("")) {
-			campos_blanco = campos_blanco.concat(langLoader.getText("comprobarDatosOp3"));
+			campos_blanco = campos_blanco.concat(" Segundo apellido ");
 		}
 		if (textField_3.getText().equals("")) {
-			if (campos_blanco.equals(langLoader.getText("comprobarDatosOp0")))
-				campos_blanco = langLoader.getText("comprobarDatosOp4");
+			if (campos_blanco.equals("El "))
+				campos_blanco = " La direccion ";
 			else
-				campos_blanco = campos_blanco.concat(langLoader.getText("comprobarDatosOp5"));
+				campos_blanco = campos_blanco.concat(" direccion ");
 		}
 		if (!comprobarEmail()) {
 

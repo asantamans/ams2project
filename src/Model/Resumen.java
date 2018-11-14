@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import app_config.langLoader;
 import configuracion_vehiculo.Model;
 import factura.Cliente;
 import factura.Factura;
@@ -34,7 +33,7 @@ public class Resumen extends JFrame {
 	 * Create the frame.
 	 * @param mod 
 	 */
-	public Resumen(Model m,String mo,String usuario,String precioF, String acc) {
+	public Resumen(Model m,String mo, ArrayList <String> text,String usuario,String precioF, String acc) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 300);
 		contentPane = new JPanel();
@@ -52,8 +51,8 @@ public class Resumen extends JFrame {
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
-		JLabel lblModelo = new JLabel(langLoader.getText("lblModelo"));
-		
+		JLabel lblModelo = new JLabel(text.get(0));
+		text.remove(0);
 		GridBagConstraints gbc_lblModelo = new GridBagConstraints();
 		gbc_lblModelo.insets = new Insets(0, 0, 5, 5);
 		gbc_lblModelo.gridx = 1;
@@ -67,15 +66,15 @@ public class Resumen extends JFrame {
 		gbc_lblNewLabel.gridy = 1;
 		panel.add(modelo, gbc_lblNewLabel);
 		
-		JLabel lblAccesorios = new JLabel(langLoader.getText("lblAccesorios"));
-		
+		JLabel lblAccesorios = new JLabel(text.get(0));
+		text.remove(0);
 		GridBagConstraints gbc_lblAccesorios = new GridBagConstraints();
 		gbc_lblAccesorios.insets = new Insets(0, 0, 5, 5);
 		gbc_lblAccesorios.gridx = 1;
 		gbc_lblAccesorios.gridy = 3;
 		panel.add(lblAccesorios, gbc_lblAccesorios);
 		
-		JLabel Accesorios= new JLabel("");
+		JLabel Accesorios= new JLabel("New label");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
 		gbc_lblNewLabel_1.gridx = 3;
@@ -83,8 +82,8 @@ public class Resumen extends JFrame {
 		Accesorios.setText(acc);
 		panel.add(Accesorios, gbc_lblNewLabel_1);
 		
-		JLabel lblPrecioFinal = new JLabel(langLoader.getText("lblPrecioFinal"));
-		
+		JLabel lblPrecioFinal = new JLabel(text.get(0));
+		text.remove(0);
 		GridBagConstraints gbc_lblPrecioFinal = new GridBagConstraints();
 		gbc_lblPrecioFinal.insets = new Insets(0, 0, 0, 5);
 		gbc_lblPrecioFinal.gridx = 1;
@@ -107,13 +106,13 @@ public class Resumen extends JFrame {
 		try {
 			FileWriter fr= new FileWriter(f.getAbsoluteFile(), true);
 			BufferedWriter br = new BufferedWriter(fr);
-			br.write(langLoader.getText("FacturaWriterOp1")+mo+System.getProperty("line.separator"));
+			br.write("Modelo: "+mo+System.getProperty("line.separator"));
 			if (acc == null) {
-				br.write(langLoader.getText("FacturaWriterOp2")+System.getProperty("line.separator"));
+				br.write("Accesorios: sin accesorios"+System.getProperty("line.separator"));
 			}else {
-				br.write(langLoader.getText("FacturaWriterOp3")+acc+System.getProperty("line.separator"));
+				br.write("Accesorios: "+acc+System.getProperty("line.separator"));
 			}
-			br.write(langLoader.getText("FacturaWriterOp4")+precioF);
+			br.write("Precio Final: "+precioF);
 			br.close();
 		} catch (IOException e1) {
 			e1.printStackTrace();

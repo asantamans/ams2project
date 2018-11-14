@@ -9,8 +9,9 @@ public class TestMain {
 
 	public static void main(String[] args) {
 		ConfigurationLoader.getConfigurador();
-		langLoader.getTextos();
-		new loginFrame();
+		ArrayList<String> texto = new ArrayList<String>();
+		texto = langLoader.getText(ConfigurationLoader.getLanguage());
+		new loginFrame(texto);
 	}
 }
 

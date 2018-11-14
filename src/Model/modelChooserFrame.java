@@ -44,7 +44,7 @@ public class modelChooserFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public modelChooserFrame(String user) {
+	public modelChooserFrame(String user,ArrayList<String> text) {
 		this.user = user;
 		setResizable(false);
 		setMaximumSize(new Dimension(594, 2147483647));
@@ -67,11 +67,11 @@ public class modelChooserFrame extends JFrame {
 		gbl_panel.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
-		JLabel lblNewLabel_2 = new JLabel(langLoader.getText("lblNewLabel_2")+user);
+		JLabel lblNewLabel_2 = new JLabel(text.get(0)+user);
 		if(User.getUsuario().getEmployee_version() == true) {
 			lblNewLabel_2.setToolTipText("Tu cliente tendrá un 20% de descuento en su compra");
 		}
-		
+		text.remove(0);
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 		gbc_lblNewLabel_2.gridwidth = 2;
 		gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
@@ -80,8 +80,8 @@ public class modelChooserFrame extends JFrame {
 		gbc_lblNewLabel_2.gridy = 0;
 		panel.add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
-		JLabel lblNewLabel_1 = new JLabel(langLoader.getText("lblNewLabel_1"));
-		
+		JLabel lblNewLabel_1 = new JLabel(text.get(0));
+		text.remove(0);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
@@ -138,8 +138,8 @@ public class modelChooserFrame extends JFrame {
 		JScrollPane scPane = new JScrollPane(textArea);
 		panel.add(scPane, gbc_textArea);
 		
-		JButton anteriorButton = new JButton(langLoader.getText("anteriorButton"));
-		
+		JButton anteriorButton = new JButton(text.get(0));
+		text.remove(0);
 		GridBagConstraints gbc_anteriorButton = new GridBagConstraints();
 		gbc_anteriorButton.insets = new Insets(0, 0, 5, 25);
 		gbc_anteriorButton.gridx = 3;
@@ -149,14 +149,15 @@ public class modelChooserFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new Introducir_datos(user);
+				ArrayList<String> text = langLoader.getText(ConfigurationLoader.getLanguage(),1);
+				new Introducir_datos(user,text);
 				setVisible(false);
 				
 			}
 		});
 		
-		JButton siguienteButton = new JButton(langLoader.getText("siguienteButton"));
-		
+		JButton siguienteButton = new JButton(text.get(0));
+		text.remove(0);
 		GridBagConstraints gbc_siguienteButton = new GridBagConstraints();
 		gbc_siguienteButton.insets = new Insets(0, 0, 5, 5);
 		gbc_siguienteButton.gridx = 4;
@@ -169,7 +170,7 @@ public class modelChooserFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new PantallaSubmodelos(modelos.get(numBtn), user);
+				new PantallaSubmodelos(modelos.get(numBtn), user,text);
 				
 			}
 		});
